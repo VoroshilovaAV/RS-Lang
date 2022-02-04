@@ -9,6 +9,51 @@
 </head>
 
 <body>
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <img class="logo__img" src="assets/icons/logo.svg" alt="Logo">
+        <div class="logo__text">
+          <h4 class="logo__title">RS Lang</h4>
+          <p class="logo__subtitle">learning english app</p>
+        </div>
+      </div>
+      <div class="auth-btns">
+        <button class="btn btn-secondary sign-in-btn">Вход</button>
+        <button class="btn btn-outline-secondary sign-up-btn">Регистрация</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="nav-container">
+      <ul class="nav nav-pills nav-flush">
+        <li class="nav-item">
+          <a href="/book" class="nav-link active" aria-current="page" title="Учебник" data-bs-toggle="tooltip"
+            data-bs-placement="left">
+            <div class="nav-link-img"><i class="bi bi-book"></i></div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/games" class="nav-link py-3" title="Игры" data-bs-toggle="tooltip" data-bs-placement="right">
+            <i class="bi bi-controller"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/stats" class="nav-link py-3" title="Статистика" data-bs-toggle="tooltip" data-bs-placement="right">
+            <i class="bi bi-bar-chart"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/about-team" class="nav-link py-3" title="О команде" data-bs-toggle="tooltip"
+            data-bs-placement="right">
+            <i class="bi bi-people-fill"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="main-content"></div>
+  </main>
 </body>
 
 </html>
