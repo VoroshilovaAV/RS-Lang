@@ -101,7 +101,7 @@ module.exports = ({ development }) => {
         },
         {
           test: /\.(woff(2)?|eot|ttf|otf)$/i,
-          type: 'asset/resource',
+          type: 'asset/inline',
         },
         {
           test: /\.css$/i,
@@ -122,6 +122,12 @@ module.exports = ({ development }) => {
             },
             'css-loader',
             'sass-loader',
+            {
+              loader: 'sass-resources-loader',
+              options: {
+                resources: [path.resolve(srcPath, 'styles/vars.scss')],
+              },
+            },
           ],
         },
       ],

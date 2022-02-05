@@ -1,0 +1,107 @@
+.root {
+  display: flex;
+}
+
+.page-content {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  height: 80px;
+  background-color: $primary;
+
+  & .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.sign-up-btn {
+  color: #fff;
+}
+
+.logo {
+  cursor: pointer;
+  display: flex;
+  gap: 12px;
+}
+
+.logo__title {
+  margin: 0;
+  font-weight: bold;
+}
+
+.logo__subtitle {
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.auth-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.logo__text {
+  color: #fff;
+}
+
+.nav-flush .nav-link {
+  border-radius: 0;
+}
+
+.nav-item {
+  & i {
+    font-size: 20px;
+    color: #000;
+  }
+}
+
+.nav-container {
+  background-color: #fafafa;
+  display: inline-flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 4.5rem;
+  height: 100vh;
+  box-shadow: 10px 15px 20px 0px rgb(0 0 0 / 15%);
+}
+
+.nav {
+  flex-direction: column;
+  margin-bottom: auto;
+  text-align: center;
+  margin-top: 12px;
+}
+
+.nav-pills .nav-link.active {
+  background-color: transparent;
+
+  & .nav-link-img {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px 0px rgb(0 0 0 / 10%);
+  }
+}
+
+.nav-link {
+  padding: 10px;
+}
+
+.nav-link-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin: auto;
+}
+
+@media screen and (max-height: 336px) {
+  .nav-container {
+    height: 100%;
+  }
+}
