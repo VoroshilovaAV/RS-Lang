@@ -1,4 +1,5 @@
-export const HomeComponent = {
+export const ErrorComponent = {
+  listen: () => {},
   render: () => {
     return `         
     `;

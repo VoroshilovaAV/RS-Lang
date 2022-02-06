@@ -1,4 +1,5 @@
-export const DictionaryComponent = {
+export const GamesComponent = {
+  listen: () => {},
   render: () => {
     return `         
     `;

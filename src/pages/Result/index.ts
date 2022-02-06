@@ -1,4 +1,5 @@
-export const SprintComponent = {
+export const ResultComponent = {
+  listen: () => {},
   render: () => {
     return `         
     `;
