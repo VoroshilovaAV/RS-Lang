@@ -26,11 +26,11 @@ export const router = () => {
   const pageContainer = document.querySelector('.page-content');
   const footerContainer = document.querySelector('.footer');
 
-  if (authContainer !== null)
+  if (authContainer)
     authContainer.innerHTML =
       localStorage.getItem('authorizedUser') !== null ? ButtonLogoutComponent.render() : ButtonLoginComponent.render();
 
-  if (mainContainer !== null) mainContainer.innerHTML = component.render();
+  if (mainContainer) mainContainer.innerHTML = component.render();
   component.listen();
 
   if (
@@ -46,6 +46,6 @@ export const router = () => {
     if (footerContainer) footerContainer.remove();
     pageContainer.insertAdjacentHTML('beforeend', FooterComponent.render());
   } else {
-    if (footerContainer !== null) footerContainer.remove();
+    if (footerContainer) footerContainer.remove();
   }
 };
