@@ -68,10 +68,10 @@ export const router = () => {
     path !== '/sprint' &&
     path !== '/result-audiocall' &&
     path !== '/result-sprint' &&
-    pageContainer !== null &&
-    footerContainer === null
+    pageContainer !== null
   ) {
-    pageContainer.insertAdjacentHTML('beforeend', FooterComponent.render());
+    if (footerContainer) footerContainer.remove();
+    pageContainer.insertAdjacentHTML('beforeend', FooterComponent.render());     
   } else {
     if (footerContainer !== null) footerContainer.remove();
   }
