@@ -1,4 +1,4 @@
-export const PreAudioComponent = {
+export const ResultAudiocallComponent = {
   render: () => {
     return `         
     `;
