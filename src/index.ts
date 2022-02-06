@@ -1,7 +1,7 @@
 import * as bootstrap from 'bootstrap';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './index.scss';
-import { router } from 'router/routes';
+import { router } from 'router/router';
 
 const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
 tooltipTriggerList.forEach(function (tooltipTriggerEl) {

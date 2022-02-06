@@ -1,12 +1,51 @@
-export const parseLocation = () => location.hash.slice(1).toLowerCase() || '/';
+import { ErrorComponent } from 'pages/Error';
+import { ButtonLoginComponent } from 'components/HeaderButtons/button-login';
+import { ButtonLogoutComponent } from 'components/HeaderButtons/button-logout';
+import { FooterComponent } from 'components/Footer';
+import { routes } from './routes';
 
-export const findComponentByPath = (
+const parseLocation = () => location.hash.slice(1).toLowerCase() || '/';
+
+const findComponentByPath = (
   path: string,
   routes: {
     path: string;
-    component: {     
-      listen: () => void; 
+    component: {
+      listen: () => void;
       render: () => string;
     };
   }[]
 ) => routes.find((r: { path: string }) => r.path.match(new RegExp(`^\\${path}$`, 'gm'))) || undefined;
+
+export const router = () => {
+  const path = parseLocation();
+  const { component = ErrorComponent } = findComponentByPath(path, routes) || {};
+
+  const mainContainer = document.querySelector('.main-content');
+  const authContainer = document.querySelector('.auth-btns');
+  const pageContainer = document.querySelector('.page-content');
+  const footerContainer = document.querySelector('.footer');
+
+  if (authContainer !== null)
+    authContainer.innerHTML =
+      localStorage.getItem('authorizedUser') !== null ? ButtonLogoutComponent.render() : ButtonLoginComponent.render();
+
+  if (mainContainer !== null) mainContainer.innerHTML = component.render();
+  component.listen();
+
+  if (
+    path !== '/games' &&
+    path !== '/pre-audio' &&
+    path !== '/pre-sprint' &&
+    path !== '/audiocall' &&
+    path !== '/sprint' &&
+    path !== '/result-audiocall' &&
+    path !== '/result-sprint' &&
+    pageContainer !== null
+  ) {
+    if (footerContainer) footerContainer.remove();
+    pageContainer.insertAdjacentHTML('beforeend', FooterComponent.render());
+  } else {
+    if (footerContainer !== null) footerContainer.remove();
+  }
+};
