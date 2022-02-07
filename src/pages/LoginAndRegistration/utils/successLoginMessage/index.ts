@@ -23,6 +23,5 @@ export const successLoginMessage = () => {
     popap.innerHTML = '';
     location.hash = '/';
     router();
-    // document.location.reload();
   });
 };
