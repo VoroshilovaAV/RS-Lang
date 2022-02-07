@@ -208,3 +208,125 @@ export const deleteUserWord = async ({ userId, wordId }: IUserWordIdDelete, toke
     console.log(error);
   }
 };
+
+export const getAggregatedWords = async (
+  { userId, group, page, wordsPerPage }: IAggregateWords,
+  token: string
+): Promise<IWord[] | void> => {
+  try {
+    const rawResponse = await fetch(
+      `${usersUrl}/${userId}/aggregatedWords?group=${group}&page=${page}&wordsPerPage=${wordsPerPage}`, //filter=%22easy%22,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    const content = await rawResponse.json();
+    console.log(content);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAggregatedWord = async (
+  { userId, wordId }: IUserWordIdDelete,
+  token: string
+): Promise<IWord | void> => {
+  try {
+    const rawResponse = await fetch(`${usersUrl}/${userId}/aggregatedWords/${wordId}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+    const content = await rawResponse.json();
+    console.log(content);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserStatistics = async (userId: string, token: string) => {
+  try {
+    const rawResponse = await fetch(`${usersUrl}/${userId}/statistics/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+    const content = await rawResponse.json();
+    console.log(content);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateUserStatistics = async ({ userId, statistics }: IStatisticUser, token: string) => {
+  try {
+    const rawResponse = await fetch(`${usersUrl}/${userId}/statistics`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(statistics),
+    });
+    const content = await rawResponse.json();
+    console.log(content);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateUserSettings = async ({ userId, settings }: ISettingsUser, token: string) => {
+  try {
+    const rawResponse = await fetch(`${usersUrl}/${userId}/settings`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(settings),
+    });
+    const content = await rawResponse.json();
+    console.log(content);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserSettings = async (userId: string, token: string) => {
+  const rawResponse = await fetch(`${usersUrl}/${userId}/settings/`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const content = await rawResponse.json();
+  console.log(content);
+};
+
+export const loginUser = async (user: IUser): Promise<IAuth | void> => {
+  try {
+    const rawResponse = await fetch(`${baseUrl}signin`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    });
+    const content = await rawResponse.json();
+    return content;
+  } catch (error) {
+    console.log('');
+  }
+};
