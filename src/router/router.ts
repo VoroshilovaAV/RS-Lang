@@ -1,3 +1,4 @@
+import { checkNavHeight, removeActiveNavLink, setActiveNavLink } from 'utils/navbar';
 import { ErrorComponent } from 'pages/Error';
 import { ButtonLoginComponent } from 'components/HeaderButtons/button-login';
 import { ButtonLogoutComponent } from 'components/HeaderButtons/button-logout';
@@ -17,11 +18,17 @@ const findComponentByPath = (
   }[]
 ) => waybill.find((r: { path: string }) => r.path.match(new RegExp(`^\\${path}$`, 'gm'))) || undefined;
 
+const changeNavBar = (path: string) => {
+  removeActiveNavLink();
+  setActiveNavLink(path);
+  checkNavHeight();
+};
+
 export const router = () => {
   const path = parseLocation();
   const { component = ErrorComponent } = findComponentByPath(path, routes) || {};
 
-  const mainContainer = document.querySelector('.main-content');
+  const mainContainer = document.querySelector('.main');
   const authContainer = document.querySelector('.auth-btns');
   const pageContainer = document.querySelector('.page-content');
   const footerContainer = document.querySelector('.footer');
@@ -32,6 +39,13 @@ export const router = () => {
 
   if (mainContainer) mainContainer.innerHTML = component.render();
   component.listen();
+  changeNavBar(path);
+
+  if (path === '/') {
+    pageContainer?.classList.add('main-bg');
+  } else {
+    pageContainer?.classList.remove('main-bg');
+  }
 
   if (
     path !== '/games' &&

@@ -1,0 +1,48 @@
+.footer {
+  height: 80px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.devs {
+  display: flex;
+  gap: 24px;
+}
+
+.dev {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 300;
+  color: #000;
+}
+
+.github {
+  width: 48px;
+  height: 48px;
+  background-image: url('assets/icons/github.svg');
+  background-repeat: no-repeat;
+}
+
+.github_blue {
+  filter: invert(26%) sepia(94%) saturate(4568%) hue-rotate(237deg) brightness(100%) contrast(104%);
+}
+
+.github_yellow {
+  filter: invert(68%) sepia(71%) saturate(459%) hue-rotate(344deg) brightness(103%) contrast(104%);
+}
+
+@media (max-width: 768px) {
+  .dev__name {
+    display: none;
+  }
+
+  .devs {
+    gap: 0;
+  }
+}
