@@ -118,3 +118,93 @@ export const getNewUserToken = async (userId: string, refreshToken: string) => {
     console.log(error);
   }
 };
+
+export const getUserIdWords = async (userId: string, token: string): Promise<IUserWord[] | [] | void> => {
+  try {
+    const rawResponse = await fetch(`${usersUrl}/${userId}/words`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+    const content = await rawResponse.json();
+
+    console.log(content);
+    return content;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const createUserWord = async (
+  { userId, wordId, body }: IUserWordId,
+  token: string
+): Promise<IUserWord | void> => {
+  try {
+    const rawResponse = await fetch(`${usersUrl}/${userId}/words/${wordId}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+    const content = await rawResponse.json();
+    console.log(content);
+    return content;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserWord = async ({ userId, wordId }: IUserWordId, token: string) => {
+  try {
+    const rawResponse = await fetch(`${usersUrl}/${userId}/words/${wordId}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+      },
+    });
+    const content = await rawResponse.json();
+    console.log(content);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateUserWord = async ({ userId, wordId, body }: IUserWordId, token: string) => {
+  try {
+    const rawResponse = await fetch(`${usersUrl}/${userId}/words/${wordId}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+    const content = await rawResponse.json();
+    console.log(content);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteUserWord = async ({ userId, wordId }: IUserWordIdDelete, token: string) => {
+  try {
+    await fetch(`${usersUrl}/${userId}/words/${wordId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
