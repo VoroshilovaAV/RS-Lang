@@ -1,3 +1,4 @@
+import { router } from 'router/router';
 import { authorizedUser } from '../../../../state';
 import '../../style.scss';
 export const successLoginMessage = () => {
@@ -21,6 +22,7 @@ export const successLoginMessage = () => {
     popap.style.display = 'none';
     popap.innerHTML = '';
     location.hash = '/';
-    document.location.reload();
+    router();
+    // document.location.reload();
   });
 };
