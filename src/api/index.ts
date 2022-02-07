@@ -11,6 +11,9 @@ import {
   IUserWordIdDelete,
   IPageWords,
   IUserCreated,
+  ISetting,
+  IStatistic,
+  IGetNewToken,
 } from './interfaces';
 
 export const getWords = async ({ page, group }: IPageWords): Promise<IWord[] | void> => {
@@ -27,10 +30,9 @@ export const getWordsId = async (wordId: string): Promise<IWord | void> => {
   try {
     const res = await fetch(`${wordsUrl}/${wordId}`);
     const data = await res.json();
-    console.log(data);
     return data;
   } catch (error) {
-    console.log(error, 'слова с таким Id не существует');
+    console.log(error);
   }
 };
 
@@ -47,7 +49,7 @@ export const createUser = async (user: IUser): Promise<IUserCreated | void> => {
     const content = await rawResponse.json();
     return content;
   } catch (error) {
-    console.log('');
+    console.log(error);
   }
 };
 
@@ -62,14 +64,13 @@ export const getUserId = async (userId: string, token: string): Promise<IUser | 
       },
     });
     const content = await rawResponse.json();
-    console.log(content);
     return content;
   } catch (error) {
     console.log('такого пользователя не существует');
   }
 };
 
-export const updateUser = async (userId: string, body: object, token: string) => {
+export const updateUser = async (userId: string, body: object, token: string): Promise<IUserCreated | void> => {
   try {
     const rawResponse = await fetch(`${usersUrl}/${userId}`, {
       method: 'PUT',
@@ -81,7 +82,7 @@ export const updateUser = async (userId: string, body: object, token: string) =>
       body: JSON.stringify(body),
     });
     const content = await rawResponse.json();
-    console.log(content);
+    return content;
   } catch (error) {
     console.log(error);
   }
@@ -102,7 +103,7 @@ export const deleteUser = async (userId: string, token: string) => {
   }
 };
 
-export const getNewUserToken = async (userId: string, refreshToken: string) => {
+export const getNewUserToken = async (userId: string, refreshToken: string): Promise<IGetNewToken | void> => {
   try {
     const rawResponse = await fetch(`${usersUrl}/${userId}/tokens`, {
       method: 'GET',
@@ -113,7 +114,7 @@ export const getNewUserToken = async (userId: string, refreshToken: string) => {
       },
     });
     const content = await rawResponse.json();
-    console.log(content);
+    return content;
   } catch (error) {
     console.log(error);
   }
@@ -130,8 +131,6 @@ export const getUserIdWords = async (userId: string, token: string): Promise<IUs
       },
     });
     const content = await rawResponse.json();
-
-    console.log(content);
     return content;
   } catch (error) {
     console.log(error);
@@ -160,7 +159,7 @@ export const createUserWord = async (
   }
 };
 
-export const getUserWord = async ({ userId, wordId }: IUserWordId, token: string) => {
+export const getUserWord = async ({ userId, wordId }: IUserWordId, token: string): Promise<IUserWord | void> => {
   try {
     const rawResponse = await fetch(`${usersUrl}/${userId}/words/${wordId}`, {
       method: 'GET',
@@ -170,13 +169,16 @@ export const getUserWord = async ({ userId, wordId }: IUserWordId, token: string
       },
     });
     const content = await rawResponse.json();
-    console.log(content);
+    return content;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const updateUserWord = async ({ userId, wordId, body }: IUserWordId, token: string) => {
+export const updateUserWord = async (
+  { userId, wordId, body }: IUserWordId,
+  token: string
+): Promise<IUserWordId | void> => {
   try {
     const rawResponse = await fetch(`${usersUrl}/${userId}/words/${wordId}`, {
       method: 'PUT',
@@ -188,7 +190,7 @@ export const updateUserWord = async ({ userId, wordId, body }: IUserWordId, toke
       body: JSON.stringify(body),
     });
     const content = await rawResponse.json();
-    console.log(content);
+    return content;
   } catch (error) {
     console.log(error);
   }
@@ -226,7 +228,7 @@ export const getAggregatedWords = async (
       }
     );
     const content = await rawResponse.json();
-    console.log(content);
+    return content;
   } catch (error) {
     console.log(error);
   }
@@ -246,13 +248,13 @@ export const getAggregatedWord = async (
       },
     });
     const content = await rawResponse.json();
-    console.log(content);
+    return content;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const getUserStatistics = async (userId: string, token: string) => {
+export const getUserStatistics = async (userId: string, token: string): Promise<IStatistic | void> => {
   try {
     const rawResponse = await fetch(`${usersUrl}/${userId}/statistics/`, {
       headers: {
@@ -262,13 +264,16 @@ export const getUserStatistics = async (userId: string, token: string) => {
       },
     });
     const content = await rawResponse.json();
-    console.log(content);
+    return content;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const updateUserStatistics = async ({ userId, statistics }: IStatisticUser, token: string) => {
+export const updateUserStatistics = async (
+  { userId, statistics }: IStatisticUser,
+  token: string
+): Promise<IStatisticUser | void> => {
   try {
     const rawResponse = await fetch(`${usersUrl}/${userId}/statistics`, {
       method: 'PUT',
@@ -280,13 +285,16 @@ export const updateUserStatistics = async ({ userId, statistics }: IStatisticUse
       body: JSON.stringify(statistics),
     });
     const content = await rawResponse.json();
-    console.log(content);
+    return content;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const updateUserSettings = async ({ userId, settings }: ISettingsUser, token: string) => {
+export const updateUserSettings = async (
+  { userId, settings }: ISettingsUser,
+  token: string
+): Promise<ISettingsUser | void> => {
   try {
     const rawResponse = await fetch(`${usersUrl}/${userId}/settings`, {
       method: 'PUT',
@@ -298,20 +306,24 @@ export const updateUserSettings = async ({ userId, settings }: ISettingsUser, to
       body: JSON.stringify(settings),
     });
     const content = await rawResponse.json();
-    console.log(content);
+    return content;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const getUserSettings = async (userId: string, token: string) => {
-  const rawResponse = await fetch(`${usersUrl}/${userId}/settings/`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  const content = await rawResponse.json();
-  console.log(content);
+export const getUserSettings = async (userId: string, token: string): Promise<ISetting | void> => {
+  try {
+    const rawResponse = await fetch(`${usersUrl}/${userId}/settings/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const content = await rawResponse.json();
+    return content;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const loginUser = async (user: IUser): Promise<IAuth | void> => {
@@ -327,6 +339,6 @@ export const loginUser = async (user: IUser): Promise<IAuth | void> => {
     const content = await rawResponse.json();
     return content;
   } catch (error) {
-    console.log('');
+    console.log(error);
   }
 };

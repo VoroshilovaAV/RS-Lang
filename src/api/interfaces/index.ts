@@ -30,6 +30,10 @@ export interface ISetting {
   optional?: object;
 }
 
+export interface IGetNewToken {
+  token: string;
+  refreshToken: string;
+}
 export interface IUser {
   email: string;
   password: string;
@@ -58,7 +62,7 @@ export interface IUserWordIdDelete {
 export interface IUserWordId {
   userId: string;
   wordId: string;
-  body: object;
+  body: IUserWord;
 }
 
 export interface IStatisticUser {
