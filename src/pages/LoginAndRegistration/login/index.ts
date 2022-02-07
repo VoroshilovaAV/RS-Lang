@@ -1,5 +1,5 @@
-import { listenSingInPage } from '.';
-import './style.scss';
+import { listenSingInPage } from '..';
+import '../style.scss';
 
 export const LoginComponent = {
   listen: () => listenSingInPage(),

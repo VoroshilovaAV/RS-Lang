@@ -1,4 +1,4 @@
-import { checkNavHeight, removeActiveNavLink, setActiveNavLink } from 'utils/navbar';
+import { changeNavBar } from 'utils/navbar';
 import { ErrorComponent } from 'pages/Error';
 import { ButtonLoginComponent } from 'components/HeaderButtons/button-login';
 import { ButtonLogoutComponent } from 'components/HeaderButtons/button-logout';
@@ -17,12 +17,6 @@ const findComponentByPath = (
     };
   }[]
 ) => waybill.find((r: { path: string }) => r.path.match(new RegExp(`^\\${path}$`, 'gm'))) || undefined;
-
-const changeNavBar = (path: string) => {
-  removeActiveNavLink();
-  setActiveNavLink(path);
-  checkNavHeight();
-};
 
 export const router = () => {
   const path = parseLocation();

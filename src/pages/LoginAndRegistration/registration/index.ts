@@ -1,4 +1,5 @@
-import { listenCreateUserPage } from '.';
+import { listenCreateUserPage } from '..';
+import '../style.scss';
 
 export const RegistrationComponent = {
   listen: () => listenCreateUserPage(),

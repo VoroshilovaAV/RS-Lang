@@ -1,6 +1,14 @@
 import { router } from 'router/router';
 import { authorizedUser } from '../../../../state';
 import '../../style.scss';
+
+export function getStorage(textDataStorage: string) {
+  const storage = localStorage.getItem(textDataStorage);
+  if (storage) {
+    return JSON.parse(storage);
+  } else return false;
+}
+
 export const successLoginMessage = () => {
   const html = `${authorizedUser.name}, вы выполнили вход`;
   const windowMessage = document.createElement('div');
@@ -21,7 +29,8 @@ export const successLoginMessage = () => {
   popap.addEventListener('animationend', () => {
     popap.style.display = 'none';
     popap.innerHTML = '';
-    location.hash = '/';
+    location.hash = getStorage('lastPath') ? getStorage('lastPath') : '/';
+    console.log(location.hash);
     router();
   });
 };
