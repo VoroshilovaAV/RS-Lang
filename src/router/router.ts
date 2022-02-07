@@ -8,14 +8,14 @@ const parseLocation = () => location.hash.slice(1).toLowerCase() || '/';
 
 const findComponentByPath = (
   path: string,
-  routes: {
+  waybill: {
     path: string;
     component: {
       listen: () => void;
       render: () => string;
     };
   }[]
-) => routes.find((r: { path: string }) => r.path.match(new RegExp(`^\\${path}$`, 'gm'))) || undefined;
+) => waybill.find((r: { path: string }) => r.path.match(new RegExp(`^\\${path}$`, 'gm'))) || undefined;
 
 export const router = () => {
   const path = parseLocation();
