@@ -1,8 +1,8 @@
-// import { listenSingInPage } from '.';
+import { listenSingInPage } from '.';
 import './style.scss';
 
 export const LoginComponent = {
-  // listen: () => listenSingInPage(),
+  listen: () => listenSingInPage(),
   render: () =>
     `<div class = "page-singIn-user">
       <form action="">

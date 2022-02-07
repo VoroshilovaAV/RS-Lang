@@ -1,7 +1,7 @@
-// import { listenCreateUserPage } from '.';
+import { listenCreateUserPage } from '.';
 
 export const RegistrationComponent = {
-  // listen: () => listenCreateUserPage(),
+  listen: () => listenCreateUserPage(),
   render: () => `<div class = page-create-user>
   <form action="">
     <h2>Регистрация</h2>
