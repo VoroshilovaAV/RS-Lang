@@ -30,7 +30,6 @@ export const successLoginMessage = () => {
     popap.style.display = 'none';
     popap.innerHTML = '';
     location.hash = getStorage('lastPath') ? getStorage('lastPath') : '/';
-    console.log(location.hash);
     router();
   });
 };

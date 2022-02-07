@@ -1,7 +1,4 @@
 $width-message: 60vw;
-@media (max-width: 400px) {
-  $width-message: 250px;
-}
 @keyframes change-size {
   0% {
     left: calc(50% - $width-message / 2);
