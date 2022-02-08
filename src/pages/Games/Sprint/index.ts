@@ -7,7 +7,7 @@ export const SprintComponent = {
         <div class="container sprint-container">
           <div class="progress-container">
             <div class="progress">
-              <div class="progress-bar bg-secondary" role="progressbar"
+              <div class="progress-bar" role="progressbar"
                 aria-valuenow="30" aria-valuemin="0" aria-valuemax="60" style="width: 90%"></div>
             </div>
             <span class="progress-time">00:50</span>
