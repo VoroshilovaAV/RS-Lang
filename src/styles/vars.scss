@@ -2,10 +2,4 @@ $primary: #ffbb3f;
 $secondary: #3f47ff;
 $gray: #808080;
 
-$theme-colors: (
-  'primary': $primary,
-  'secondary': $secondary,
-  'gray': $gray,
-);
-
-@import '../../node_modules/bootstrap';
+@import '../../node_modules/bootstrap/scss/bootstrap-reboot';
