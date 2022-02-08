@@ -1,0 +1,50 @@
+$width-message: 60vw;
+@keyframes change-size {
+  0% {
+    left: calc(50% - $width-message / 2);
+    transform: scale(0);
+  }
+  10% {
+    left: calc(50% - $width-message / 2);
+    transform: scale(1);
+  }
+  90% {
+    left: calc(50% - $width-message / 2);
+    transform: scale(1);
+  }
+  100% {
+    left: calc(50% - $width-message / 2);
+    transform: scale(0);
+  }
+}
+.main{
+  .window-message{
+    margin-top: -300px;
+    position: relative;
+    .popap {
+      position: absolute;
+      border-radius: 50px;
+      width: 0px;
+      height: 0px;
+      background-color: #ffffffe6;
+      border: solid 2px #f0b326e6;
+      box-shadow: 0px 0px 15px 10px rgba(44, 44, 44, 0.253);
+      top: calc(50%);
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      .message{
+        margin: auto;
+        font-size: 24px;
+        text-align: center;
+      }
+    }
+    .active{
+      width: $width-message;
+      height: 200px;
+      animation-duration: 4s;
+      animation-name: change-size;
+    }
+  }
+}

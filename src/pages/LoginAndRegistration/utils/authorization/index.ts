@@ -1,5 +1,5 @@
-import { loginUser, createUser } from '../../../../api';
-import { userCreated, authorizedUser } from '../../../../state';
+import { loginUser, createUser } from 'api';
+import { userCreated, authorizedUser } from 'state';
 import { successLoginMessage } from '../';
 import { IUser } from './interfaces';
 

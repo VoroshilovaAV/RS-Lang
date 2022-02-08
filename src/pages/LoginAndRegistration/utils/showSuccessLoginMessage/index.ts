@@ -1,6 +1,6 @@
 import { router } from 'router/router';
-import { authorizedUser } from '../../../../state';
-import '../../style.scss';
+import { authorizedUser } from 'state';
+import './style.scss';
 
 export function getStorage(textDataStorage: string) {
   const storage = localStorage.getItem(textDataStorage);
