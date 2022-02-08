@@ -1,9 +1,10 @@
-import { changeNavBar } from 'utils/navbar';
+import { changeNavBar } from 'utils';
 import { ErrorComponent } from 'pages/Error';
 import { ButtonLoginComponent } from 'components/HeaderButtons/button-login';
 import { ButtonLogoutComponent } from 'components/HeaderButtons/button-logout';
 import { FooterComponent } from 'components/Footer';
 import { routes } from './routes';
+import { logoutUser } from 'utils';
 
 const parseLocation = () => location.hash.slice(1).toLowerCase() || '/';
 
@@ -33,6 +34,7 @@ export const router = () => {
 
   if (mainContainer) mainContainer.innerHTML = component.render();
   component.listen();
+  logoutUser();
   changeNavBar(path);
 
   if (path === '/') {
