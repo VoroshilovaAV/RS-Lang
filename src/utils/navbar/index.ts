@@ -1,3 +1,10 @@
+export const setStorageLastPath = () => {
+  const currentElement = document.querySelector('.active-link');
+  if (currentElement instanceof HTMLAnchorElement) {
+    localStorage.setItem('lastPath', JSON.stringify(currentElement.href.split('#')[1]));
+  }
+};
+
 export const setActiveNavLink = (path: string) => {
   const navLink = document.querySelector(`[href="#${path}"]`);
   navLink?.classList.add('active-link');
@@ -14,4 +21,11 @@ export const checkNavHeight = () => {
   } else {
     nav?.classList.remove('nav-min');
   }
+};
+
+export const changeNavBar = (path: string) => {
+  setStorageLastPath();
+  removeActiveNavLink();
+  setActiveNavLink(path);
+  checkNavHeight();
 };

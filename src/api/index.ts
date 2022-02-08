@@ -152,7 +152,6 @@ export const createUserWord = async (
       body: JSON.stringify(body),
     });
     const content = await rawResponse.json();
-    console.log(content);
     return content;
   } catch (error) {
     console.log(error);
