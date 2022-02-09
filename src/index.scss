@@ -1,3 +1,8 @@
+@import 'bootstrap/scss/buttons';
+@import 'bootstrap/scss/nav';
+@import 'bootstrap/scss/tooltip';
+@import 'bootstrap/scss/containers';
+
 .root {
   display: flex;
 }
@@ -110,6 +115,7 @@
 }
 
 .main {
+  position: relative;
   width: 100%;
   height: 100%;
 }
