@@ -1,0 +1,74 @@
+@import 'bootstrap/scss/_pagination.scss';
+
+.book {
+  margin-left: 20px;
+}
+.book__wrapper {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.book__header {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  align-items: center;
+  gap: 15px
+}
+.book__panel-controls{
+  display: flex;
+  align-items:center;
+  padding-left: 20px;
+  padding-right: 20px;
+  gap: 10px;
+}
+.title {
+}
+.book__title {
+}
+.book__part {
+}
+.parh {
+}
+.parh-title {
+}
+.parh__drop-down {
+}
+.part-1 {
+}
+.part-2 {
+}
+.part-3 {
+}
+.part-4 {
+}
+.part-5 {
+}
+.part-6 {
+}
+.book__games {
+}
+.user-words{
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  gap: 20px;
+  justify-self: end;
+  justify-content: end;
+}
+.difficult-words {
+}
+.learned__img{
+  width: 40px;
+}
+.difficult__img{
+  width: 20px;
+}
+.learned-words {
+
+}
+.book__word-list {
+}
+.word-list {
+}
+.book__pages {
+}

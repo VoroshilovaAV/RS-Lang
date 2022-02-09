@@ -34,3 +34,8 @@ export interface IWord {
   textMeaningTranslate: string;
   textExampleTranslate: string;
 }
+
+export interface IPageWords {
+  page: number;
+  group: number;
+}

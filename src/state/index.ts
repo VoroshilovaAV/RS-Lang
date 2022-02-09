@@ -1,4 +1,4 @@
-import { IUserCreated, IAuth } from './interfaces';
+import { IUserCreated, IAuth, IPageWords } from './interfaces';
 
 export const userCreated: IUserCreated = {
   id: '',
@@ -12,4 +12,9 @@ export const authorizedUser: IAuth = {
   refreshToken: '',
   userId: '',
   name: '',
+};
+
+export const currentPage: IPageWords = {
+  page: 1,
+  group: 1,
 };
