@@ -5,7 +5,9 @@ export const AboutUsComponent = {
   listen: () => {},
   render: () => {
     return ` 
-    <h2 class="about-team__title">О команде</h2>
+    <div class="container title-container">
+      <h2 class="about-team__title">О команде</h2>
+    </div> 
     <div class="container d-flex justify-content-center flex-wrap cards-container">
       ${CardTemlate(
         'igor',
