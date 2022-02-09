@@ -1,4 +1,4 @@
-export const CardTemlate = (photo: string, githubLink: string, name: string, color: string, done: string) => {
+export const CardTemplate = (photo: string, githubLink: string, name: string, color: string, done: string) => {
   return `
     <div class="d-sm-flex card-container">                  
         <img class="card-photo" src="assets/photo/${photo}.png" alt="developer photo" />
