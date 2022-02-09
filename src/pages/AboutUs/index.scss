@@ -1,0 +1,140 @@
+.about-team__title {
+  margin-top: 36px;
+  margin-left: 36px;
+}
+
+.card-photo {
+  width: 15rem;
+  border-radius: 12px;
+}
+
+.card-container {
+  max-width: 450px;
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  margin: 2rem;
+  background: #fff;
+}
+
+.text-title {
+  margin-bottom: 0;
+}
+
+.cards-container {
+  position: relative;
+}
+
+.card-link {
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+#yellow-toy {
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  top: calc(50% + 13rem);
+  left: calc(50% - 26rem);
+  z-index: -1;
+  transform: rotate(-17.21deg);
+}
+
+#orange-toy {
+  position: absolute;
+  width: 6rem;
+  height: 6rem;
+  top: calc(50% + 1rem);
+  left: calc(50% - 22rem);
+  z-index: -1;
+  transform: rotate(-40.31deg);
+}
+
+#blue-toy {
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  top: calc(50% - 8rem);
+  left: calc(50% - 1.75rem);
+  z-index: -1;
+}
+
+#pink-toy {
+  position: absolute;
+  width: 5.5rem;
+  height: 6rem;
+  z-index: -1;
+  top: calc(50% + 1rem);
+  left: calc(50% + 16rem);
+  transform: rotate(14.82deg);
+  z-index: -1;
+}
+
+#violet-toy {
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  top: calc(50% + 13rem);
+  left: calc(50% + 20rem);
+  z-index: -1;
+}
+
+.github {
+  width: 48px;
+  height: 48px;
+  background-image: url('assets/icons/github.svg');
+  background-repeat: no-repeat;
+}
+
+.github_blue {
+  filter: invert(26%) sepia(94%) saturate(4568%) hue-rotate(237deg) brightness(100%) contrast(104%);
+}
+
+.github_yellow {
+  filter: invert(68%) sepia(71%) saturate(459%) hue-rotate(344deg) brightness(103%) contrast(104%);
+}
+
+@media screen and (min-width: 1013px) {
+  .nav-container {
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  #blue-toy {
+    display: none;
+  }
+
+  #yellow-toy {
+    top: calc(50% - 11rem);
+    left: calc(50% - 12rem);
+  }
+
+  #violet-toy {
+    top: calc(50% - 11rem);
+    left: calc(50% + 5rem);
+  }
+
+  #orange-toy {
+    top: calc(50% + 9rem);
+    left: calc(50% - 12rem);
+  }
+
+  #pink-toy {
+    top: calc(50% + 9rem);
+    left: calc(50% + 5rem);
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 795px) {
+  .card-photo {
+    width: 12rem;
+  }
+
+  #yellow-toy,
+  #violet-toy,
+  #orange-toy,
+  #blue-toy,
+  #pink-toy {
+    display: none;
+  }
+}

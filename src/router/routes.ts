@@ -25,5 +25,5 @@ export const routes = [
   { path: '/sprint', component: SprintComponent },
   { path: '/result', component: ResultComponent },
   { path: '/stats', component: StatsComponent },
-  { path: '/about', component: AboutUsComponent },
+  { path: '/about-team', component: AboutUsComponent },
 ];
