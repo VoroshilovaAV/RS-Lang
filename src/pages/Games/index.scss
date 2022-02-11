@@ -1,0 +1,125 @@
+@import 'bootstrap/scss/utilities';
+@import 'bootstrap/scss/utilities/api';
+
+.mini-game__title {
+  margin-top: 36px;
+  margin-bottom: 36px;
+}
+
+.game-title {
+  margin-top: 21px;
+  margin-left: 25px;
+  margin-bottom: 0;
+  color: #ffffff;
+}
+
+.title-container {
+  max-width: 500px;
+}
+
+.audiocall-container {
+  width: 1200px;
+  min-height: 240px;
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  margin-left: 0;
+  background-color: #f8e8f5;
+  background-image: url('assets/bg/pink_bg.png');
+  background-repeat: no-repeat;
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.35));
+  border-radius: 12px;
+}
+
+.sprint-container {
+  width: 1200px;
+  min-height: 240px;
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  margin-left: 0;
+  background-color: #ececff;
+  background-image: url('assets/bg/blue_bg.png');
+  background-repeat: no-repeat;
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.35));
+  border-radius: 12px;
+}
+
+.game-text {
+  max-width: 780px;
+  margin-top: 29px;
+  margin-left: 81px;
+  margin-bottom: 60px;
+  font-size: 16px;
+  color: #fff;
+}
+
+.btn-pink {
+  background-color: #e5adca !important;
+}
+
+.btn-pink:hover {
+  background-color: #dbc7d2 !important;
+}
+
+.btn-blue {
+  background-color: #A5A6F6 !important;
+}
+
+.btn-blue:hover {
+  background-color: #c2c2d6 !important;
+}
+
+.level-text {
+  font-size: 18px;
+  margin-bottom: 18px;
+  margin-left: 50px;
+}
+
+.audiocall-btns {
+  margin-left: 30px;
+}
+
+.custom {
+  width: 120px !important;
+  color: #fff !important;  
+}
+
+@media screen and (max-width: 769px) {
+  .game-text {
+    margin-top: 19px;
+    margin-left: 20px;
+    font-size: 14px;
+  }
+
+  .level-text {
+    font-size: 14px;
+  }
+
+  .custom {
+    width: 95px !important;
+    font-size: 12px !important;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .game-text {
+    margin-top: 22px;
+    color: black;
+  }
+  .game-title {    
+    color: black;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .audiocall-btns {
+    margin-left: 60px;
+  } 
+  .sprint-btns{
+    margin-left: 20px;
+  } 
+  .custom {
+    width: 115px !important;
+    font-size: 14px !important;
+  }
+}
+
