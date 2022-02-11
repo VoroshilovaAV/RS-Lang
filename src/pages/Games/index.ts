@@ -8,7 +8,7 @@ export const GamesComponent = {
     <h2 class="mini-game__title">Мини-игры</h2>
   </div>
   <div class="container d-flex justify-content-center flex-wrap">
-    <div class="container d-flex audiocall-container justify-content-center" style="margin-bottom: 85px">
+    <div class="container d-flex audiocall-block justify-content-center" style="margin-bottom: 85px">
       <div class="d-sm-flex flex-row">
         <div class="d-sm-flex justify-content-center flex-column">
           <h2 class="game-title">Аудиовызов</h2>
@@ -26,7 +26,7 @@ export const GamesComponent = {
         </div>
       </div>
     </div>
-    <div class="container d-flex sprint-container justify-content-center">
+    <div class="container d-flex sprint-block justify-content-center">
       <div class="d-sm-flex flex-row justify-content-center">
         <div class="d-sm-flex flex-column" style="margin-left: 45px">
           <p class="game-text" style="margin-left: 5px">
