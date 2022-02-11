@@ -1,16 +1,16 @@
+import { sprintListener } from './utils';
 import './index.scss';
 
 export const SprintComponent = {
-  listen: () => {},
+  listen: sprintListener,
   render: () => {
     return `
         <div class="container sprint-container">
           <div class="progress-container">
             <div class="progress">
-              <div class="progress-bar" role="progressbar"
-                aria-valuenow="30" aria-valuemin="0" aria-valuemax="60" style="width: 90%"></div>
+              <div class="progress-bar" role="progressbar" style="width: 100%"></div>
             </div>
-            <span class="progress-time">00:50</span>
+            <span class="progress-time">01:00</span>
           </div>
           <div class="sprint__answer-icon sprint__answer-icon_true"></div>
           <div class="sprint__answer-text">
