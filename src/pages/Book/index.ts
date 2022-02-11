@@ -1,23 +1,22 @@
 import { getPaginationNav } from './components/pagination';
-import { currentPage } from 'state';
+import { currentPage, state } from 'state';
+import * as bootstrap from 'bootstrap';
+import { listenPagination } from './utils/pagination';
 import './style.scss';
-import { listenPagination } from './pagination';
-export const BookComponent = {
-  listen: () => {
-    const dropdownMenu = document.querySelector('.dropdown-menu');
-    if (dropdownMenu !== null) {
-      dropdownMenu.addEventListener('click', (e) => {
-        e.preventDefault();
-      });
-    }
+import { getWordList } from './components/getWordList';
+import { listenAudio } from './utils/audioListen';
+import { addHardWord } from './utils/addHardWord';
+import { getTemplate, userLogin, hardWords, learnProgress } from './utils/constants';
 
-    const PageLink = document.querySelector('.pagination');
-    if (PageLink !== null) {
-      PageLink.addEventListener('click', (e) => {
-        e.preventDefault();
-      });
-    }
+export const BookComponent = {
+  listen: async () => {
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('.main [data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+      new bootstrap.Tooltip(tooltipTriggerEl, { trigger: 'hover' });
+    });
     listenPagination();
+    listenAudio();
+    addHardWord();
   },
   render: () =>
     `<div class="book">
@@ -25,10 +24,10 @@ export const BookComponent = {
         <div class="book__header">
           <h2 class="title book__title">Учебник</h2>
           <div class="book__panel-controls">
-            <div class="book__part parh">
+            <div class="book__part part">
               <h6 class="part-title">Раздел</h6>
               <select class="form-select form-select-sm btn-primary" aria-label=".form-select-sm example"">
-                <option value="1" selected>1</option>
+                <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -36,16 +35,16 @@ export const BookComponent = {
                 <option value="6">6</option>
               </select>
             </div>
-            <a href="#/games" class="book__games"><img class="game__img" src='./assets/icons/game.svg' alt="игры"></a>
-            <div class="user-words">
-              <div class="learned-words"><img class="learned__img" src='./assets/icons/learned-words.svg' alt="изученные слова"></div>
-              <div class="difficult-words"><img class="difficult__img" src='./assets/icons/hard-words.svg' alt="трудные слова"></div>
-            </div>
+            <a href="#/games" class="book__games" data-bs-toggle="tooltip" data-bs-placement="right" title="Игры"><img class="game__img" src='./assets/icons/game.svg' alt="игры"></a>
+            ${getTemplate(userLogin)}
           </div>  
         </div>
-        <div class="book__word-list word-list"></div>
+        <div class="book__word-list">
+          ${getWordList(state, learnProgress, hardWords)}
+        </div>
         <div class="book__pages">
-        ${getPaginationNav(currentPage)}
-      </div>
+          ${getPaginationNav(currentPage)}
+        </div>
+      </div>  
     </div>`,
 };

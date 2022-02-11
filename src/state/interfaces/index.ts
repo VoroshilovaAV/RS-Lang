@@ -39,3 +39,8 @@ export interface IPageWords {
   page: number;
   group: number;
 }
+export interface IState {
+  pageWords: IWord[] | [];
+  currentChapter: number;
+  currentPage: number;
+}

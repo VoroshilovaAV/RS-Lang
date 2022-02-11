@@ -1,51 +1,58 @@
 @import 'bootstrap/scss/_pagination.scss';
 
 .book {
-  margin-left: 20px;
+  max-width: 1240px;
+  width: calc(100% - 60px);
+  margin: 0px auto;
+}
+@media (max-width: 1200px){
+  .book{
+    max-width: 1140px;
+  }
+}
+@media (max-width: 992px) {
+  .book{
+    max-width: 960px;
+  }
+}
+@media (max-width: 768px){
+  .book{
+    max-width: 720px;
+  }
+}
+@media (max-width: 576px){
+  .book{
+    max-width: 540px;
+  }
 }
 .book__wrapper {
-  padding: 20px;
+  padding: 20px 0px;
   display: flex;
   flex-direction: column;
 }
 .book__header {
   display: grid;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 2fr 9fr;
   align-items: center;
-  gap: 15px
 }
 .book__panel-controls{
   display: flex;
   align-items:center;
   padding-left: 20px;
-  padding-right: 20px;
-  gap: 10px;
+  gap: 20px;
 }
-.title {
+.form-select {
+  cursor: pointer;
+  option {
+    cursor: pointer;
+  }
 }
-.book__title {
-}
-.book__part {
-}
-.parh {
-}
-.parh-title {
-}
-.parh__drop-down {
-}
-.part-1 {
-}
-.part-2 {
-}
-.part-3 {
-}
-.part-4 {
-}
-.part-5 {
-}
-.part-6 {
-}
-.book__games {
+.game__img {
+  position: relative;
+  transition: 0.1s;
+  &:hover{
+    transform: scale(1.05);
+  }
 }
 .user-words{
   display: flex;
@@ -56,19 +63,23 @@
   justify-content: end;
 }
 .difficult-words {
+  background: transparent;
+  border: none;
 }
 .learned__img{
   width: 40px;
+  transition: 0.1s;
+  &:hover{
+    transform: scale(1.05);
+  }
 }
 .difficult__img{
   width: 20px;
 }
 .learned-words {
-
+  background: transparent;
+  border: none;
 }
 .book__word-list {
-}
-.word-list {
-}
-.book__pages {
+  padding: 20px 0px;
 }
