@@ -59,7 +59,12 @@ export const listenPagination = () => {
   }
   const partPageLink = document.querySelector('.form-select');
   if (partPageLink instanceof HTMLSelectElement) {
-    partPageLink.addEventListener('input', () => {
+    const selectedPart = partPageLink.children[currentPage.group];
+    if (selectedPart instanceof HTMLOptionElement) {
+      selectedPart.selected = true;
+    }
+    partPageLink.addEventListener('input', (e) => {
+      e.preventDefault();
       currentPage.group = +partPageLink.value - 1;
       state.currentChapter = +partPageLink.value - 1;
       getArray(currentPage);
