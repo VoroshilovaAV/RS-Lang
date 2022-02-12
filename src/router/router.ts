@@ -45,7 +45,7 @@ export const router = () => {
 
   if (
     path !== '/games' &&
-    path !== '/pre-audio' &&
+    path !== '/pre-audiocall' &&
     path !== '/pre-sprint' &&
     path !== '/audiocall' &&
     path !== '/sprint' &&
