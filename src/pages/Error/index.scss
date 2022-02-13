@@ -1,0 +1,33 @@
+@import 'bootstrap/scss/utilities';
+@import 'bootstrap/scss/utilities/api';
+@import 'bootstrap/scss/_images.scss';
+
+.error-container {
+  max-width: 500px;
+}
+
+.error-title {
+  margin-top: 8%;
+  font-size: 8rem;
+  font-weight: 600;
+  line-height: 115%;
+  color: #808080;
+}
+
+.error-text {
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 115%;
+  color: #808080;
+}
+
+.error-img {
+  margin-top: 5%;
+}
+
+@media screen and (max-width: 575px) {
+  .error-title {
+    margin-top: 18%;
+    font-size: 4rem;
+  }
+}
