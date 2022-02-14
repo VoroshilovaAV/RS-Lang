@@ -10,18 +10,21 @@ export const SprintComponent = {
             <div class="progress">
               <div class="progress-bar" role="progressbar" style="width: 100%"></div>
             </div>
-            <span class="progress-time">01:00</span>
+            <div class="progress-track">
+              <span class="progress-text progress-time">01:00</span>
+              <span class="progress-text progress-score">0</span>
+            </div>
           </div>
-          <div class="sprint__answer-icon sprint__answer-icon_true"></div>
+          <div class="sprint__answer-icon"></div>
           <div class="sprint__answer-text">
-            <span class="sprint__answer-eng">Parents</span>
-            <span class="sprint__answer-ru">родители</span>
+            <span class="sprint__answer-eng"></span>
+            <span class="sprint__answer-ru"></span>
           </div>
           <div class="sprint__answer-btns">
-            <button class="sprint__answer-btn sprint__answer-btn_false btn btn-danger btn-lg">
+            <button class="sprint__answer-btn sprint__answer-btn_false btn btn-danger btn-lg" data-sprint-answer="false">
               <i class="bi bi-arrow-left-square"></i> Неверно
             </button>
-            <button class="sprint__answer-btn sprint__answer-btn_true btn btn-success btn-lg">
+            <button class="sprint__answer-btn sprint__answer-btn_true btn btn-success btn-lg" data-sprint-answer="true">
               Верно <i class="bi bi-arrow-right-square"></i>
             </button>
           </div>

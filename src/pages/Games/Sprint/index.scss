@@ -13,10 +13,16 @@
   flex-direction: column;
 }
 
-.progress-time {
+.progress-text {
   color: $gray;
   font-size: 32px;
   font-weight: 500;
+}
+
+.progress-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .sprint-bg {
