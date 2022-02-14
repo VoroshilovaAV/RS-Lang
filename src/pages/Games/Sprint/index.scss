@@ -34,9 +34,6 @@
   opacity: 0;
   color: rgb(255, 130, 28);
 
-  text-shadow: 0 2px 30px rgba(255, 0, 0, 0.2), 0 0 20px rgba(255, 0, 0, 0.2), 0 0 10px orange, 4px -5px 6px rgba(255, 255, 0, 0.2), -4px -10px 10px rgba(255, 255, 0, 0.2),
-    0 -10px 30px rgba(255, 255, 0, 0.2);
-
   &.progress-score__extra_hide {
     opacity: 0;
     animation: fade-in-hide 0.2s;
