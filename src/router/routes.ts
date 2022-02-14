@@ -8,7 +8,8 @@ import { PreAudiocallComponent } from 'pages/GameRules/pre-audiocall';
 import { PreSprintComponent } from 'pages/GameRules/pre-sprint';
 import { AudiocallComponent } from 'pages/Games/Audiocall';
 import { SprintComponent } from 'pages/Games/Sprint';
-import { ResultComponent } from 'pages/Result';
+import { ResultAudiocallComponent } from 'pages/Result/Audiocall';
+import { ResultSprintComponent } from 'pages/Result/Sprint';
 import { StatsComponent } from 'pages/Stats';
 import { AboutUsComponent } from 'pages/AboutUs';
 
@@ -23,7 +24,8 @@ export const routes = [
   { path: '/pre-sprint', component: PreSprintComponent },
   { path: '/audiocall', component: AudiocallComponent },
   { path: '/sprint', component: SprintComponent },
-  { path: '/result', component: ResultComponent },
+  { path: '/audiocall-result', component: ResultAudiocallComponent },
+  { path: '/sprint-result', component: ResultSprintComponent },
   { path: '/stats', component: StatsComponent },
   { path: '/about-team', component: AboutUsComponent },
 ];
