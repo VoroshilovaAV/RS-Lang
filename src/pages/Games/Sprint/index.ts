@@ -12,7 +12,10 @@ export const SprintComponent = {
             </div>
             <div class="progress-track">
               <span class="progress-text progress-time">01:00</span>
-              <span class="progress-text progress-score">0</span>
+              <div class="progress-score">
+                <span class="progress-text progress-score__basic">0</span>
+                <span class="progress-score__extra">0</span>
+              </div>
             </div>
           </div>
           <div class="sprint__answer-icon"></div>
