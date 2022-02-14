@@ -45,12 +45,12 @@ export const router = () => {
 
   if (
     path !== '/games' &&
-    path !== '/pre-audio' &&
+    path !== '/pre-audiocall' &&
     path !== '/pre-sprint' &&
     path !== '/audiocall' &&
     path !== '/sprint' &&
-    path !== '/result-audiocall' &&
-    path !== '/result-sprint' &&
+    path !== '/audiocall-result' &&
+    path !== '/sprint-result' &&
     pageContainer !== null
   ) {
     if (footerContainer) footerContainer.remove();

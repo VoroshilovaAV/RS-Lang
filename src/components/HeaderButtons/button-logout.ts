@@ -1,7 +1,7 @@
-import { ButtonTemlate } from './button-template';
+import { ButtonTemplate } from './button-template';
 
 export const ButtonLogoutComponent = {
   render: () => {
-    return `${ButtonTemlate('#/', 'Выход')}`;
+    return `${ButtonTemplate('#/', 'Выход')}`;
   },
 };
