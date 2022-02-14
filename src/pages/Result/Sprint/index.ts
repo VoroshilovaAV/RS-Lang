@@ -1,7 +1,8 @@
+import { GameResultPage } from 'components/GameResultTemplate';
+
 export const ResultSprintComponent = {
   listen: () => {},
   render: () => {
-    return `         
-        `;
+    return `${GameResultPage('sprint')}`;
   },
 };
