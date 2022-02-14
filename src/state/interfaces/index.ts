@@ -18,6 +18,16 @@ export interface IState {
   currentPage: number;
 }
 
+export interface IGameState {
+  words: IWord[] | [];
+  translates: string[] | [];
+  rightAnswers: IWord[] | [];
+  wrongAnswers: IWord[] | [];
+  score: number;
+  longestSeries: number;
+  isRightTranslate?: boolean;
+}
+
 export interface IWord {
   id: string;
   group: number;
