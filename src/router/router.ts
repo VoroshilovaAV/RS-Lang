@@ -49,8 +49,8 @@ export const router = () => {
     path !== '/pre-sprint' &&
     path !== '/audiocall' &&
     path !== '/sprint' &&
-    path !== '/result-audiocall' &&
-    path !== '/result-sprint' &&
+    path !== '/audiocall-result' &&
+    path !== '/sprint-result' &&
     pageContainer !== null
   ) {
     if (footerContainer) footerContainer.remove();
