@@ -7,7 +7,7 @@ import { handleArrowsForSprint, handleBtnsForSprint } from '../handleBtns';
 export const sprintListener = () => {
   updateSprintState();
   const answerBtns = document.querySelector('.sprint__answer-btns');
-  gameState.isRightTranslate = changeAndCompareText();
+  gameState.isRightTranslate = changeAndCompareText()?.isRightTranslate;
 
   answerBtns?.addEventListener('click', handleBtnsForSprint);
   document.addEventListener('keyup', handleArrowsForSprint);
