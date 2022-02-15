@@ -4,7 +4,11 @@
 }
 .word-list{
   display: flex; 
-  padding: 10px 0px;
+  margin: 10px 0px;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.137);
   .word-list__learn-progress{
     padding: 0px 20px;
     display: flex;
@@ -30,7 +34,9 @@
 
   .word-image {
     height: 100%;
+    border-radius: 5px;
     img{
+      border-radius: 5px;
       object-fit: cover;
       width: 170px;
       height: 170px;

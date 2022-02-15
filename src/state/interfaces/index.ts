@@ -14,8 +14,6 @@ export interface IAuth {
 
 export interface IState {
   pageWords: IWord[] | [];
-  currentChapter: number;
-  currentPage: number;
 }
 
 export interface IWord {
@@ -39,8 +37,29 @@ export interface IPageWords {
   page: number;
   group: number;
 }
+
 export interface IState {
   pageWords: IWord[] | [];
-  currentChapter: number;
-  currentPage: number;
+}
+
+export interface IUserWords {
+  words: IUserWordsGet[] | [];
+}
+
+export interface IUserWord {
+  difficulty: string;
+  optional?: object;
+}
+
+export interface IUserWordId {
+  userId: string;
+  wordId: string;
+  body: { difficulty: string; optional: { isLearnt: boolean } };
+}
+
+export interface IUserWordsGet {
+  difficulty: string;
+  id: string;
+  optional?: object;
+  wordId: string;
 }

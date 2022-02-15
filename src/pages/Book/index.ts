@@ -1,22 +1,27 @@
 import { getPaginationNav } from './components/pagination';
-import { currentPage, state } from 'state';
+import { currentPage, state, userWordId } from 'state';
 import * as bootstrap from 'bootstrap';
 import { listenPagination } from './utils/pagination';
-import './style.scss';
 import { getWordList } from './components/getWordList';
 import { listenAudio } from './utils/audioListen';
-import { addHardWord } from './utils/addHardWord';
-import { getTemplate, userLogin, hardWords, learnProgress } from './utils/constants';
+import { getDifficultWord } from './utils/addHardWord';
+import { getTemplate, userLogin, hardWords, learnProgress, difficultWords } from './utils/constants';
+import { getStorage } from './components';
+import { addLearntWord, getUserWords } from './utils';
+import './style.scss';
 
 export const BookComponent = {
   listen: async () => {
+    const user = getStorage('authorizedUser');
     const tooltipTriggerList = [].slice.call(document.querySelectorAll('.main [data-bs-toggle="tooltip"]'));
     tooltipTriggerList.forEach(function (tooltipTriggerEl) {
       new bootstrap.Tooltip(tooltipTriggerEl, { trigger: 'hover' });
     });
-    listenPagination();
+    getUserWords(state, user);
+    listenPagination(currentPage);
     listenAudio();
-    addHardWord();
+    getDifficultWord(userWordId, user, state);
+    addLearntWord(user, userWordId, state);
   },
   render: () =>
     `<div class="book">
@@ -36,6 +41,7 @@ export const BookComponent = {
               </select>
             </div>
             <a href="#/games" class="book__games" data-bs-toggle="tooltip" data-bs-placement="right" title="Игры"><img class="game__img" src='./assets/icons/game.svg' alt="игры"></a>
+            ${getTemplate(difficultWords)}
             ${getTemplate(userLogin)}
           </div>  
         </div>

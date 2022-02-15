@@ -16,8 +16,26 @@ export interface IWord {
 }
 
 export interface IUserWord {
+  _id: string;
+  group: number;
+  page: number;
+  word: string;
+  image: string;
+  audio: string;
+  audioMeaning: string;
+  audioExample: string;
+  textMeaning: string;
+  textExample: string;
+  transcription: string;
+  wordTranslate: string;
+  textMeaningTranslate: string;
+  textExampleTranslate: string;
+  userWord: IUserWordParams;
+}
+
+export interface IUserWordParams {
   difficulty: string;
-  optional?: object;
+  optional?: { isLearnt: boolean };
 }
 
 export interface IStatistic {
@@ -54,15 +72,10 @@ export interface IAuth {
   name: string;
 }
 
-export interface IUserWordIdDelete {
-  userId: string;
-  wordId: string;
-}
-
 export interface IUserWordId {
   userId: string;
   wordId: string;
-  body: IUserWord;
+  body: { difficulty: string; optional: { isLearnt: boolean } };
 }
 
 export interface IStatisticUser {
@@ -81,11 +94,10 @@ export interface IAggregateWords {
   page: number;
   wordsPerPage: number;
 }
-
-export interface IUserWord {
+export interface IUserWordsGet {
   difficulty: string;
   id: string;
-  optional?: object;
+  optional: { isLearnt: boolean };
   wordId: string;
 }
 
@@ -96,6 +108,4 @@ export interface IPageWords {
 
 export interface IState {
   pageWords: IWord[] | [];
-  currentChapter: number;
-  currentPage: number;
 }

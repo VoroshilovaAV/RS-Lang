@@ -8,12 +8,12 @@ import {
   IAggregateWords,
   IAuth,
   IUserWord,
-  IUserWordIdDelete,
   IPageWords,
   IUserCreated,
   ISetting,
   IStatistic,
   IGetNewToken,
+  IUserWordsGet,
 } from './interfaces';
 
 export const getWords = async ({ page, group }: IPageWords): Promise<IWord[] | void> => {
@@ -120,7 +120,7 @@ export const getNewUserToken = async (userId: string, refreshToken: string): Pro
   }
 };
 
-export const getUserIdWords = async (userId: string, token: string): Promise<IUserWord[] | [] | void> => {
+export const getUserIdWords = async (userId: string, token: string): Promise<IUserWordsGet[] | void> => {
   try {
     const rawResponse = await fetch(`${usersUrl}/${userId}/words`, {
       method: 'GET',
@@ -128,43 +128,6 @@ export const getUserIdWords = async (userId: string, token: string): Promise<IUs
         Authorization: `Bearer ${token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
-      },
-    });
-    const content = await rawResponse.json();
-    return content;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const createUserWord = async (
-  { userId, wordId, body }: IUserWordId,
-  token: string
-): Promise<IUserWord | void> => {
-  try {
-    const rawResponse = await fetch(`${usersUrl}/${userId}/words/${wordId}`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    });
-    const content = await rawResponse.json();
-    return content;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const getUserWord = async ({ userId, wordId }: IUserWordId, token: string): Promise<IUserWord | void> => {
-  try {
-    const rawResponse = await fetch(`${usersUrl}/${userId}/words/${wordId}`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
       },
     });
     const content = await rawResponse.json();
@@ -191,11 +154,50 @@ export const updateUserWord = async (
     const content = await rawResponse.json();
     return content;
   } catch (error) {
+    if (error) {
+      console.log(error);
+    }
+  }
+};
+
+export const createUserWord = async (
+  { userId, wordId, body }: IUserWordId,
+  token: string
+): Promise<IUserWord | void> => {
+  try {
+    const rawResponse = await fetch(`${usersUrl}/${userId}/words/${wordId}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+    const content = await rawResponse.json();
+    return content;
+  } catch (error) {
     console.log(error);
   }
 };
 
-export const deleteUserWord = async ({ userId, wordId }: IUserWordIdDelete, token: string) => {
+export const getUserWord = async (userId: string, wordId: string, token: string): Promise<IUserWord | void> => {
+  try {
+    const rawResponse = await fetch(`${usersUrl}/${userId}/words/${wordId}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+      },
+    });
+    const content = await rawResponse.json();
+    return content;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteUserWord = async (userId: string, wordId: string, token: string) => {
   try {
     await fetch(`${usersUrl}/${userId}/words/${wordId}`, {
       method: 'DELETE',
@@ -213,7 +215,7 @@ export const deleteUserWord = async ({ userId, wordId }: IUserWordIdDelete, toke
 export const getAggregatedWords = async (
   { userId, group, page, wordsPerPage }: IAggregateWords,
   token: string
-): Promise<IWord[] | void> => {
+): Promise<IUserWord[] | void> => {
   try {
     const rawResponse = await fetch(
       `${usersUrl}/${userId}/aggregatedWords?group=${group}&page=${page}&wordsPerPage=${wordsPerPage}`, //filter=%22easy%22,
@@ -233,10 +235,7 @@ export const getAggregatedWords = async (
   }
 };
 
-export const getAggregatedWord = async (
-  { userId, wordId }: IUserWordIdDelete,
-  token: string
-): Promise<IWord | void> => {
+export const getAggregatedWord = async (userId: string, wordId: string, token: string): Promise<IUserWord[] | void> => {
   try {
     const rawResponse = await fetch(`${usersUrl}/${userId}/aggregatedWords/${wordId}`, {
       method: 'GET',

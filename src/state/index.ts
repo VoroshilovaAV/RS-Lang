@@ -1,4 +1,4 @@
-import { IUserCreated, IAuth, IPageWords, IState } from './interfaces';
+import { IUserCreated, IAuth, IPageWords, IState, IUserWordId, IUserWords } from './interfaces';
 
 export const userCreated: IUserCreated = {
   id: '',
@@ -20,6 +20,15 @@ export const currentPage: IPageWords = {
 };
 export const state: IState = {
   pageWords: [],
-  currentChapter: 1,
-  currentPage: 1,
+};
+export const userWords: IUserWords = {
+  words: [],
+};
+export const userWordId: IUserWordId = {
+  userId: '',
+  wordId: '',
+  body: {
+    difficulty: 'easy',
+    optional: { isLearnt: false },
+  },
 };
