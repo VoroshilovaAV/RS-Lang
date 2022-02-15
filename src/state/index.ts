@@ -1,5 +1,4 @@
-import { IGameState } from './interfaces/index';
-import { IUserCreated, IAuth } from './interfaces';
+import { IUserCreated, IAuth, ISprintState } from './interfaces';
 
 export const userCreated: IUserCreated = {
   id: '',
@@ -15,7 +14,7 @@ export const authorizedUser: IAuth = {
   name: '',
 };
 
-export const gameState: IGameState = {
+export const sprintState: ISprintState = {
   pageWords: [],
   words: [],
   translates: [],

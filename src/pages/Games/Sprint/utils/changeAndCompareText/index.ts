@@ -1,5 +1,5 @@
 import { randomNum } from 'pages/Games/utils/randomNum';
-import { gameState } from 'state';
+import { sprintState } from 'state';
 import { TRANSLATES_COMPARE_AMOUNT } from '../consts';
 
 const changeHTMLWordsText = (word: string, translate: string) => {
@@ -10,14 +10,14 @@ const changeHTMLWordsText = (word: string, translate: string) => {
 };
 
 export const changeAndCompareText = () => {
-  const translatesLengthRemainder = gameState.translates.length - gameState.words.length;
-  let restOfTranslatesLength = gameState.translates.length - TRANSLATES_COMPARE_AMOUNT;
+  const translatesLengthRemainder = sprintState.translates.length - sprintState.words.length;
+  let restOfTranslatesLength = sprintState.translates.length - TRANSLATES_COMPARE_AMOUNT;
   if (translatesLengthRemainder % TRANSLATES_COMPARE_AMOUNT === 0 && translatesLengthRemainder !== 0) {
-    const deletedTranslates = gameState.translates.splice(restOfTranslatesLength, TRANSLATES_COMPARE_AMOUNT);
-    restOfTranslatesLength = gameState.translates.length - deletedTranslates.length;
+    const deletedTranslates = sprintState.translates.splice(restOfTranslatesLength, TRANSLATES_COMPARE_AMOUNT);
+    restOfTranslatesLength = sprintState.translates.length - deletedTranslates.length;
   }
-  const wordObj = gameState.words.pop();
-  const translate = gameState.translates[randomNum(restOfTranslatesLength, gameState.translates.length)];
+  const wordObj = sprintState.words.pop();
+  const translate = sprintState.translates[randomNum(restOfTranslatesLength, sprintState.translates.length)];
   if (wordObj && translate) {
     changeHTMLWordsText(wordObj.word, translate);
     return { wordObj, isRightTranslate: wordObj.wordTranslate === translate };

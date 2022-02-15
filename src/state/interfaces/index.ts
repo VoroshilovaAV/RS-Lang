@@ -18,12 +18,14 @@ export interface IState {
   currentPage: number;
 }
 
-export interface IGameState {
+export interface ISprintState {
+  pageWords: IWord[] | [];
   words: IWord[] | [];
   translates: string[] | [];
   rightAnswers: IWord[] | [];
   wrongAnswers: IWord[] | [];
   score: number;
+  series: number;
   longestSeries: number;
   isRightTranslate?: boolean;
 }
