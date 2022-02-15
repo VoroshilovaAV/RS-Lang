@@ -9,7 +9,9 @@
   border-radius: 12px;
 }
 
-.answers {  
+.answers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(250px, 1fr));
   overflow-y: auto;
   height: 360px;  
   max-width: 800px;
@@ -65,8 +67,8 @@
 }
 
 .word-sound {  
-  width: 2rem; 
-  height: 1.8rem;;
+  width: 2rem;
+  height: 100%;
   padding: 0;
   border: none;  
   color: inherit;
@@ -87,7 +89,11 @@
   margin-bottom: 0;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
+  .answers {
+    grid-template-columns: minmax(250px, 1fr);
+  }
+  
   .correct, .incorrect {    
     background: #FFFF;  
   }
