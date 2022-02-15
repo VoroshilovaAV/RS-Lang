@@ -1,8 +1,9 @@
 import { IWord } from 'api/interfaces';
 import { shuffleWords } from 'pages/Games/utils/shuffleWords';
-import { gameState } from 'state';
+import { sprintState } from 'state';
 
 export const updateSprintState = () => {
-  shuffleWords(gameState.words);
-  gameState.translates = gameState.words.map((wordObj: IWord) => wordObj.wordTranslate);
+  sprintState.words = JSON.parse(JSON.stringify(sprintState.pageWords));
+  shuffleWords(sprintState.words);
+  sprintState.translates = sprintState.words.map((wordObj: IWord) => wordObj.wordTranslate);
 };
