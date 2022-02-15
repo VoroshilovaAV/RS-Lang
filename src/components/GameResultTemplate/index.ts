@@ -1,11 +1,11 @@
-import { gameState } from 'state';
+import { sprintState } from 'state';
 import './index.scss';
 
 export const GameResultPage = (linkPlayAgain: string, correctWords: string, incorrectWords: string) => {
   return `
   <div class="results-container container d-flex flex-column align-items-center p-3">
-    <div class="result-title">${gameState.score} очков</div>
-    <div class="result-subtitle">Длина серии: ${gameState.longestSeries}</div>
+    <div class="result-title">${sprintState.score} очков</div>
+    <div class="result-subtitle">Длина серии: ${sprintState.longestSeries}</div>
     <div class="answers">
         <div class="correct px-5 py-3">
           <p class="correct-title">Правильные:</p>  

@@ -1,4 +1,4 @@
-import { gameState } from 'state';
+import { sprintState } from 'state';
 import { ARRAY_NUM_FOR_EXTRA_POINTS, START_POINTS } from '../consts';
 
 let points = START_POINTS;
@@ -16,19 +16,20 @@ const showExtraPoints = (extraPoints: number) => {
 
 export const changeGameScore = (isRight: boolean) => {
   if (isRight) {
-    gameState.longestSeries++;
-    gameState.score += points;
+    sprintState.series++;
+    if (sprintState.series > sprintState.longestSeries) sprintState.longestSeries = sprintState.series;
+    sprintState.score += points;
 
-    if (gameState.longestSeries % ARRAY_NUM_FOR_EXTRA_POINTS === 0 && gameState.longestSeries !== 0) {
-      const extraPoints = gameState.longestSeries * START_POINTS;
-      gameState.score += extraPoints;
+    if (sprintState.series % ARRAY_NUM_FOR_EXTRA_POINTS === 0 && sprintState.series !== 0) {
+      const extraPoints = sprintState.series * START_POINTS;
+      sprintState.score += extraPoints;
       showExtraPoints(extraPoints);
-      points += 10;
+      points += START_POINTS;
     }
   } else {
-    gameState.longestSeries = 0;
+    sprintState.series = 0;
     points = START_POINTS;
   }
   const score = document.querySelector('.progress-score__basic');
-  if (score) score.textContent = gameState.score.toString();
+  if (score) score.textContent = sprintState.score.toString();
 };
