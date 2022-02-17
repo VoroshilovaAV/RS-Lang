@@ -3,6 +3,12 @@ import { currentPage, state } from 'state';
 import { IPageWords } from 'state/interfaces';
 
 export const getDataBookPage = () => {
+  function getStorage(textDataStorage: string) {
+    const storage = localStorage.getItem(textDataStorage);
+    if (storage) {
+      return JSON.parse(storage);
+    } else return false;
+  }
   const getArray = async (current: IPageWords) => {
     const array = await getWords(current);
     if (array) {
@@ -11,16 +17,6 @@ export const getDataBookPage = () => {
       return state;
     }
   };
-  const currentParent = document.querySelector('.main');
-  if (!(currentParent instanceof HTMLElement)) {
-    throw new Error('error');
-  }
-  function getStorage(textDataStorage: string) {
-    const storage = localStorage.getItem(textDataStorage);
-    if (storage) {
-      return JSON.parse(storage);
-    } else return false;
-  }
   if (getStorage('group')) {
     currentPage.group = getStorage('group');
   }

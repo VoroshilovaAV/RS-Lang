@@ -64,12 +64,11 @@
           transform: scale(1.05);
         }
       }
+      .hard-word-delate,
       .hard-word{
         flex-grow: 1;
         justify-content: flex-end;
         display: flex;
-      }
-      .hard-word{
         cursor: pointer;
       }
     }

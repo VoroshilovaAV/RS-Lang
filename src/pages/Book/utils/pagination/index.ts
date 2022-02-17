@@ -7,6 +7,7 @@ const ListenPrevButton = (prevButton: Element, elem: HTMLElement, currentPage: I
   } else {
     prevButton.addEventListener('click', () => {
       currentPage.page--;
+      localStorage.setItem('page', JSON.stringify(currentPage.page));
       getArray(currentPage, elem);
     });
   }
@@ -18,6 +19,7 @@ const ListenNextButton = (nextButton: Element, elem: HTMLElement, currentPage: I
   } else {
     nextButton.addEventListener('click', () => {
       currentPage.page++;
+      localStorage.setItem('page', JSON.stringify(currentPage.page));
       getArray(currentPage, elem);
     });
   }
@@ -37,6 +39,7 @@ const listenButtonPagination = (buttonGetPage: Element[], elem: HTMLElement, cur
             currentPage.page = prevDotElement == 1 ? nextDotElement - 2 : prevDotElement;
           }
         }
+        localStorage.setItem('page', JSON.stringify(currentPage.page));
         getArray(currentPage, elem);
       }
     });
@@ -53,33 +56,45 @@ const listenSelectPart = (currentParent: HTMLElement, currentPage: IPageWords) =
     partPageLink.addEventListener('input', (e) => {
       e.preventDefault();
       currentPage.group = +partPageLink.value - 1;
+      localStorage.setItem('group', JSON.stringify(currentPage.group));
       getArray(currentPage, currentParent);
     });
     const main = document.querySelector('.book');
     if (main instanceof HTMLElement) {
       switch (partPageLink.value) {
         case '1': {
-          main.style.backgroundColor = '#ffd6d677';
+          partPageLink.style.backgroundColor = '#ffd6d6';
+          main.style.backgroundColor = '#ffd6d649';
           break;
         }
         case '2': {
-          main.style.backgroundColor = '#fffbd677';
+          partPageLink.style.backgroundColor = '#fffbd6';
+          main.style.backgroundColor = '#fffbd649';
           break;
         }
         case '3': {
-          main.style.backgroundColor = '#edffd677';
+          partPageLink.style.backgroundColor = '#edffd6';
+          main.style.backgroundColor = '#edffd649';
           break;
         }
         case '4': {
-          main.style.backgroundColor = '#d6feff77';
+          partPageLink.style.backgroundColor = '#d6feff';
+          main.style.backgroundColor = '#d6feff49';
           break;
         }
         case '5': {
-          main.style.backgroundColor = '#ffd6f877';
+          partPageLink.style.backgroundColor = '#ffd6f8';
+          main.style.backgroundColor = '#ffd6f849';
           break;
         }
         case '6': {
-          main.style.backgroundColor = '#ffd2dd81';
+          partPageLink.style.backgroundColor = '#ffd2dd';
+          main.style.backgroundColor = '#ffd2dd49';
+          break;
+        }
+        case '7': {
+          partPageLink.style.backgroundColor = '#e0e47d';
+          main.style.backgroundColor = '#e0e47d49';
           break;
         }
       }
@@ -88,23 +103,21 @@ const listenSelectPart = (currentParent: HTMLElement, currentPage: IPageWords) =
 };
 
 export const listenPagination = (currentPage: IPageWords) => {
-  const pageLink = document.querySelector('.pagination');
-  if (pageLink !== null) {
-    pageLink.addEventListener('click', (e) => {
-      e.preventDefault();
-    });
-  }
   const currentParent = document.querySelector('.book__wrapper');
-  if (!(currentParent instanceof HTMLElement)) {
-    throw new Error('error');
+  if (currentParent instanceof HTMLElement) {
+    listenSelectPart(currentParent, currentPage);
+    const pageLink = document.querySelector('.pagination');
+    if (pageLink !== null) {
+      pageLink.addEventListener('click', (e) => {
+        e.preventDefault();
+      });
+
+      const collectionButtons = document.querySelectorAll('.pagination li') as NodeListOf<HTMLElement>;
+      if (collectionButtons !== null && collectionButtons) {
+        ListenPrevButton(collectionButtons[0], currentParent, currentPage);
+        listenButtonPagination([...collectionButtons].slice(1, -1), currentParent, currentPage);
+        ListenNextButton(collectionButtons[collectionButtons.length - 1], currentParent, currentPage);
+      }
+    }
   }
-  listenSelectPart(currentParent, currentPage);
-  const collectionButtons = document.querySelectorAll('.pagination li');
-  if (collectionButtons !== null) {
-    ListenPrevButton(collectionButtons[0], currentParent, currentPage);
-    listenButtonPagination([...collectionButtons].slice(1, -1), currentParent, currentPage);
-    ListenNextButton(collectionButtons[collectionButtons.length - 1], currentParent, currentPage);
-  }
-  localStorage.setItem('group', JSON.stringify(currentPage.group));
-  localStorage.setItem('page', JSON.stringify(currentPage.page));
 };

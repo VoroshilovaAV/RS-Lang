@@ -15,7 +15,7 @@ export interface IWord {
   textExampleTranslate: string;
 }
 
-export interface IUserWord {
+export interface IUserWordAggregated {
   _id: string;
   group: number;
   page: number;
@@ -31,6 +31,23 @@ export interface IUserWord {
   textMeaningTranslate: string;
   textExampleTranslate: string;
   userWord: IUserWordParams;
+}
+
+export interface IUserWord {
+  _id: string;
+  group: number;
+  page: number;
+  word: string;
+  image: string;
+  audio: string;
+  audioMeaning: string;
+  audioExample: string;
+  textMeaning: string;
+  textExample: string;
+  transcription: string;
+  wordTranslate: string;
+  textMeaningTranslate: string;
+  textExampleTranslate: string;
 }
 
 export interface IUserWordParams {
@@ -90,8 +107,7 @@ export interface ISettingsUser {
 
 export interface IAggregateWords {
   userId: string;
-  group: number;
-  page: number;
+  group?: number;
   wordsPerPage: number;
 }
 export interface IUserWordsGet {
@@ -108,4 +124,11 @@ export interface IPageWords {
 
 export interface IState {
   pageWords: IWord[] | [];
+}
+
+export interface IUsersWords {
+  paginatedResults: IUserWordAggregated[] | IUserWord[];
+  totalCount: {
+    count: number;
+  };
 }

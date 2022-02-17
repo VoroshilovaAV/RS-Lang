@@ -1,4 +1,5 @@
 import { IPageWords } from 'state/interfaces';
+import { getStorage } from '.';
 
 const getNumberPages = (currentPage: IPageWords) => {
   const pages = 30;
@@ -26,27 +27,30 @@ const getNumberPages = (currentPage: IPageWords) => {
   }
   return currentNumberOfPages
     .map((page) => {
-      const currentClass = currentPage.page + 1 === page ? 'page-item active' : 'page-item';
-      return ` <li class="${currentClass}">
+      const currentClass = currentPage.page + 1 === page ? 'page-item active' : 'page-item'; // условие изученных
+      return ` <li class="${currentClass}"> 
                 <a href='!#' class="page-link">${page}</a>
             </li>`;
     })
     .join('');
 };
 
-export const getPaginationNav = (currentPage: IPageWords) =>
-  `<nav aria-label="Page navigation">
-    <ul class="pagination">
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-      ${getNumberPages(currentPage)}
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </ul>
-  </nav>`;
+export const getPaginationNav = (currentPage: IPageWords) => {
+  return currentPage.group === 6
+    ? ''
+    : `<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    ${getNumberPages(currentPage)}
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>`;
+};

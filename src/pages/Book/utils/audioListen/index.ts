@@ -11,10 +11,16 @@ export const listenAudio = () => {
       });
       const aud = audio.querySelectorAll('audio');
       if (aud[0] instanceof HTMLAudioElement) {
-        aud[0].volume = 0.8;
+        aud[0].volume = 0.5;
         aud[0].play();
-        aud[0].onended = () => aud[1].play();
-        aud[1].onended = () => aud[2].play();
+        aud[0].onended = () => {
+          aud[1].volume = 0.5;
+          aud[1].play();
+        };
+        aud[1].onended = () => {
+          aud[2].volume = 0.5;
+          aud[2].play();
+        };
       }
     })
   );

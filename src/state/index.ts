@@ -20,6 +20,7 @@ export const currentPage: IPageWords = {
 };
 export const state: IState = {
   pageWords: [],
+  pageUserWords: [],
 };
 export const userWords: IUserWords = {
   words: [],

@@ -5,7 +5,7 @@ import { listenPagination } from './utils/pagination';
 import { getWordList } from './components/getWordList';
 import { listenAudio } from './utils/audioListen';
 import { getDifficultWord } from './utils/addHardWord';
-import { getTemplate, userLogin, hardWords, learnProgress, difficultWords } from './utils/constants';
+import { hardWords, learnProgress, hardWordsDelete } from './utils/constants';
 import { getStorage } from './components';
 import { addLearntWord, getUserWords } from './utils';
 import './style.scss';
@@ -18,10 +18,10 @@ export const BookComponent = {
       new bootstrap.Tooltip(tooltipTriggerEl, { trigger: 'hover' });
     });
     getUserWords(state, user);
-    listenPagination(currentPage);
     listenAudio();
     getDifficultWord(userWordId, user, state);
     addLearntWord(user, userWordId, state);
+    listenPagination(currentPage);
   },
   render: () =>
     `<div class="book">
@@ -38,15 +38,15 @@ export const BookComponent = {
                 <option value="4">4</option>
                 <option value="5">5</option>
                 <option value="6">6</option>
+                ${getStorage('authorizedUser') ? '<option value="7">трудные слова</option>' : ''} ;
               </select>
             </div>
             <a href="#/games" class="book__games" data-bs-toggle="tooltip" data-bs-placement="right" title="Игры"><img class="game__img" src='./assets/icons/game.svg' alt="игры"></a>
-            ${getTemplate(difficultWords)}
-            ${getTemplate(userLogin)}
+           
           </div>  
         </div>
         <div class="book__word-list">
-          ${getWordList(state, learnProgress, hardWords)}
+          ${getWordList(state, learnProgress, hardWords, hardWordsDelete, currentPage)}
         </div>
         <div class="book__pages">
           ${getPaginationNav(currentPage)}

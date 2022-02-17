@@ -1,3 +1,5 @@
+import { IUserWord, IUserWordAggregated } from 'api/interfaces';
+
 export interface IUserCreated {
   email: string;
   id: string;
@@ -14,6 +16,7 @@ export interface IAuth {
 
 export interface IState {
   pageWords: IWord[] | [];
+  pageUserWords: IUserWordAggregated[] | IUserWord[];
 }
 
 export interface IWord {
@@ -38,15 +41,11 @@ export interface IPageWords {
   group: number;
 }
 
-export interface IState {
-  pageWords: IWord[] | [];
-}
-
 export interface IUserWords {
   words: IUserWordsGet[] | [];
 }
 
-export interface IUserWord {
+export interface IUserWordParams {
   difficulty: string;
   optional?: object;
 }

@@ -1,3 +1,5 @@
+import { getStorage } from 'pages/Book/components';
+import { currentPage } from 'state';
 import { usersUrl, wordsUrl, baseUrl } from './constants';
 import {
   IWord,
@@ -5,7 +7,6 @@ import {
   IUserWordId,
   IStatisticUser,
   ISettingsUser,
-  IAggregateWords,
   IAuth,
   IUserWord,
   IPageWords,
@@ -14,6 +15,8 @@ import {
   IStatistic,
   IGetNewToken,
   IUserWordsGet,
+  IUserWordAggregated,
+  IUsersWords,
 } from './interfaces';
 
 export const getWords = async ({ page, group }: IPageWords): Promise<IWord[] | void> => {
@@ -212,30 +215,47 @@ export const deleteUserWord = async (userId: string, wordId: string, token: stri
   }
 };
 
-export const getAggregatedWords = async (
-  { userId, group, page, wordsPerPage }: IAggregateWords,
-  token: string
-): Promise<IUserWord[] | void> => {
+export const getAggregatedWords = async <T>(token: T, url: string): Promise<T | void> => {
   try {
-    const rawResponse = await fetch(
-      `${usersUrl}/${userId}/aggregatedWords?group=${group}&page=${page}&wordsPerPage=${wordsPerPage}`, //filter=%22easy%22,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const rawResponse = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
     const content = await rawResponse.json();
-    return content;
+    return content[0];
   } catch (error) {
     console.log(error);
   }
 };
 
-export const getAggregatedWord = async (userId: string, wordId: string, token: string): Promise<IUserWord[] | void> => {
+export const getFilterWords = async (isFilterParam: string): Promise<IUsersWords | void> => {
+  let filter = `%7B%20%22%24and%22%3A%20%5B%7B%20%22page%22%3A%20${currentPage.page}%20%7D%2C%20%7B%20%22userWord.optional.isDelete%22%3A%20null%20%7D%5D%20%7D`;
+  const user = getStorage('authorizedUser');
+  let url = `${usersUrl}/${user.userId}/aggregatedWords?`;
+  switch (isFilterParam) {
+    case 'hard':
+      // filter = `%7B%22userWord.difficulty%22%3A%22hard%22%7D`;
+      filter = '{"userWord.difficulty":"hard"}';
+      url = `${usersUrl}/${user.userId}/aggregatedWords?filter=${filter}`;
+      return getAggregatedWords(user.token, url);
+    default:
+      filter = `%7B%20%22%24and%22%3A%20%5B%7B%20%22page%22%3A%20${currentPage.page}%20%7D%2C%20%7B%20%22userWord.optional.isDelete%22%3A%20null%20%7D%5D%20%7D`;
+      url = `${usersUrl}/${user.userId}/aggregatedWords?group=${
+        currentPage.group - 1
+      }&wordsPerPage=20&filter=${filter}`;
+      return getAggregatedWords(user.token, url);
+  }
+};
+
+export const getAggregatedWord = async (
+  userId: string,
+  wordId: string,
+  token: string
+): Promise<IUserWord | IUserWordAggregated | void> => {
   try {
     const rawResponse = await fetch(`${usersUrl}/${userId}/aggregatedWords/${wordId}`, {
       method: 'GET',
