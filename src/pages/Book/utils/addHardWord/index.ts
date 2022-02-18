@@ -1,6 +1,5 @@
-import { createUserWord, getUserIdWords, updateUserWord } from 'api';
-import { IState } from 'api/interfaces';
-import { IAuth, IUserWordId } from 'state/interfaces';
+import { createUserWord, updateUserWord } from 'api';
+import { IAuth, IState, IUserWordId } from 'state/interfaces';
 
 export const getDifficultWord = async (userWordId: IUserWordId, user: false | IAuth, state: IState) => {
   const hardWord = document.querySelectorAll('.hard-word img');
@@ -9,22 +8,26 @@ export const getDifficultWord = async (userWordId: IUserWordId, user: false | IA
       item.addEventListener('click', async () => {
         if (item instanceof HTMLImageElement) {
           const firstSrc = './assets/icons/hard-words.svg';
-          const secondSrc = './assets/icons/hard-words-empty.svg';
-          if (item.src.indexOf('empty') !== -1) {
+          if (item.src.indexOf('empty') !== -1 && state.pageUserWords[i].userWord?.difficulty !== 'hard') {
             item.src = firstSrc;
-            userWordId.wordId = state.pageWords[i].id;
+            userWordId.wordId = state.pageUserWords[i]._id;
+            const useWord = state.pageUserWords[i].userWord;
             userWordId.userId = user.userId;
             userWordId.body.difficulty = 'hard';
-            const isUserWord = await getUserIdWords(userWordId.userId, user.token);
-            if (isUserWord) {
-              const wordId = isUserWord.find((el) => el.wordId === userWordId.wordId);
-              if (wordId) {
-                console.log(userWordId);
-                updateUserWord(userWordId, user.token);
-              } else {
-                console.log(userWordId);
-                createUserWord(userWordId, user.token);
-              }
+            const containerWord = document.querySelectorAll('.word-list')[i];
+            if (useWord && useWord.optional) {
+              useWord.optional.isLearnt = false;
+              userWordId.body.optional = useWord.optional;
+            }
+            if (containerWord instanceof HTMLElement) {
+              containerWord.style.backgroundColor = '#ffffff';
+            }
+            const checkboxLearnt = document.querySelectorAll('.form-check-input')[i];
+            if (checkboxLearnt instanceof HTMLInputElement) checkboxLearnt.checked = false;
+            if (state.pageUserWords[i].userWord || state.pageUserWords[i].userWord?.optional) {
+              updateUserWord(userWordId, user.token);
+            } else {
+              createUserWord(userWordId, user.token);
             }
           }
         }

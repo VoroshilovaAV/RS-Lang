@@ -1,27 +1,14 @@
-import { getWords } from 'api';
 import { currentPage, state } from 'state';
-import { IPageWords } from 'state/interfaces';
+import { getStorage } from '../components';
+import { getArrayToPage } from '../components';
 
-export const getDataBookPage = () => {
-  function getStorage(textDataStorage: string) {
-    const storage = localStorage.getItem(textDataStorage);
-    if (storage) {
-      return JSON.parse(storage);
-    } else return false;
-  }
-  const getArray = async (current: IPageWords) => {
-    const array = await getWords(current);
-    if (array) {
-      state.pageWords = array;
-      localStorage.setItem('pageWords', JSON.stringify(state.pageWords));
-      return state;
-    }
-  };
+export const getDataBookPage = async () => {
   if (getStorage('group')) {
     currentPage.group = getStorage('group');
   }
   if (getStorage('page')) {
     currentPage.page = getStorage('page');
   }
-  getArray(currentPage);
+  // await getArrayToPage(currentPage, state);
+  getArrayToPage(currentPage, state);
 };

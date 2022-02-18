@@ -30,29 +30,16 @@ export interface IUserWordAggregated {
   wordTranslate: string;
   textMeaningTranslate: string;
   textExampleTranslate: string;
-  userWord: IUserWordParams;
-}
-
-export interface IUserWord {
-  _id: string;
-  group: number;
-  page: number;
-  word: string;
-  image: string;
-  audio: string;
-  audioMeaning: string;
-  audioExample: string;
-  textMeaning: string;
-  textExample: string;
-  transcription: string;
-  wordTranslate: string;
-  textMeaningTranslate: string;
-  textExampleTranslate: string;
+  userWord?: IUserWordParams;
 }
 
 export interface IUserWordParams {
   difficulty: string;
   optional?: { isLearnt: boolean };
+}
+export interface IUserWord {
+  difficulty: string;
+  optional?: object;
 }
 
 export interface IStatistic {
@@ -92,7 +79,7 @@ export interface IAuth {
 export interface IUserWordId {
   userId: string;
   wordId: string;
-  body: { difficulty: string; optional: { isLearnt: boolean } };
+  body: { difficulty: string; optional?: { isLearnt: boolean } };
 }
 
 export interface IStatisticUser {
@@ -113,7 +100,7 @@ export interface IAggregateWords {
 export interface IUserWordsGet {
   difficulty: string;
   id: string;
-  optional: { isLearnt: boolean };
+  optional?: { isLearnt: boolean };
   wordId: string;
 }
 
@@ -127,7 +114,7 @@ export interface IState {
 }
 
 export interface IUsersWords {
-  paginatedResults: IUserWordAggregated[] | IUserWord[];
+  paginatedResults: IUserWordAggregated[];
   totalCount: {
     count: number;
   };

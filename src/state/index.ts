@@ -1,9 +1,14 @@
-import { IUserCreated, IAuth, IPageWords, IState, IUserWordId, IUserWords } from './interfaces';
+import { IUserCreated, IAuth, IPageWords, IState, IUserWordId, IUserWords, IFilterParam } from './interfaces';
 
 export const userCreated: IUserCreated = {
   id: '',
   email: '',
   name: '',
+};
+
+export const filterParams: IFilterParam = {
+  hard: 'hard',
+  all: 'all',
 };
 
 export const authorizedUser: IAuth = {
@@ -30,6 +35,5 @@ export const userWordId: IUserWordId = {
   wordId: '',
   body: {
     difficulty: 'easy',
-    optional: { isLearnt: false },
   },
 };

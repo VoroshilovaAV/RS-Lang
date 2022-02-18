@@ -1,5 +1,5 @@
 import { getPaginationNav } from './components/pagination';
-import { currentPage, state, userWordId } from 'state';
+import { currentPage, filterParams, state, userWordId } from 'state';
 import * as bootstrap from 'bootstrap';
 import { listenPagination } from './utils/pagination';
 import { getWordList } from './components/getWordList';
@@ -7,7 +7,7 @@ import { listenAudio } from './utils/audioListen';
 import { getDifficultWord } from './utils/addHardWord';
 import { hardWords, learnProgress, hardWordsDelete } from './utils/constants';
 import { getStorage } from './components';
-import { addLearntWord, getUserWords } from './utils';
+import { addLearntWord, deleteHardWords, getUserWords } from './utils';
 import './style.scss';
 
 export const BookComponent = {
@@ -17,10 +17,11 @@ export const BookComponent = {
     tooltipTriggerList.forEach(function (tooltipTriggerEl) {
       new bootstrap.Tooltip(tooltipTriggerEl, { trigger: 'hover' });
     });
-    getUserWords(state, user);
+    getUserWords(currentPage, state, user);
+    deleteHardWords(state, user);
     listenAudio();
     getDifficultWord(userWordId, user, state);
-    addLearntWord(user, userWordId, state);
+    addLearntWord(currentPage, user, userWordId, state);
     listenPagination(currentPage);
   },
   render: () =>

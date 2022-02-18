@@ -1,5 +1,5 @@
 .preloader {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   right: 0;
@@ -10,8 +10,8 @@
 
 .preloader__row {
   position: relative;
-  top: calc(50% - 20px);
-  left: calc(50% - 20px);
+  top: calc(45% - 20px);
+  left: 50% ;
   width: 70px;
   height: 70px;
   margin-top: -25px;

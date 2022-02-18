@@ -1,5 +1,3 @@
-import { getStorage } from 'pages/Book/components';
-import { currentPage } from 'state';
 import { usersUrl, wordsUrl, baseUrl } from './constants';
 import {
   IWord,
@@ -215,7 +213,7 @@ export const deleteUserWord = async (userId: string, wordId: string, token: stri
   }
 };
 
-export const getAggregatedWords = async <T>(token: T, url: string): Promise<T | void> => {
+export const getAggregatedWords = async <T>(token: string, url: string): Promise<T | void> => {
   try {
     const rawResponse = await fetch(url, {
       method: 'GET',
@@ -232,21 +230,20 @@ export const getAggregatedWords = async <T>(token: T, url: string): Promise<T | 
   }
 };
 
-export const getFilterWords = async (isFilterParam: string): Promise<IUsersWords | void> => {
-  let filter = `%7B%20%22%24and%22%3A%20%5B%7B%20%22page%22%3A%20${currentPage.page}%20%7D%2C%20%7B%20%22userWord.optional.isDelete%22%3A%20null%20%7D%5D%20%7D`;
-  const user = getStorage('authorizedUser');
+export const getFilterWords = async (
+  isFilterParam: string,
+  currentPage: IPageWords,
+  user: IAuth
+): Promise<IUsersWords | void> => {
+  let filter = `{ "$and": [{ "page":${currentPage.page} }, { "userWord.optional.isDelete": null }] }`;
   let url = `${usersUrl}/${user.userId}/aggregatedWords?`;
   switch (isFilterParam) {
     case 'hard':
-      // filter = `%7B%22userWord.difficulty%22%3A%22hard%22%7D`;
       filter = '{"userWord.difficulty":"hard"}';
-      url = `${usersUrl}/${user.userId}/aggregatedWords?filter=${filter}`;
+      url = `${usersUrl}/${user.userId}/aggregatedWords?wordsPerPage=3600&filter=${filter}`;
       return getAggregatedWords(user.token, url);
-    default:
-      filter = `%7B%20%22%24and%22%3A%20%5B%7B%20%22page%22%3A%20${currentPage.page}%20%7D%2C%20%7B%20%22userWord.optional.isDelete%22%3A%20null%20%7D%5D%20%7D`;
-      url = `${usersUrl}/${user.userId}/aggregatedWords?group=${
-        currentPage.group - 1
-      }&wordsPerPage=20&filter=${filter}`;
+    case 'all':
+      url = `${usersUrl}/${user.userId}/aggregatedWords?group=${currentPage.group}&wordsPerPage=20&filter=${filter}`;
       return getAggregatedWords(user.token, url);
   }
 };

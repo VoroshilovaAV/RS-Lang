@@ -9,10 +9,12 @@ const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-tog
 tooltipTriggerList.forEach(function (tooltipTriggerEl) {
   new bootstrap.Tooltip(tooltipTriggerEl, { trigger: 'hover' });
 });
-const startApp = async () => {
-  await getDataBookPage();
-  window.addEventListener('hashchange', router);
-  window.addEventListener('load', router);
-  window.addEventListener('resize', checkNavHeight);
-};
+
+getDataBookPage();
+
+window.addEventListener('hashchange', router);
+window.addEventListener('load', router);
+window.addEventListener('resize', checkNavHeight);
+const startApp = () => {};
+// await getDataBookPage();
 startApp();

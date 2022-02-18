@@ -63,37 +63,37 @@ const listenSelectPart = (currentParent: HTMLElement, currentPage: IPageWords) =
     if (main instanceof HTMLElement) {
       switch (partPageLink.value) {
         case '1': {
-          partPageLink.style.backgroundColor = '#ffd6d6';
+          partPageLink.style.backgroundColor = '#ff9b9b';
           main.style.backgroundColor = '#ffd6d649';
           break;
         }
         case '2': {
-          partPageLink.style.backgroundColor = '#fffbd6';
+          partPageLink.style.backgroundColor = '#fff6a8';
           main.style.backgroundColor = '#fffbd649';
           break;
         }
         case '3': {
-          partPageLink.style.backgroundColor = '#edffd6';
+          partPageLink.style.backgroundColor = '#d5ff9e';
           main.style.backgroundColor = '#edffd649';
           break;
         }
         case '4': {
-          partPageLink.style.backgroundColor = '#d6feff';
+          partPageLink.style.backgroundColor = '#92fdff';
           main.style.backgroundColor = '#d6feff49';
           break;
         }
         case '5': {
-          partPageLink.style.backgroundColor = '#ffd6f8';
+          partPageLink.style.backgroundColor = '#e16aff';
           main.style.backgroundColor = '#ffd6f849';
           break;
         }
         case '6': {
-          partPageLink.style.backgroundColor = '#ffd2dd';
+          partPageLink.style.backgroundColor = '#ff6bd2';
           main.style.backgroundColor = '#ffd2dd49';
           break;
         }
         case '7': {
-          partPageLink.style.backgroundColor = '#e0e47d';
+          partPageLink.style.backgroundColor = '#fbff7b';
           main.style.backgroundColor = '#e0e47d49';
           break;
         }

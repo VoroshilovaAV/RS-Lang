@@ -64,12 +64,24 @@
           transform: scale(1.05);
         }
       }
-      .hard-word-delate,
+      .hard-word-delete,
       .hard-word{
         flex-grow: 1;
         justify-content: flex-end;
         display: flex;
         cursor: pointer;
+        transition: 0.1s;
+        & circle {
+          fill: #363cd9;
+        }
+      }
+      .hard-word-delete{
+        &:hover circle{
+          fill: #f0b426;
+        }
+        &:hover svg {
+          transform: scale(1.05);
+        }
       }
     }
     .word-translate{
