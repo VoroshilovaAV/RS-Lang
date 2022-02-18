@@ -1,5 +1,6 @@
 import { answerAction } from '../answerAction';
 import { changeGameScore } from '../changeGameScore';
+import { keyboardActions } from '../keyboardActions';
 import { playWordAudio } from '../playAudio';
 import { getWordsOnPage } from '../updateWords';
 
@@ -15,4 +16,5 @@ export const audiocallListener = () => {
       answerAction(<HTMLElement>el);
     })
   );
+  document.addEventListener('keydown', keyboardActions);
 };

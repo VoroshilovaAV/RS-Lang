@@ -5,11 +5,7 @@ export const PreSprintComponent = {
   listen: () => {},
   render: () => {
     return `  
-    ${PreloadGamePage(
-      'для выбора ответа',
-      '&#8592 и &#8594 для выбора ответа <br/>Enter для перехода к следующему слову',
-      'sprint'
-    )}         
+    ${PreloadGamePage('для выбора ответа', '&#8592 и &#8594 для выбора ответа', 'sprint')}         
     `;
   },
 };

@@ -21,12 +21,13 @@
 #audiocall-button {
   margin-top: 65px;
   padding: 0;
-  border: none;
+  border: 1px;
   color: inherit;
   background-color: transparent;
+  border-radius: 50%;
 }
 
-.audiocall-button-img:hover {
+.audiocall-button-img:active {
   opacity: 0.8;
 }
 
@@ -43,15 +44,15 @@
 }
 
 .btn-answer {
-  width: 180px !important;
-  height: 50px !important;
-  font-size: 24px !important;
+  width: 260px !important;
+  height: 60px !important;
+  font-size: 22px !important;
   color: white !important;
   background-color: #f178b6 !important;
 }
 
 .btn-answer:hover {
-  background-color: #eea4ca !important;
+  background-color: #e771ae !important;
 }
 
 .btn-answer:active {
@@ -59,8 +60,7 @@
 }
 
 .wrong {
-  text-decoration: line-through !important;
-  background-color: #f3c8de !important;
+  text-decoration: line-through !important;  
 }
 
 .variants {
