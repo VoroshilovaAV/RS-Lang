@@ -22,16 +22,16 @@ export interface IUserWord {
 
 export interface IWordOptionalParams {
   isLearnt: boolean;
-  sprint: {
+  sprint?: {
     correct: number;
     wrong: number;
   };
-  audiocall: {
+  audiocall?: {
     correct: number;
     wrong: number;
   };
-  lastChanged: string;
-  correctSeries: number;
+  lastChanged?: string;
+  correctSeries?: number;
 }
 
 export interface IStatistic {

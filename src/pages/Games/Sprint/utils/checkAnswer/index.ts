@@ -25,7 +25,7 @@ const createUserWordInSprint = (
   curFullDate: string
 ) => {
   const body = {
-    difficulty: 'normal',
+    difficulty: 'easy',
     optional: {
       isLearnt: false,
       sprint: {
@@ -53,11 +53,11 @@ const updateUserWordInSprint = (
 ) => {
   const wordOptional = wordBody.optional;
 
-  if (wordOptional) {
+  if (wordOptional && wordOptional.sprint && wordOptional.correctSeries) {
     let optional: IWordOptionalParams;
     let isLearnt: boolean;
     switch (wordBody.difficulty) {
-      case 'normal':
+      case 'easy':
         isLearnt = Number(isRight) + Number(wordOptional.correctSeries) >= 3;
         break;
       case 'hard':
@@ -96,7 +96,7 @@ const updateUserWordInSprint = (
     }
 
     const body = {
-      difficulty: isLearnt ? 'normal' : 'hard',
+      difficulty: wordBody.difficulty,
       optional,
     };
     updateUserWord({ userId, wordId, body }, token);
