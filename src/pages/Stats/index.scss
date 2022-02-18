@@ -1,0 +1,15 @@
+.stats-title {
+  margin: 36px 0;
+}
+
+.first-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .first-stats {
+    grid-template-columns: 1fr;
+  }
+}
