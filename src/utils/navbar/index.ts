@@ -1,11 +1,24 @@
-export const setStorageLastPath = () => {
+export const setStorageLastPathOfNavBar = () => {
   const currentElement = document.querySelector('.active-link');
   if (currentElement instanceof HTMLAnchorElement) {
     localStorage.setItem('lastPath', JSON.stringify(currentElement.href.split('#')[1]));
   }
 };
+export const setStorageCurPath = (path: string) => {
+  localStorage.setItem('curPath', JSON.stringify(path));
+};
 
 export const setActiveNavLink = (path: string) => {
+  if (
+    path === '/sprint' ||
+    path === '/audiocall' ||
+    path === '/pre-audiocall' ||
+    path === '/pre-sprint' ||
+    path === '/audiocall-result' ||
+    path === '/sprint-result'
+  ) {
+    path = '/games';
+  }
   const navLink = document.querySelector(`[href="#${path}"]`);
   navLink?.classList.add('active-link');
 };
@@ -24,7 +37,8 @@ export const checkNavHeight = () => {
 };
 
 export const changeNavBar = (path: string) => {
-  setStorageLastPath();
+  setStorageCurPath(path);
+  setStorageLastPathOfNavBar();
   removeActiveNavLink();
   setActiveNavLink(path);
   checkNavHeight();

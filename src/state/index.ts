@@ -1,4 +1,4 @@
-import { IUserCreated, IAuth } from './interfaces';
+import { IUserCreated, IAuth, ISprintState } from './interfaces';
 
 export const userCreated: IUserCreated = {
   id: '',
@@ -12,4 +12,15 @@ export const authorizedUser: IAuth = {
   refreshToken: '',
   userId: '',
   name: '',
+};
+
+export const sprintState: ISprintState = {
+  pageWords: [],
+  words: [],
+  translates: [],
+  rightAnswers: [],
+  wrongAnswers: [],
+  series: 0,
+  score: 0,
+  longestSeries: 0,
 };
