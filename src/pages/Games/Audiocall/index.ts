@@ -1,8 +1,13 @@
 import './index.scss';
 import { AudiocallAnswerButtons } from 'components/AudiocallAnswerButton';
+import { updateAudiocallState } from './utils/updateAudiocallState';
+import { audiocallListener } from './utils/audiocallListener';
 
 export const AudiocallComponent = {
-  listen: () => {},
+  listen: () => {
+    updateAudiocallState();
+    audiocallListener();
+  },
   render: () => {
     return `
     <div class="container d-flex flex-column align-items-center audiocall-container">
