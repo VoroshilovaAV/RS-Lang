@@ -130,8 +130,10 @@ export const getUserIdWords = async (userId: string, token: string): Promise<IUs
         'Content-Type': 'application/json',
       },
     });
-    const content = await rawResponse.json();
-    return content;
+    if (rawResponse.ok) {
+      const content = await rawResponse.json();
+      return content;
+    }
   } catch (error) {
     console.log(error);
   }
@@ -167,8 +169,10 @@ export const getUserWord = async ({ userId, wordId }: IUserWordId, token: string
         Accept: 'application/json',
       },
     });
-    const content = await rawResponse.json();
-    return content;
+    if (rawResponse.ok) {
+      const content = await rawResponse.json();
+      return content;
+    }
   } catch (error) {
     console.log(error);
   }

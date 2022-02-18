@@ -10,7 +10,7 @@ export const sprintListener = () => {
   }
   updateSprintState();
   const answerBtns = document.querySelector('.sprint__answer-btns');
-  sprintState.isRightTranslate = changeAndCompareText()?.isRightTranslate;
+  sprintState.wordAnswer = changeAndCompareText();
 
   answerBtns?.addEventListener('click', handleBtnsForSprint);
   document.addEventListener('keyup', handleArrowsForSprint);

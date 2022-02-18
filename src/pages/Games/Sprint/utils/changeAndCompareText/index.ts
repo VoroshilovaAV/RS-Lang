@@ -1,3 +1,4 @@
+import { IWordAnswer } from 'state/interfaces';
 import { randomNum } from 'pages/Games/utils/randomNum';
 import { sprintState } from 'state';
 import { TRANSLATES_COMPARE_AMOUNT } from '../consts';
@@ -9,7 +10,7 @@ const changeHTMLWordsText = (word: string, translate: string) => {
   if (translateText) translateText.textContent = translate;
 };
 
-export const changeAndCompareText = () => {
+export const changeAndCompareText = (): IWordAnswer | undefined => {
   const translatesLengthRemainder = sprintState.translates.length - sprintState.words.length;
   let restOfTranslatesLength = sprintState.translates.length - TRANSLATES_COMPARE_AMOUNT;
   if (translatesLengthRemainder % TRANSLATES_COMPARE_AMOUNT === 0 && translatesLengthRemainder !== 0) {

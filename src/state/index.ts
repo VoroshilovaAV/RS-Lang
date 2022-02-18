@@ -23,4 +23,7 @@ export const sprintState: ISprintState = {
   series: 0,
   score: 0,
   longestSeries: 0,
+  wordAnswer: {
+    isRightTranslate: false,
+  },
 };

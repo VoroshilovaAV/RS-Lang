@@ -17,7 +17,21 @@ export interface IWord {
 
 export interface IUserWord {
   difficulty: string;
-  optional?: object;
+  optional?: IWordOptionalParams;
+}
+
+export interface IWordOptionalParams {
+  isLearnt: boolean;
+  sprint: {
+    correct: number;
+    wrong: number;
+  };
+  audiocall: {
+    correct: number;
+    wrong: number;
+  };
+  lastChanged: string;
+  correctSeries: number;
 }
 
 export interface IStatistic {
@@ -62,7 +76,7 @@ export interface IUserWordIdDelete {
 export interface IUserWordId {
   userId: string;
   wordId: string;
-  body: IUserWord;
+  body?: IUserWord;
 }
 
 export interface IStatisticUser {
@@ -80,13 +94,6 @@ export interface IAggregateWords {
   group: number;
   page: number;
   wordsPerPage: number;
-}
-
-export interface IUserWord {
-  difficulty: string;
-  id: string;
-  optional?: object;
-  wordId: string;
 }
 
 export interface IPageWords {

@@ -18,6 +18,11 @@ export interface IState {
   currentPage: number;
 }
 
+export interface IWordAnswer {
+  wordObj?: IWord;
+  isRightTranslate: boolean;
+}
+
 export interface ISprintState {
   pageWords: IWord[] | [];
   words: IWord[] | [];
@@ -27,7 +32,7 @@ export interface ISprintState {
   score: number;
   series: number;
   longestSeries: number;
-  isRightTranslate?: boolean;
+  wordAnswer?: IWordAnswer;
 }
 
 export interface IWord {
