@@ -1,27 +1,9 @@
-import { sprintState } from 'state';
-import { randomNum } from './utils/randomNum';
-import { getWords } from 'api';
-import './index.scss';
 import { LevelButtonsTemplate } from 'components/MiniGamesButtons';
+import { gameStateListener } from './utils/gamePageListener';
+import './index.scss';
 
 export const GamesComponent = {
-  listen: () => {
-    const gameBtnsFromTwoGames = document.querySelectorAll('.game-btns');
-    gameBtnsFromTwoGames.forEach((gameBtns) =>
-      gameBtns?.addEventListener('click', (e: Event) => {
-        const gameBtn: HTMLElement | null = e.target instanceof HTMLElement ? e.target.closest('.game-btn') : null;
-        if (gameBtn) {
-          const groupPageBtn = gameBtn.getAttribute('data-game-level');
-          if (groupPageBtn) {
-            // randomNum(0, 30)
-            getWords({ page: 0, group: Number(groupPageBtn) }).then((data) => {
-              sprintState.pageWords = Array.isArray(data) ? data : [];
-            });
-          }
-        }
-      })
-    );
-  },
+  listen: gameStateListener,
   render: () => {
     return `
   <div class="container title-container">
