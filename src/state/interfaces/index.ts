@@ -30,6 +30,19 @@ export interface ISprintState {
   isRightTranslate?: boolean;
 }
 
+export interface IAudiocallState {
+  pageWords: IWord[] | [];
+  words: string[] | [];
+  translates: string[] | [];
+  rightAnswers: IWord[] | [];
+  wrongAnswers: IWord[] | [];
+  score: number;
+  series: number;
+  longestSeries: number;
+  counter: number;
+  responseNumber: number[] | [];
+}
+
 export interface IWord {
   id: string;
   group: number;

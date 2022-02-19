@@ -21,6 +21,12 @@ export const ResultSprintComponent = {
     const incorrectHTMLWords = sprintState.wrongAnswers.map((wordObj: IWord) =>
       createResultWord('incorrect-word', wordObj.word, wordObj.wordTranslate, wordObj.audio)
     );
-    return `${GameResultPage('sprint', correctHTMLWords.join(''), incorrectHTMLWords.join(''))}`;
+    return `${GameResultPage(
+      'sprint',
+      correctHTMLWords.join(''),
+      incorrectHTMLWords.join(''),
+      sprintState.score,
+      sprintState.longestSeries
+    )}`;
   },
 };
