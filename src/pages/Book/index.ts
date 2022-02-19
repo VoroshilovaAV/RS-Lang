@@ -39,7 +39,7 @@ export const BookComponent = {
                 <option value="4">4</option>
                 <option value="5">5</option>
                 <option value="6">6</option>
-                ${getStorage('authorizedUser') ? '<option value="7">трудные слова</option>' : ''} ;
+                ${getStorage('authorizedUser') ? '<option value="7">Сложные слова</option>' : ''} ;
               </select>
             </div>
             <div class="book__games">

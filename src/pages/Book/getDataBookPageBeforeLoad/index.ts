@@ -9,6 +9,5 @@ export const getDataBookPage = async () => {
   if (getStorage('page')) {
     currentPage.page = getStorage('page');
   }
-  // await getArrayToPage(currentPage, state);
-  getArrayToPage(currentPage, state);
+  return getArrayToPage(currentPage, state);
 };

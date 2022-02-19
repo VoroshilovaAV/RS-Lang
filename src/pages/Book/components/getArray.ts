@@ -22,4 +22,5 @@ export const getArrayToPage = async (current: IPageWords, state: IState) => {
       return state;
     }
   }
+  return;
 };
