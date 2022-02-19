@@ -13,10 +13,6 @@ import { isAllUsersWord } from './utils';
 export const BookComponent = {
   listen: async () => {
     const user = getStorage('authorizedUser');
-    const tooltipTriggerList = [].slice.call(document.querySelectorAll('.main [data-bs-toggle="tooltip"]'));
-    tooltipTriggerList.forEach(function (tooltipTriggerEl) {
-      new bootstrap.Tooltip(tooltipTriggerEl, { trigger: 'hover' });
-    });
     getUserWords(currentPage, state, user);
     deleteHardWords(state, user);
     listenAudio();
@@ -43,12 +39,12 @@ export const BookComponent = {
               </select>
             </div>
             <div class="book__games">
-              <a href="#/sprint" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cпринт" ${isAllWords(
+              <a href="#/sprint" title="Cпринт" ${isAllWords(
                 currentPage,
                 state,
                 eventNone
               )}><img class="game__img" src='./assets/icons/Sprint.svg' alt="игры"></a>
-              <a href="#/audiocall" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Аудиовызов" ${isAllWords(
+              <a href="#/audiocall" title="Аудиовызов" ${isAllWords(
                 currentPage,
                 state,
                 eventNone

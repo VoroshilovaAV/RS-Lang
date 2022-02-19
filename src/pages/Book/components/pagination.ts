@@ -1,5 +1,5 @@
 import { IPageWords, IState } from 'state/interfaces';
-import { buttonClassGray } from '.';
+import { buttonClassGray, getStorage } from '.';
 import { isAllWords } from '../utils';
 
 const getNumberPages = (currentPage: IPageWords, store: IState) => {
@@ -30,8 +30,10 @@ const getNumberPages = (currentPage: IPageWords, store: IState) => {
     .map((page) => {
       const currentClass =
         currentPage.page + 1 === page
-          ? isAllWords(currentPage, store, buttonClassGray) !== ''
-            ? `page-item active ${buttonClassGray}`
+          ? getStorage('authorizedUser')
+            ? isAllWords(currentPage, store, buttonClassGray) !== ''
+              ? `page-item active ${buttonClassGray}`
+              : 'page-item active'
             : 'page-item active'
           : 'page-item';
       return ` <li class="${currentClass}"> 
