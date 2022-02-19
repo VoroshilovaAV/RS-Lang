@@ -1,3 +1,5 @@
+import { IUserWord, IUserWordAggregated } from 'api/interfaces';
+
 export interface IUserCreated {
   email: string;
   id: string;
@@ -32,6 +34,7 @@ export interface ISprintState {
   score: number;
   series: number;
   longestSeries: number;
+  userWords: IUserWordAggregated[] | IUserWord[];
   wordAnswer?: IWordAnswer;
 }
 

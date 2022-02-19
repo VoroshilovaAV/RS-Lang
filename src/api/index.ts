@@ -5,7 +5,6 @@ import {
   IUserWordId,
   IStatisticUser,
   ISettingsUser,
-  IAggregateWords,
   IAuth,
   IUserWord,
   IUserWordIdDelete,
@@ -14,6 +13,7 @@ import {
   ISetting,
   IStatistic,
   IGetNewToken,
+  IUsersWords,
 } from './interfaces';
 
 export const getWords = async ({ page, group }: IPageWords): Promise<IWord[] | void> => {
@@ -214,26 +214,45 @@ export const deleteUserWord = async ({ userId, wordId }: IUserWordIdDelete, toke
   }
 };
 
-export const getAggregatedWords = async (
-  { userId, group, page, wordsPerPage }: IAggregateWords,
-  token: string
-): Promise<IWord[] | void> => {
+export const getAggregatedWords = async <T>(token: string, url: string): Promise<T | void> => {
   try {
-    const rawResponse = await fetch(
-      `${usersUrl}/${userId}/aggregatedWords?group=${group}&page=${page}&wordsPerPage=${wordsPerPage}`, //filter=%22easy%22,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const rawResponse = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
     const content = await rawResponse.json();
-    return content;
+    return content[0];
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const getFilterWords = async (
+  isFilterParam: string,
+  user: IAuth,
+  currentPage?: IPageWords
+): Promise<IUsersWords | void> => {
+  let filter: string;
+  let url: string;
+  switch (isFilterParam) {
+    case 'hard':
+      filter = '{"userWord.difficulty":"hard"}';
+      url = `${usersUrl}/${user.userId}/aggregatedWords?wordsPerPage=3600&filter=${filter}`;
+      return getAggregatedWords(user.token, url);
+    case 'allUser':
+      filter = '{"$or":[{"userWord.difficulty":"easy"},{"userWord.difficulty":"hard"}]}';
+      url = `${usersUrl}/${user.userId}/aggregatedWords?wordsPerPage=3600&filter=${filter}`;
+      return getAggregatedWords(user.token, url);
+    case 'all':
+      if (currentPage) {
+        filter = `{ "$and": [{ "page":${currentPage.page} }, { "userWord.optional.isDelete": null }] }`;
+        url = `${usersUrl}/${user.userId}/aggregatedWords?group=${currentPage.group}&wordsPerPage=20&filter=${filter}`;
+        return getAggregatedWords(user.token, url);
+      }
   }
 };
 

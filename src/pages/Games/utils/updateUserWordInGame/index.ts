@@ -1,5 +1,5 @@
 import { updateUserWord } from 'api';
-import { IUserWord, IWordOptionalParams } from 'api/interfaces';
+import { IUserWordAggregated, IWordOptionalParams } from 'api/interfaces';
 
 const updateGameState = (
   isRight: boolean,
@@ -19,18 +19,19 @@ export const updateUserWordInGame = (
   wordId: string,
   token: string,
   isRight: boolean,
-  wordBody: IUserWord,
+  wordBody: IUserWordAggregated,
   curFullDate: string,
   game: 'sprint' | 'audiocall'
 ) => {
-  const wordOptional = wordBody.optional;
+  const userWord = wordBody.userWord;
+  const wordOptional = userWord.optional;
 
   if (wordOptional && wordOptional.correctSeries) {
     let optional: IWordOptionalParams;
 
     let isLearnt: boolean;
 
-    switch (wordBody.difficulty) {
+    switch (userWord.difficulty) {
       case 'easy':
         isLearnt = Number(isRight) + Number(wordOptional.correctSeries) >= 3;
         break;
@@ -94,7 +95,7 @@ export const updateUserWordInGame = (
     }
 
     const body = {
-      difficulty: wordBody.difficulty,
+      difficulty: userWord.difficulty,
       optional,
     };
 
