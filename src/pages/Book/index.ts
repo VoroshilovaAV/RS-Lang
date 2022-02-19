@@ -1,14 +1,13 @@
 import { eventNone, getPaginationNav, hardWords, hardWordsDelete, learnProgress } from './components';
 import { currentPage, state, userWordId } from 'state';
-import * as bootstrap from 'bootstrap';
 import { isAllWords, listenPagination } from './utils';
 import { getWordList } from './components';
 import { listenAudio } from './utils';
 import { getDifficultWord } from './utils';
 import { getStorage } from './components';
 import { addLearntWord, deleteHardWords, getUserWords } from './utils';
-import './style.scss';
 import { isAllUsersWord } from './utils';
+import './style.scss';
 
 export const BookComponent = {
   listen: async () => {

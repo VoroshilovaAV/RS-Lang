@@ -37,12 +37,21 @@
   display: grid;
   grid-template-columns: 2fr 9fr;
   align-items: center;
+  @media (max-width: 768px){
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr;
+  }
 }
 .book__panel-controls{
   display: flex;
-  align-items:center;
+  align-items: center;
   padding-left: 20px;
   gap: 20px;
+  @media (max-width: 768px){
+    padding-left: 0px;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
 }
 .form-select {
   cursor: pointer;
@@ -61,6 +70,9 @@
   gap: 20px;
   justify-self: end;
   justify-content: end;
+  @media (max-width: 768px){
+    flex-grow: 0;
+  }
 }
 .difficult-words {
   background: transparent;
@@ -82,4 +94,8 @@
 }
 .page-item.active.full-page .page-link {
   background-color: #4d4d4d;
+}
+.book__games{
+  display: flex;
+  flex-wrap: nowrap;
 }
