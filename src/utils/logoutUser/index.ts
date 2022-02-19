@@ -1,3 +1,5 @@
+import { preloadLoad } from 'components';
+import { getDataBookPage } from 'pages/Book/getDataBookPageBeforeLoad';
 import { router } from 'router/router';
 
 export const logoutUser = () => {
@@ -6,7 +8,12 @@ export const logoutUser = () => {
     if (currentElement.textContent === 'Выход') {
       currentElement.addEventListener('click', () => {
         localStorage.clear();
-        router();
+        const elem = document.querySelector('.main');
+        getDataBookPage();
+        if (elem instanceof HTMLElement) {
+          preloadLoad(elem);
+          setTimeout(router, 1000);
+        }
       });
     }
   }
