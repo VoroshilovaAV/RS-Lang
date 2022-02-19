@@ -12,7 +12,6 @@ const loginIn = async (user: IUser) => {
   if (!parentElement.classList.contains('loaded_hiding')) {
     preloadLoad(parentElement);
   }
-  console.log(parentElement);
   const UserData = await loginUser(user);
   removePreload(parentElement);
   setTimeout(() => {

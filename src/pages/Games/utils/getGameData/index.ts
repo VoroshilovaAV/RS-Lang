@@ -23,7 +23,6 @@ export const getGameData = async (selector: string, state: ISprintState | IAudio
         const restWords: IUsersWords | void = await getFilterWords('rest', user, { page, group }, restWordsAmount);
         if (restWords) dataUser = [...notLearnedWords.paginatedResults, ...restWords.paginatedResults];
       }
-      console.log(dataUser);
       state.pageWordsUser = dataUser;
     } else {
       data = await getWords({ page, group });

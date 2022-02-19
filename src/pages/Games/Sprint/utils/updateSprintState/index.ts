@@ -5,7 +5,6 @@ import { sprintState } from 'state';
 
 export const updateSprintState = () => {
   if (getStorage('authorizedUser')) {
-    console.log(sprintState.pageWordsUser);
     sprintState.wordsUser = JSON.parse(JSON.stringify(sprintState.pageWordsUser));
     shuffleWords(sprintState.wordsUser);
     sprintState.translates = sprintState.wordsUser.map((wordObj: IUserWordAggregated) => wordObj.wordTranslate);
