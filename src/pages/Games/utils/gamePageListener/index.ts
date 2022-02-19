@@ -2,7 +2,7 @@ import { sprintState } from 'state';
 import { randomNum } from '../randomNum';
 import { getWords } from 'api';
 
-export const gameStateListener = () => {
+export const gamePageListener = () => {
   const gameBtnsFromTwoGames = document.querySelectorAll('.game-btns');
   gameBtnsFromTwoGames.forEach((gameBtns) =>
     gameBtns?.addEventListener('click', (e: Event) => {

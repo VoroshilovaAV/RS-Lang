@@ -1,9 +1,9 @@
 import { LevelButtonsTemplate } from 'components/MiniGamesButtons';
-import { gameStateListener } from './utils/gamePageListener';
+import { gamePageListener } from './utils/gamePageListener';
 import './index.scss';
 
 export const GamesComponent = {
-  listen: gameStateListener,
+  listen: gamePageListener,
   render: () => {
     return `
   <div class="container title-container">

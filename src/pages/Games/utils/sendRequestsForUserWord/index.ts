@@ -13,6 +13,7 @@ export const sendRequestsForUserWord = (wordId: string, isRight: boolean, game: 
 
     getUserWord({ userId, wordId }, token).then((data) => {
       if (data) {
+        console.log(data);
         updateUserWordInGame(userId, wordId, token, isRight, data, curFullDate, game);
       } else {
         createUserWordInGame(userId, wordId, token, isRight, curFullDate, game);

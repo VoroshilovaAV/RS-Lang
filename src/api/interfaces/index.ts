@@ -30,7 +30,7 @@ export interface IWordOptionalParams {
   sprint?: IGameCount;
   audiocall?: IGameCount;
   lastChanged?: string;
-  correctSeries?: number;
+  correctSeries?: string;
 }
 
 export interface IStatistic {
