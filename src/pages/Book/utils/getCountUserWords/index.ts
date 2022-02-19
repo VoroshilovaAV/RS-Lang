@@ -13,3 +13,8 @@ export const isAllUsersWord = (current: IPageWords, state: IState) => {
     } else return '';
   } else return '';
 };
+export const isAllWords = (current: IPageWords, state: IState, string: string) => {
+  const countUsersWordLearnt = state.pageUserWords.filter((el) => el.userWord?.optional?.isLearnt === true).length;
+  const countUsersWordHard = state.pageUserWords.filter((el) => el.userWord?.difficulty === 'hard').length;
+  return countUsersWordLearnt === 20 || countUsersWordHard === 20 || current.group === 6 ? string : '';
+};

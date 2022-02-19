@@ -18,8 +18,6 @@ export const getDifficultWord = async (userWordId: IUserWordId, user: false | IA
             const checkboxLearnt = document.querySelectorAll('.form-check-input')[i];
             if (checkboxLearnt instanceof HTMLInputElement) checkboxLearnt.checked = false;
 
-            markPageHard(state, hard);
-
             userWordId.wordId = state.pageUserWords[i]._id;
             userWordId.userId = user.userId;
 
@@ -34,13 +32,7 @@ export const getDifficultWord = async (userWordId: IUserWordId, user: false | IA
               ...{ difficulty: 'hard' },
               ...{ optional: { isLearnt: false } },
             };
-            // userWordId.body.difficulty = 'hard';
-            // userWordId.body.optional?.isLearnt = false;
-            // if (useWord && useWord.optional) {
-            //   useWord.optional.isLearnt = false;
-            //   userWordId.body.optional = useWord.optional;
-            // }
-
+            markPageHard(state, hard);
             if (useWord) {
               updateUserWord(userWordId, user.token);
             } else {

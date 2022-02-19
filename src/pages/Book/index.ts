@@ -1,7 +1,7 @@
-import { getPaginationNav, hardWords, hardWordsDelete, learnProgress } from './components';
+import { eventNone, getPaginationNav, hardWords, hardWordsDelete, learnProgress } from './components';
 import { currentPage, state, userWordId } from 'state';
 import * as bootstrap from 'bootstrap';
-import { listenPagination } from './utils';
+import { isAllWords, listenPagination } from './utils';
 import { getWordList } from './components';
 import { listenAudio } from './utils';
 import { getDifficultWord } from './utils';
@@ -43,8 +43,16 @@ export const BookComponent = {
               </select>
             </div>
             <div class="book__games">
-              <a href="#/sprint" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cпринт"><img class="game__img" src='./assets/icons/Sprint.svg' alt="игры"></a>
-              <a href="#/audiocall" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Аудиовызов"><img class="game__img" src='./assets/icons/audiocall.svg' alt="игры"></a>
+              <a href="#/sprint" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cпринт" ${isAllWords(
+                currentPage,
+                state,
+                eventNone
+              )}><img class="game__img" src='./assets/icons/Sprint.svg' alt="игры"></a>
+              <a href="#/audiocall" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Аудиовызов" ${isAllWords(
+                currentPage,
+                state,
+                eventNone
+              )}><img class="game__img" src='./assets/icons/audiocall.svg' alt="игры"></a>
             </div>
             ${isAllUsersWord(currentPage, state)}
           </div>  
@@ -53,7 +61,7 @@ export const BookComponent = {
           ${getWordList(state, learnProgress, hardWords, hardWordsDelete, currentPage)}
         </div>
         <div class="book__pages">
-          ${getPaginationNav(currentPage)}
+          ${getPaginationNav(currentPage, state)}
         </div>
       </div>  
     </div>`,

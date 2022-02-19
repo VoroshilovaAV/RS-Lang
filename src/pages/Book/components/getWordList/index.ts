@@ -40,7 +40,9 @@ export const getWordList = (
                 </div>`;
 
   if (getStorage('authorizedUser')) {
-    return state.pageUserWords.map((word: IUserWordAggregated) => root(word)).join('');
+    if (state.pageUserWords.length < 1) {
+      return `<div class="page-empty" style="display: flex; flex-direction: column; align-content: center;"><h3 style = " margin: 0px auto">Отмеченых слов как "сложные" нет</h3><img src="assets/img/empty-page.png" style = "height: 50vh; margin: 0px auto" alt="слов нет"></div>`;
+    } else return state.pageUserWords.map((word: IUserWordAggregated) => root(word)).join('');
   } else {
     return state.pageWords.map((word: IWord) => root(word)).join('');
   }
