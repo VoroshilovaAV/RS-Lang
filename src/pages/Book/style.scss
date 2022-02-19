@@ -52,10 +52,7 @@
 }
 .game__img {
   position: relative;
-  transition: 0.1s;
-  &:hover{
-    transform: scale(1.05);
-  }
+  cursor: pointer;
 }
 .user-words{
   display: flex;

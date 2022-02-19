@@ -75,11 +75,11 @@
           fill: #363cd9;
         }
       }
-      .hard-word-delete{
+      .hard-word-delete svg{
         &:hover circle{
           fill: #f0b426;
         }
-        &:hover svg {
+        &:hover {
           transform: scale(1.05);
         }
       }

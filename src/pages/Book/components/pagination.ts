@@ -1,5 +1,4 @@
 import { IPageWords } from 'state/interfaces';
-import { getStorage } from '.';
 
 const getNumberPages = (currentPage: IPageWords) => {
   const pages = 30;

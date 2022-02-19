@@ -79,7 +79,7 @@ export interface IAuth {
 export interface IUserWordId {
   userId: string;
   wordId: string;
-  body: { difficulty: string; optional?: { isLearnt: boolean } };
+  body: { difficulty?: string; optional?: { isLearnt: boolean } };
 }
 
 export interface IStatisticUser {

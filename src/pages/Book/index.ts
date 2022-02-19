@@ -1,14 +1,14 @@
-import { getPaginationNav } from './components/pagination';
-import { currentPage, filterParams, state, userWordId } from 'state';
+import { getPaginationNav, hardWords, hardWordsDelete, learnProgress } from './components';
+import { currentPage, state, userWordId } from 'state';
 import * as bootstrap from 'bootstrap';
-import { listenPagination } from './utils/pagination';
-import { getWordList } from './components/getWordList';
-import { listenAudio } from './utils/audioListen';
-import { getDifficultWord } from './utils/addHardWord';
-import { hardWords, learnProgress, hardWordsDelete } from './utils/constants';
+import { listenPagination } from './utils';
+import { getWordList } from './components';
+import { listenAudio } from './utils';
+import { getDifficultWord } from './utils';
 import { getStorage } from './components';
 import { addLearntWord, deleteHardWords, getUserWords } from './utils';
 import './style.scss';
+import { isAllUsersWord } from './utils';
 
 export const BookComponent = {
   listen: async () => {
@@ -42,8 +42,11 @@ export const BookComponent = {
                 ${getStorage('authorizedUser') ? '<option value="7">трудные слова</option>' : ''} ;
               </select>
             </div>
-            <a href="#/games" class="book__games" data-bs-toggle="tooltip" data-bs-placement="right" title="Игры"><img class="game__img" src='./assets/icons/game.svg' alt="игры"></a>
-           
+            <div class="book__games">
+              <a href="#/sprint" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cпринт"><img class="game__img" src='./assets/icons/Sprint.svg' alt="игры"></a>
+              <a href="#/audiocall" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Аудиовызов"><img class="game__img" src='./assets/icons/audiocall.svg' alt="игры"></a>
+            </div>
+            ${isAllUsersWord(currentPage, state)}
           </div>  
         </div>
         <div class="book__word-list">

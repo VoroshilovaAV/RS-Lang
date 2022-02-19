@@ -1,6 +1,5 @@
 import { IWord, IState, IPageWords, IUserWordAggregated } from 'state/interfaces';
-import { getStorage } from '..';
-import { getTemplate } from '../../utils/constants';
+import { getStorage, getTemplate } from '..';
 import './style.scss';
 
 export const getWordList = (
