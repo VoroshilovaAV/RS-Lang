@@ -30,7 +30,7 @@ export interface IUserWordAggregated {
   wordTranslate: string;
   textMeaningTranslate: string;
   textExampleTranslate: string;
-  userWord: IUserWord;
+  userWord?: IUserWord;
 }
 
 export interface IUserWord {
@@ -44,7 +44,7 @@ export interface IGameCount {
 }
 
 export interface IWordOptionalParams {
-  isLearnt: boolean;
+  isLearnt?: boolean;
   sprint?: IGameCount;
   audiocall?: IGameCount;
   lastChanged?: string;
@@ -125,7 +125,7 @@ export interface IState {
 }
 
 export interface IUsersWords {
-  paginatedResults: IUserWordAggregated[] | IUserWord[];
+  paginatedResults: IUserWordAggregated[];
   totalCount: {
     count: number;
   };

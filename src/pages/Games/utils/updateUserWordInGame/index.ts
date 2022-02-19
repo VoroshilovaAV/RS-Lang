@@ -24,7 +24,7 @@ export const updateUserWordInGame = (
   game: 'sprint' | 'audiocall'
 ) => {
   const userWord = wordBody.userWord;
-  const wordOptional = userWord.optional;
+  const wordOptional = userWord?.optional;
 
   if (wordOptional && wordOptional.correctSeries) {
     let optional: IWordOptionalParams;

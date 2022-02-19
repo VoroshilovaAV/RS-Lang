@@ -21,7 +21,7 @@ export const authorizedUser: IAuth = {
 };
 
 export const sprintState: ISprintState = {
-  pageWords: [],
+  wordsUser: [],
   words: [],
   translates: [],
   rightAnswers: [],

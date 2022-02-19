@@ -234,7 +234,8 @@ export const getAggregatedWords = async <T>(token: string, url: string): Promise
 export const getFilterWords = async (
   isFilterParam: string,
   user: IAuth,
-  currentPage?: IPageWords
+  currentPage?: IPageWords,
+  restWordsAmount?: number
 ): Promise<IUsersWords | void> => {
   let filter: string;
   let url: string;
@@ -247,12 +248,27 @@ export const getFilterWords = async (
       filter = '{"$or":[{"userWord.difficulty":"easy"},{"userWord.difficulty":"hard"}]}';
       url = `${usersUrl}/${user.userId}/aggregatedWords?wordsPerPage=3600&filter=${filter}`;
       return getAggregatedWords(user.token, url);
+    case 'notLearned':
+      if (currentPage) {
+        filter = `{ "$and": [{ "page": ${currentPage.page} }, {"$or":[ { "userWord.optional.isLearnt": null }, { "userWord.optional.isLearnt": false }] }]}`;
+        url = `${usersUrl}/${user.userId}/aggregatedWords?group=${currentPage.group}&wordsPerPage=20&filter=${filter}`;
+        return getAggregatedWords(user.token, url);
+      }
+      break;
+    case 'rest':
+      if (restWordsAmount) {
+        filter = `{ "userWord.optional.isDelete": null }`;
+        url = `${usersUrl}/${user.userId}/aggregatedWords?wordsPerPage=${restWordsAmount}&filter=${filter}`;
+        return getAggregatedWords(user.token, url);
+      }
+      break;
     case 'all':
       if (currentPage) {
         filter = `{ "$and": [{ "page":${currentPage.page} }, { "userWord.optional.isDelete": null }] }`;
         url = `${usersUrl}/${user.userId}/aggregatedWords?group=${currentPage.group}&wordsPerPage=20&filter=${filter}`;
         return getAggregatedWords(user.token, url);
       }
+      break;
   }
 };
 

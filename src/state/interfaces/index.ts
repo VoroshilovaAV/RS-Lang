@@ -22,15 +22,18 @@ export interface IState {
 
 export interface IWordAnswer {
   wordObj?: IWord;
+  wordObjUser?: IUserWordAggregated;
   isRightTranslate: boolean;
 }
 
 export interface ISprintState {
-  pageWords: IWord[] | [];
+  pageWords?: IWord[] | [];
+  pageWordsUser?: IUserWordAggregated[] | [];
+  wordsUser: IUserWordAggregated[] | [];
   words: IWord[] | [];
   translates: string[] | [];
-  rightAnswers: IWord[] | [];
-  wrongAnswers: IWord[] | [];
+  rightAnswers: (IWord | IUserWordAggregated)[] | undefined;
+  wrongAnswers: (IWord | IUserWordAggregated)[] | undefined;
   score: number;
   series: number;
   longestSeries: number;
@@ -40,6 +43,7 @@ export interface ISprintState {
 
 export interface IAudiocallState {
   pageWords: IWord[] | [];
+  pageWordsUser?: IUserWordAggregated[] | [];
   words: string[] | [];
   translates: string[] | [];
   rightAnswers: IWord[] | [];
