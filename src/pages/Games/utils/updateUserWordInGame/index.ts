@@ -1,6 +1,19 @@
 import { updateUserWord } from 'api';
 import { IUserWord, IWordOptionalParams } from 'api/interfaces';
 
+const updateGameState = (
+  isRight: boolean,
+  wordOptional: IWordOptionalParams,
+  gameStr: keyof IWordOptionalParams & ('sprint' | 'audiocall')
+) => {
+  const gameObj = wordOptional[gameStr];
+  if (gameObj)
+    return {
+      correct: isRight ? ++gameObj.correct : gameObj.correct,
+      wrong: isRight ? gameObj.wrong : ++gameObj.wrong,
+    };
+};
+
 export const updateUserWordInGame = (
   userId: string,
   wordId: string,
@@ -12,7 +25,7 @@ export const updateUserWordInGame = (
 ) => {
   const wordOptional = wordBody.optional;
 
-  if (wordOptional && wordOptional.sprint && wordOptional.correctSeries) {
+  if (wordOptional && wordOptional.sprint && wordOptional.audiocall && wordOptional.correctSeries) {
     let optional: IWordOptionalParams;
 
     let isLearnt: boolean;
@@ -30,11 +43,6 @@ export const updateUserWordInGame = (
     }
 
     if (wordOptional.lastChanged === curFullDate) {
-      const gameState = {
-        correct: isRight ? ++wordOptional.sprint.correct : wordOptional.sprint.correct,
-        wrong: isRight ? wordOptional.sprint.wrong : ++wordOptional.sprint.wrong,
-      };
-
       optional = {
         isLearnt,
         lastChanged: curFullDate,
@@ -43,16 +51,24 @@ export const updateUserWordInGame = (
 
       switch (game) {
         case 'sprint':
-          optional = { ...optional, sprint: gameState, audiocall: wordOptional.audiocall };
+          optional = {
+            ...optional,
+            sprint: updateGameState(isRight, wordOptional, 'sprint'),
+            audiocall: wordOptional.audiocall,
+          };
           break;
         case 'audiocall':
-          optional = { ...optional, sprint: wordOptional.sprint, audiocall: gameState };
+          optional = {
+            ...optional,
+            sprint: wordOptional.sprint,
+            audiocall: updateGameState(isRight, wordOptional, 'audiocall'),
+          };
           break;
         default:
           break;
       }
     } else {
-      const gameState = {
+      const gameStateTimeUp = {
         correct: isRight ? 1 : 0,
         wrong: isRight ? 0 : 1,
       };
@@ -65,10 +81,10 @@ export const updateUserWordInGame = (
 
       switch (game) {
         case 'sprint':
-          optional = { ...optional, sprint: gameState };
+          optional = { ...optional, sprint: gameStateTimeUp };
           break;
         case 'audiocall':
-          optional = { ...optional, audiocall: gameState };
+          optional = { ...optional, audiocall: gameStateTimeUp };
           break;
         default:
           break;

@@ -20,16 +20,15 @@ export interface IUserWord {
   optional?: IWordOptionalParams;
 }
 
+export interface IGameCount {
+  correct: number;
+  wrong: number;
+}
+
 export interface IWordOptionalParams {
   isLearnt: boolean;
-  sprint?: {
-    correct: number;
-    wrong: number;
-  };
-  audiocall?: {
-    correct: number;
-    wrong: number;
-  };
+  sprint?: IGameCount;
+  audiocall?: IGameCount;
   lastChanged?: string;
   correctSeries?: number;
 }
