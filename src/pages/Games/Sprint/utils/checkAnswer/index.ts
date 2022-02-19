@@ -24,9 +24,9 @@ export const checkAnswer = (answerOfBtn: boolean) => {
   }
   if (sprintState.wordAnswer && sprintState.wordAnswer.wordObj) {
     sendRequestsForUserWord(sprintState.wordAnswer.wordObj.id, isRight, 'sprint');
+    separateWordsByAnswer(isRight, sprintState.wordAnswer.wordObj);
   }
   if (word) sprintState.wordAnswer = { wordObj: word.wordObj, isRightTranslate: word.isRightTranslate };
-  separateWordsByAnswer(isRight, word?.wordObj);
   changeGameScore(isRight);
   iconAnimation(isRight);
   if (!sprintState.words.length) {

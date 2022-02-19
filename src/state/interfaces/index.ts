@@ -34,7 +34,7 @@ export interface ISprintState {
   score: number;
   series: number;
   longestSeries: number;
-  userWords: IUserWordAggregated[] | IUserWord[];
+  userWords?: IUserWordAggregated[] | IUserWord[];
   wordAnswer?: IWordAnswer;
 }
 
@@ -49,6 +49,7 @@ export interface IAudiocallState {
   longestSeries: number;
   counter: number;
   responseNumber: number[] | [];
+  userWords?: IUserWordAggregated[] | IUserWord[];
 }
 
 export interface IWord {
