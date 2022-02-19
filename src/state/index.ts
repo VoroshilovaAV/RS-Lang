@@ -1,5 +1,5 @@
 import { IPageWords } from 'api/interfaces';
-import { IUserCreated, IAuth, ISprintState } from './interfaces';
+import { IUserCreated, IAuth, ISprintState, IAudiocallState } from './interfaces';
 
 export const userCreated: IUserCreated = {
   id: '',
@@ -29,8 +29,20 @@ export const sprintState: ISprintState = {
   series: 0,
   score: 0,
   longestSeries: 0,
-  userWords: [],
   wordAnswer: {
     isRightTranslate: false,
   },
+};
+
+export const audiocallState: IAudiocallState = {
+  pageWords: [],
+  words: [],
+  translates: [],
+  rightAnswers: [],
+  wrongAnswers: [],
+  series: 0,
+  score: 0,
+  longestSeries: 0,
+  counter: 0,
+  responseNumber: [],
 };

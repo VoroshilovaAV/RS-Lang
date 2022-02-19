@@ -7,6 +7,7 @@ import { routes } from './routes';
 import { logoutUser } from 'utils';
 import { getStorage } from 'pages/LoginAndRegistration';
 import { setDefaultOptionsToSprintState } from 'state/utils';
+import { setDefaultOptionsToAudiocallState } from 'state/utils/setDefaultOptionsToAudiocallState';
 
 const parseLocation = () => location.hash.slice(1).toLowerCase() || '/';
 
@@ -26,6 +27,9 @@ export const router = () => {
 
   if (getStorage('curPath') === '/sprint' && path !== '/sprint-result') {
     setDefaultOptionsToSprintState();
+  }
+  if (getStorage('curPath') === '/audiocall' && path !== '/audiocall-result') {
+    setDefaultOptionsToAudiocallState();
   }
 
   const { component = ErrorComponent } = findComponentByPath(path, routes) || {};

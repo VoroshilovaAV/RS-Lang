@@ -13,37 +13,6 @@
   flex-direction: column;
 }
 
-.progress-text {
-  color: $gray;
-  font-size: 32px;
-  font-weight: 500;
-}
-
-.progress-score {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.progress-score__extra {
-  position: absolute;
-  font-size: 20px;
-  font-weight: 500;
-  top: 70%;
-  opacity: 0;
-  color: rgb(255, 130, 28);
-
-  &.progress-score__extra_hide {
-    opacity: 0;
-    animation: fade-in-hide 0.2s;
-  }
-  &.progress-score__extra_show {
-    opacity: 1;
-    animation: fade-in-show 0.1s;
-  }
-}
-
 @keyframes fade-in-hide {
   from {
     opacity: 1;
