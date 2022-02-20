@@ -1,5 +1,14 @@
-import { IPageWords } from 'api/interfaces';
-import { IUserCreated, IAuth, ISprintState, IAudiocallState } from './interfaces';
+import {
+  IUserCreated,
+  IAuth,
+  IPageWords,
+  IState,
+  IUserWordId,
+  IUserWords,
+  IFilterParam,
+  ISprintState,
+  IAudiocallState,
+} from './interfaces';
 
 export const userCreated: IUserCreated = {
   id: '',
@@ -7,9 +16,9 @@ export const userCreated: IUserCreated = {
   name: '',
 };
 
-export const currentPage: IPageWords = {
-  page: 0,
-  group: 0,
+export const filterParams: IFilterParam = {
+  hard: 'hard',
+  all: 'all',
 };
 
 export const authorizedUser: IAuth = {
@@ -19,7 +28,24 @@ export const authorizedUser: IAuth = {
   userId: '',
   name: '',
 };
-
+export const currentPage: IPageWords = {
+  page: 0,
+  group: 0,
+};
+export const state: IState = {
+  pageWords: [],
+  pageUserWords: [],
+};
+export const userWords: IUserWords = {
+  words: [],
+};
+export const userWordId: IUserWordId = {
+  userId: '',
+  wordId: '',
+  body: {
+    difficulty: 'easy',
+  },
+};
 export const sprintState: ISprintState = {
   wordsUser: [],
   words: [],

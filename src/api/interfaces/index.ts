@@ -34,7 +34,7 @@ export interface IUserWordAggregated {
 }
 
 export interface IUserWord {
-  difficulty: string;
+  difficulty?: string;
   optional?: IWordOptionalParams;
 }
 
@@ -44,7 +44,7 @@ export interface IGameCount {
 }
 
 export interface IWordOptionalParams {
-  isLearnt?: boolean;
+  isLearnt: boolean;
   sprint?: IGameCount;
   audiocall?: IGameCount;
   lastChanged?: string;
@@ -85,11 +85,6 @@ export interface IAuth {
   name: string;
 }
 
-export interface IUserWordIdDelete {
-  userId: string;
-  wordId: string;
-}
-
 export interface IUserWordId {
   userId: string;
   wordId: string;
@@ -108,9 +103,14 @@ export interface ISettingsUser {
 
 export interface IAggregateWords {
   userId: string;
-  group: number;
-  page: number;
+  group?: number;
   wordsPerPage: number;
+}
+export interface IUserWordsGet {
+  difficulty: string;
+  id: string;
+  optional?: IWordOptionalParams;
+  wordId: string;
 }
 
 export interface IPageWords {
@@ -120,8 +120,13 @@ export interface IPageWords {
 
 export interface IState {
   pageWords: IWord[] | [];
-  currentChapter: number;
-  currentPage: number;
+}
+
+export interface IUsersWords {
+  paginatedResults: IUserWordAggregated[];
+  totalCount: {
+    count: number;
+  };
 }
 
 export interface IUsersWords {

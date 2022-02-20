@@ -1,3 +1,4 @@
+import { getDataBookPage } from 'pages/Book/getDataBookPageBeforeLoad';
 import { router } from 'router/router';
 import { authorizedUser } from 'state';
 import './style.scss';
@@ -10,6 +11,7 @@ export function getStorage(textDataStorage: string) {
 }
 
 export const successLoginMessage = () => {
+  getDataBookPage();
   const html = `${authorizedUser.name}, вы выполнили вход`;
   const windowMessage = document.createElement('div');
   const popap = document.createElement('div');
