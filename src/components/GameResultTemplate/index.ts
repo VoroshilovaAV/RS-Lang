@@ -2,8 +2,8 @@ import './index.scss';
 
 export const GameResultPage = (
   linkPlayAgain: string,
-  correctWords: string,
-  incorrectWords: string,
+  correctWords: string | undefined,
+  incorrectWords: string | undefined,
   score: number,
   longestSeries: number
 ) => {

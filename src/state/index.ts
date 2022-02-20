@@ -47,7 +47,7 @@ export const userWordId: IUserWordId = {
   },
 };
 export const sprintState: ISprintState = {
-  pageWords: [],
+  wordsUser: [],
   words: [],
   translates: [],
   rightAnswers: [],
@@ -55,6 +55,9 @@ export const sprintState: ISprintState = {
   series: 0,
   score: 0,
   longestSeries: 0,
+  wordAnswer: {
+    isRightTranslate: false,
+  },
 };
 
 export const audiocallState: IAudiocallState = {

@@ -3,15 +3,19 @@ import { updateSprintState } from './../updateSprintState';
 import { startTimer } from '../sprintTimer';
 import { changeAndCompareText } from '../changeAndCompareText';
 import { handleArrowsForSprint, handleBtnsForSprint } from '../handleBtns';
+import { getGameData } from 'pages/Games/utils/getGameData';
+import { getStorage } from 'pages/LoginAndRegistration';
 
-export const sprintListener = () => {
-  if (!sprintState.pageWords.length) {
+export const sprintListener = async () => {
+  if (getStorage('curPath') !== '/sprint-result') {
+    await getGameData('.sprint__answer-text', sprintState);
+  }
+  if (!sprintState.pageWords?.length && !sprintState.pageWordsUser?.length) {
     location.hash = '/games';
   }
   updateSprintState();
   const answerBtns = document.querySelector('.sprint__answer-btns');
-  sprintState.isRightTranslate = changeAndCompareText()?.isRightTranslate;
-
+  sprintState.wordAnswer = changeAndCompareText();
   answerBtns?.addEventListener('click', handleBtnsForSprint);
   document.addEventListener('keyup', handleArrowsForSprint);
 

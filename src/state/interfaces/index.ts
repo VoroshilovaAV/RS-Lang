@@ -48,7 +48,7 @@ export interface IWordOptionalParams {
   sprint?: IGameCount;
   audiocall?: IGameCount;
   lastChanged?: string;
-  correctSeries?: string;
+  correctSeries?: number;
 }
 
 export interface IState {
@@ -56,20 +56,30 @@ export interface IState {
   pageUserWords: IUserWordAggregated[];
 }
 
+export interface IWordAnswer {
+  wordObj?: IWord;
+  wordObjUser?: IUserWordAggregated;
+  isRightTranslate: boolean;
+}
+
 export interface ISprintState {
-  pageWords: IWord[] | [];
+  pageWords?: IWord[] | [];
+  pageWordsUser?: IUserWordAggregated[] | [];
+  wordsUser: IUserWordAggregated[] | [];
   words: IWord[] | [];
   translates: string[] | [];
-  rightAnswers: IWord[] | [];
-  wrongAnswers: IWord[] | [];
+  rightAnswers: (IWord | IUserWordAggregated)[] | undefined;
+  wrongAnswers: (IWord | IUserWordAggregated)[] | undefined;
   score: number;
   series: number;
   longestSeries: number;
-  isRightTranslate?: boolean;
+  userWords?: IUserWordAggregated[];
+  wordAnswer?: IWordAnswer;
 }
 
 export interface IAudiocallState {
   pageWords: IWord[] | [];
+  pageWordsUser?: IUserWordAggregated[] | [];
   words: string[] | [];
   translates: string[] | [];
   rightAnswers: IWord[] | [];
@@ -79,6 +89,7 @@ export interface IAudiocallState {
   longestSeries: number;
   counter: number;
   responseNumber: number[] | [];
+  userWords?: IUserWordAggregated[] | IUserWord[];
 }
 
 export interface IWord {

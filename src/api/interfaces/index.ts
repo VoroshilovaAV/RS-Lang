@@ -48,7 +48,7 @@ export interface IWordOptionalParams {
   sprint?: IGameCount;
   audiocall?: IGameCount;
   lastChanged?: string;
-  correctSeries?: string;
+  correctSeries?: number;
 }
 
 export interface IStatistic {
@@ -88,7 +88,7 @@ export interface IAuth {
 export interface IUserWordId {
   userId: string;
   wordId: string;
-  body: IUserWord;
+  body?: IUserWord;
 }
 
 export interface IStatisticUser {
@@ -120,6 +120,13 @@ export interface IPageWords {
 
 export interface IState {
   pageWords: IWord[] | [];
+}
+
+export interface IUsersWords {
+  paginatedResults: IUserWordAggregated[];
+  totalCount: {
+    count: number;
+  };
 }
 
 export interface IUsersWords {

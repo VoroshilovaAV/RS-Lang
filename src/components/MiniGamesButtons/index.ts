@@ -6,7 +6,7 @@ export const LevelButtonsTemplate = (game: string, bgColor: string) => {
   buttonsArray = [];
   levelsNum.forEach((el) => {
     buttonsArray.push(
-      `<a href="#/pre-${game}" class="btn btn-${bgColor} custom m-2" role="button" data-level-${game}="${el}">${levelsText[el]}</a>`
+      `<a href="#/pre-${game}" class="btn game-btn btn-${bgColor} custom m-2" role="button" data-game-level="${el}">${levelsText[el]}</a>`
     );
   });
   return buttonsArray.join('');
