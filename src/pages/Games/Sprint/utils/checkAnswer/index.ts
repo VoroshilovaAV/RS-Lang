@@ -41,7 +41,6 @@ export const checkAnswer = (answerOfBtn: boolean) => {
     }
   } else {
     if (sprintState.wordAnswer && sprintState.wordAnswer.wordObj) {
-      sendRequestsForUserWord(sprintState.wordAnswer.wordObj.id, isRight, 'sprint');
       separateWordsByAnswer(isRight, sprintState.wordAnswer.wordObj);
     }
     if (word) sprintState.wordAnswer = { wordObj: word.wordObj, isRightTranslate: word.isRightTranslate };

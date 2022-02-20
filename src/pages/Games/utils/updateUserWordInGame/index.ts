@@ -30,17 +30,26 @@ export const updateUserWordInGame = (
     let optional: IWordOptionalParams;
 
     let isLearnt: boolean;
+    const isPrevLearnt = wordBody.userWord?.optional?.isLearnt;
 
-    switch (userWord.difficulty) {
-      case 'easy':
-        isLearnt = Number(isRight) + Number(wordOptional.correctSeries) >= 3;
-        break;
-      case 'hard':
-        isLearnt = Number(isRight) + Number(wordOptional.correctSeries) >= 5;
-        break;
-      default:
-        isLearnt = false;
-        break;
+    if (!isRight) {
+      isLearnt = false;
+    } else {
+      if (isPrevLearnt) {
+        isLearnt = true;
+      } else {
+        switch (userWord.difficulty) {
+          case 'easy':
+            isLearnt = Number(isRight) + Number(wordOptional.correctSeries) >= 3;
+            break;
+          case 'hard':
+            isLearnt = Number(isRight) + Number(wordOptional.correctSeries) >= 5;
+            break;
+          default:
+            isLearnt = false;
+            break;
+        }
+      }
     }
 
     if (wordOptional.lastChanged === curFullDate) {
