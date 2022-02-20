@@ -48,6 +48,6 @@ export const getTemplateProgress = (template: string, word: IUserWordAggregated)
                   <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                 </div>
               </div>`;
-    } else return '';
+    } else return template;
   } else return '';
 };
