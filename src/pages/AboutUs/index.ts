@@ -14,21 +14,21 @@ export const AboutUsComponent = {
         'https://github.com/alyanoyigor',
         'Igor Alyanoy',
         'github github_yellow',
-        '<li>Макет в Figma</li><li>Главная страница</li><li>Меню</li>'
+        '<li>Макет в Figma</li><li>Главная страница</li><li>Меню</li><li>Игра «Спринт»</li><li>Страница статистики</li><li>Долгострочная статистика</li>'
       )}
       ${CardTemplate(
         'nick',
         'https://github.com/nick1091',
         'Nikolaу Kuckharchuk',
         'github github_blue',
-        '<li>Бэкенд</li><li>Авторизация</li><li>Запросы к API</li>'
+        '<li>Бэкенд</li><li>Авторизация</li><li>Запросы к API</li><li>Электронный учебник</li><li>Список слов</li><li>Прогресс изучения</li><li>Изученные слова</li>'
       )}
       ${CardTemplate(
         'ann',
         'https://github.com/VoroshilovaAV',
         'Anna Voroshilova',
         'github',
-        '<li>Макет в Figma</li><li>Роутинг</li><li>Страница "О команде"</li>'
+        '<li>Макет в Figma</li><li>Роутинг</li><li>Страницы: «Игры», «Правила игры», «404», «О команде»</li><li>Игра «Аудиовызов»</li>'
       )}      
     </div>                  
         <img id="yellow-toy" src="assets/img/yellow-toy.png" alt="yellow toy" />
