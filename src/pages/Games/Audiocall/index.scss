@@ -1,0 +1,69 @@
+@import 'bootstrap/scss/utilities';
+@import 'bootstrap/scss/utilities/api';
+@import 'bootstrap/scss/_images.scss';
+
+.audiocall-container {
+  margin: 24px 0;
+}
+
+.audiocall-bg {
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 168px;
+  background-image: url('assets/bg/audiocall-bg.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#audiocall-button {
+  margin-top: 65px;
+  padding: 0;
+  border: 1px;
+  color: inherit;
+  background-color: transparent;
+  border-radius: 50%;
+}
+
+.audiocall-button-img:active {
+  opacity: 0.8;
+}
+
+.hide {
+  opacity: 0;
+}
+
+.audiocall-answer {
+  text-transform: uppercase;
+  font-size: 48px;
+  line-height: 58px;
+  margin-top: 35px;
+  color: #808080;
+}
+
+.btn-answer {
+  width: 260px !important;
+  height: 60px !important;
+  font-size: 22px !important;
+  color: white !important;
+  background-color: #f178b6 !important;
+}
+
+.btn-answer:hover {
+  background-color: #e771ae !important;
+}
+
+.btn-answer:active {
+  border: 2px solid #fde269 !important;
+}
+
+.wrong {
+  text-decoration: line-through !important;  
+}
+
+.variants {
+  max-width: 1600px;
+  margin-top: 65px;
+}

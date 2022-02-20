@@ -1,4 +1,14 @@
-import { IUserCreated, IAuth, IPageWords, IState, IUserWordId, IUserWords, IFilterParam } from './interfaces';
+import {
+  IUserCreated,
+  IAuth,
+  IPageWords,
+  IState,
+  IUserWordId,
+  IUserWords,
+  IFilterParam,
+  ISprintState,
+  IAudiocallState,
+} from './interfaces';
 
 export const userCreated: IUserCreated = {
   id: '',
@@ -18,7 +28,6 @@ export const authorizedUser: IAuth = {
   userId: '',
   name: '',
 };
-
 export const currentPage: IPageWords = {
   page: 0,
   group: 0,
@@ -36,4 +45,27 @@ export const userWordId: IUserWordId = {
   body: {
     difficulty: 'easy',
   },
+};
+export const sprintState: ISprintState = {
+  pageWords: [],
+  words: [],
+  translates: [],
+  rightAnswers: [],
+  wrongAnswers: [],
+  series: 0,
+  score: 0,
+  longestSeries: 0,
+};
+
+export const audiocallState: IAudiocallState = {
+  pageWords: [],
+  words: [],
+  translates: [],
+  rightAnswers: [],
+  wrongAnswers: [],
+  series: 0,
+  score: 0,
+  longestSeries: 0,
+  counter: 0,
+  responseNumber: [],
 };

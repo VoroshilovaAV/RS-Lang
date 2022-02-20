@@ -1,3 +1,4 @@
+import { checkAnswer } from '../checkAnswer';
 import { TIME_DURATION } from '../consts';
 import { setRemainingSeconds, getRemainingSeconds } from '../remainingSeconds';
 import { updateTimerControls } from '../updateTimerControls';
@@ -15,6 +16,8 @@ export const startTimer = () => {
     seconds--;
     setRemainingSeconds(seconds);
     if (getRemainingSeconds() < 0) {
+      checkAnswer(false);
+      location.hash = '/sprint-result';
       return stopTimer(interval);
     }
     updateTimerControls();

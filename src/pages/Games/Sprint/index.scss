@@ -13,10 +13,38 @@
   flex-direction: column;
 }
 
-.progress-time {
-  color: $gray;
-  font-size: 32px;
-  font-weight: 500;
+@keyframes fade-in-hide {
+  from {
+    opacity: 1;
+    transform: scaleX(1);
+    transform-origin: bottom;
+  }
+
+  to {
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: bottom;
+  }
+}
+
+@keyframes fade-in-show {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: bottom;
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+    transform-origin: bottom;
+  }
+}
+
+.progress-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .sprint-bg {

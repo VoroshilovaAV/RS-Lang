@@ -5,6 +5,9 @@ import { ButtonLogoutComponent } from 'components/HeaderButtons/button-logout';
 import { FooterComponent } from 'components/Footer';
 import { routes } from './routes';
 import { logoutUser } from 'utils';
+import { getStorage } from 'pages/LoginAndRegistration';
+import { setDefaultOptionsToSprintState } from 'state/utils';
+import { setDefaultOptionsToAudiocallState } from 'state/utils/setDefaultOptionsToAudiocallState';
 
 const parseLocation = () => location.hash.slice(1).toLowerCase() || '/';
 
@@ -21,6 +24,14 @@ const findComponentByPath = (
 
 export const router = () => {
   const path = parseLocation();
+
+  if (getStorage('curPath') === '/sprint' && path !== '/sprint-result') {
+    setDefaultOptionsToSprintState();
+  }
+  if (getStorage('curPath') === '/audiocall' && path !== '/audiocall-result') {
+    setDefaultOptionsToAudiocallState();
+  }
+
   const { component = ErrorComponent } = findComponentByPath(path, routes) || {};
 
   const mainContainer = document.querySelector('.main');
@@ -35,7 +46,6 @@ export const router = () => {
   if (mainContainer) mainContainer.innerHTML = component.render();
   component.listen();
   logoutUser();
-  changeNavBar(path);
 
   if (path === '/') {
     pageContainer?.classList.add('main-bg');
@@ -45,12 +55,12 @@ export const router = () => {
 
   if (
     path !== '/games' &&
-    path !== '/pre-audio' &&
+    path !== '/pre-audiocall' &&
     path !== '/pre-sprint' &&
     path !== '/audiocall' &&
     path !== '/sprint' &&
-    path !== '/result-audiocall' &&
-    path !== '/result-sprint' &&
+    path !== '/audiocall-result' &&
+    path !== '/sprint-result' &&
     pageContainer !== null
   ) {
     if (footerContainer) footerContainer.remove();
@@ -58,4 +68,6 @@ export const router = () => {
   } else {
     if (footerContainer) footerContainer.remove();
   }
+
+  changeNavBar(path);
 };
