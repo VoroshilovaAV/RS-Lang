@@ -5,15 +5,16 @@ import {
   IUserWordId,
   IStatisticUser,
   ISettingsUser,
-  IAggregateWords,
   IAuth,
   IUserWord,
-  IUserWordIdDelete,
   IPageWords,
   IUserCreated,
   ISetting,
   IStatistic,
   IGetNewToken,
+  IUserWordsGet,
+  IUserWordAggregated,
+  IUsersWords,
 } from './interfaces';
 
 export const getWords = async ({ page, group }: IPageWords): Promise<IWord[] | void> => {
@@ -120,7 +121,7 @@ export const getNewUserToken = async (userId: string, refreshToken: string): Pro
   }
 };
 
-export const getUserIdWords = async (userId: string, token: string): Promise<IUserWord[] | [] | void> => {
+export const getUserIdWords = async (userId: string, token: string): Promise<IUserWordsGet[] | void> => {
   try {
     const rawResponse = await fetch(`${usersUrl}/${userId}/words`, {
       method: 'GET',
@@ -128,43 +129,6 @@ export const getUserIdWords = async (userId: string, token: string): Promise<IUs
         Authorization: `Bearer ${token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
-      },
-    });
-    const content = await rawResponse.json();
-    return content;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const createUserWord = async (
-  { userId, wordId, body }: IUserWordId,
-  token: string
-): Promise<IUserWord | void> => {
-  try {
-    const rawResponse = await fetch(`${usersUrl}/${userId}/words/${wordId}`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    });
-    const content = await rawResponse.json();
-    return content;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const getUserWord = async ({ userId, wordId }: IUserWordId, token: string): Promise<IUserWord | void> => {
-  try {
-    const rawResponse = await fetch(`${usersUrl}/${userId}/words/${wordId}`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
       },
     });
     const content = await rawResponse.json();
@@ -191,11 +155,50 @@ export const updateUserWord = async (
     const content = await rawResponse.json();
     return content;
   } catch (error) {
+    if (error) {
+      console.log(error);
+    }
+  }
+};
+
+export const createUserWord = async (
+  { userId, wordId, body }: IUserWordId,
+  token: string
+): Promise<IUserWord | void> => {
+  try {
+    const rawResponse = await fetch(`${usersUrl}/${userId}/words/${wordId}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+    const content = await rawResponse.json();
+    return content;
+  } catch (error) {
     console.log(error);
   }
 };
 
-export const deleteUserWord = async ({ userId, wordId }: IUserWordIdDelete, token: string) => {
+export const getUserWord = async (userId: string, wordId: string, token: string): Promise<IUserWord | void> => {
+  try {
+    const rawResponse = await fetch(`${usersUrl}/${userId}/words/${wordId}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+      },
+    });
+    const content = await rawResponse.json();
+    return content;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteUserWord = async (userId: string, wordId: string, token: string) => {
   try {
     await fetch(`${usersUrl}/${userId}/words/${wordId}`, {
       method: 'DELETE',
@@ -210,33 +213,50 @@ export const deleteUserWord = async ({ userId, wordId }: IUserWordIdDelete, toke
   }
 };
 
-export const getAggregatedWords = async (
-  { userId, group, page, wordsPerPage }: IAggregateWords,
-  token: string
-): Promise<IWord[] | void> => {
+export const getAggregatedWords = async <T>(token: string, url: string): Promise<T | void> => {
   try {
-    const rawResponse = await fetch(
-      `${usersUrl}/${userId}/aggregatedWords?group=${group}&page=${page}&wordsPerPage=${wordsPerPage}`, //filter=%22easy%22,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const rawResponse = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
     const content = await rawResponse.json();
-    return content;
+    return content[0];
   } catch (error) {
     console.log(error);
   }
 };
 
+export const getFilterWords = async (
+  isFilterParam: string,
+  user: IAuth,
+  currentPage?: IPageWords
+): Promise<IUsersWords | void> => {
+  let filter: string;
+  let url: string;
+  switch (isFilterParam) {
+    case 'hard':
+      filter = '{"userWord.difficulty":"hard"}';
+      url = `${usersUrl}/${user.userId}/aggregatedWords?wordsPerPage=3600&filter=${filter}`;
+      return getAggregatedWords(user.token, url);
+    case 'all':
+      if (currentPage) {
+        filter = `{ "$and": [{ "page":${currentPage.page} }, { "userWord.optional.isDelete": null }] }`;
+        url = `${usersUrl}/${user.userId}/aggregatedWords?group=${currentPage.group}&wordsPerPage=20&filter=${filter}`;
+        return getAggregatedWords(user.token, url);
+      }
+      break;
+  }
+};
+
 export const getAggregatedWord = async (
-  { userId, wordId }: IUserWordIdDelete,
+  userId: string,
+  wordId: string,
   token: string
-): Promise<IWord | void> => {
+): Promise<IUserWord | IUserWordAggregated | void> => {
   try {
     const rawResponse = await fetch(`${usersUrl}/${userId}/aggregatedWords/${wordId}`, {
       method: 'GET',

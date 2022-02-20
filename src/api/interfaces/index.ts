@@ -15,9 +15,40 @@ export interface IWord {
   textExampleTranslate: string;
 }
 
+export interface IUserWordAggregated {
+  _id: string;
+  group: number;
+  page: number;
+  word: string;
+  image: string;
+  audio: string;
+  audioMeaning: string;
+  audioExample: string;
+  textMeaning: string;
+  textExample: string;
+  transcription: string;
+  wordTranslate: string;
+  textMeaningTranslate: string;
+  textExampleTranslate: string;
+  userWord?: IUserWord;
+}
+
 export interface IUserWord {
-  difficulty: string;
-  optional?: object;
+  difficulty?: string;
+  optional?: IWordOptionalParams;
+}
+
+export interface IGameCount {
+  correct: number;
+  wrong: number;
+}
+
+export interface IWordOptionalParams {
+  isLearnt: boolean;
+  sprint?: IGameCount;
+  audiocall?: IGameCount;
+  lastChanged?: string;
+  correctSeries?: string;
 }
 
 export interface IStatistic {
@@ -54,11 +85,6 @@ export interface IAuth {
   name: string;
 }
 
-export interface IUserWordIdDelete {
-  userId: string;
-  wordId: string;
-}
-
 export interface IUserWordId {
   userId: string;
   wordId: string;
@@ -77,15 +103,13 @@ export interface ISettingsUser {
 
 export interface IAggregateWords {
   userId: string;
-  group: number;
-  page: number;
+  group?: number;
   wordsPerPage: number;
 }
-
-export interface IUserWord {
+export interface IUserWordsGet {
   difficulty: string;
   id: string;
-  optional?: object;
+  optional?: IWordOptionalParams;
   wordId: string;
 }
 
@@ -96,6 +120,11 @@ export interface IPageWords {
 
 export interface IState {
   pageWords: IWord[] | [];
-  currentChapter: number;
-  currentPage: number;
+}
+
+export interface IUsersWords {
+  paginatedResults: IUserWordAggregated[];
+  totalCount: {
+    count: number;
+  };
 }
