@@ -16,7 +16,10 @@ export const deleteHardWords = async (state: IState, user: IAuth) => {
               userWordId.userId = user.userId;
               userWordId.body = { ...state.pageUserWords[i].userWord };
               userWordId.body.difficulty = 'easy';
-
+              state.pageUserWords[i].userWord = {
+                ...state.pageUserWords[i].userWord,
+                ...{ difficulty: 'easy' },
+              };
               await updateUserWord(userWordId, user.token);
               await getArray(currentPage, currentParent);
             }

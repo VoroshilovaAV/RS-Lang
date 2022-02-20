@@ -1,3 +1,5 @@
+import { IUserWordAggregated } from 'state/interfaces';
+
 export const learnt = `<div class="learned-words" title="Изученные слова"><img class="learned__img" src='./assets/icons/learned-words.svg' alt="изученные слова"></div>`;
 export const hard = `<div class="difficult-words" title="Трудные слова"><img class="difficult__img" src='./assets/icons/hard-words.svg' alt="трудные слова"></div>`;
 export const firstSrc = './assets/icons/hard-words.svg';
@@ -30,6 +32,22 @@ export const learnProgress = `<div class="word-list__learn-progress">
 
 export const eventNone = 'style = "pointer-events: none"';
 export const buttonClassGray = 'full-page';
+
 export const getTemplate = (template: string) => {
   return (localStorage.getItem('authorizedUser') ? true : false) ? template : '';
+};
+
+export const getTemplateProgress = (template: string, word: IUserWordAggregated) => {
+  if (localStorage.getItem('authorizedUser') ? true : false) {
+    if (word.userWord?.optional?.correctSeries && Number(word.userWord?.optional?.correctSeries) > 0) {
+      return `<div class="word-list__learn-progress">
+                <div class="learned-word">
+                <div><span class="blue-number" style="color: blue;">${word.userWord.optional?.correctSeries}/</span>${
+        word.userWord.difficulty === 'hard' ? 5 : 3
+      }</div>
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                </div>
+              </div>`;
+    } else return template;
+  } else return template;
 };

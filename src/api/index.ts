@@ -232,19 +232,23 @@ export const getAggregatedWords = async <T>(token: string, url: string): Promise
 
 export const getFilterWords = async (
   isFilterParam: string,
-  currentPage: IPageWords,
-  user: IAuth
+  user: IAuth,
+  currentPage?: IPageWords
 ): Promise<IUsersWords | void> => {
-  let filter = `{ "$and": [{ "page":${currentPage.page} }, { "userWord.optional.isDelete": null }] }`;
-  let url = `${usersUrl}/${user.userId}/aggregatedWords?`;
+  let filter: string;
+  let url: string;
   switch (isFilterParam) {
     case 'hard':
       filter = '{"userWord.difficulty":"hard"}';
       url = `${usersUrl}/${user.userId}/aggregatedWords?wordsPerPage=3600&filter=${filter}`;
       return getAggregatedWords(user.token, url);
     case 'all':
-      url = `${usersUrl}/${user.userId}/aggregatedWords?group=${currentPage.group}&wordsPerPage=20&filter=${filter}`;
-      return getAggregatedWords(user.token, url);
+      if (currentPage) {
+        filter = `{ "$and": [{ "page":${currentPage.page} }, { "userWord.optional.isDelete": null }] }`;
+        url = `${usersUrl}/${user.userId}/aggregatedWords?group=${currentPage.group}&wordsPerPage=20&filter=${filter}`;
+        return getAggregatedWords(user.token, url);
+      }
+      break;
   }
 };
 

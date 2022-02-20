@@ -10,7 +10,7 @@ export const getArray = async (current: IPageWords, elem: HTMLElement) => {
   const user = getStorage('authorizedUser');
   if (user) {
     const filter = current.group !== 6 ? filterParams.all : filterParams.hard;
-    const array = await getFilterWords(filter, current, user);
+    const array = await getFilterWords(filter, user, current);
     if (array) {
       state.pageUserWords = array.paginatedResults;
       localStorage.setItem('pageUserWords', JSON.stringify(state.pageUserWords));

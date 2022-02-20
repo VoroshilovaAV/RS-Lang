@@ -1,16 +1,10 @@
 import { IWord, IState, IPageWords, IUserWordAggregated } from 'state/interfaces';
-import { getStorage, getTemplate } from '..';
+import { getStorage, getTemplate, getTemplateProgress, learnProgress } from '..';
 import './style.scss';
 
-export const getWordList = (
-  state: IState,
-  learnProgress: string,
-  hardWords: string,
-  hardWordsDelete: string,
-  currentPage: IPageWords
-) => {
+export const getWordList = (state: IState, hardWords: string, hardWordsDelete: string, currentPage: IPageWords) => {
   const root = (word: IUserWordAggregated | IWord) => `<div class="word-list">
-                  ${currentPage.group !== 6 ? getTemplate(learnProgress) : ''}
+                  ${currentPage.group !== 6 ? getTemplateProgress(learnProgress, word as IUserWordAggregated) : ''}
                   <div class="word-image"><img src="https://learnwords-team22.herokuapp.com/${
                     word.image
                   }" alt="изображение слова"></div>

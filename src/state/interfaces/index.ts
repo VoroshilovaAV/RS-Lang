@@ -31,16 +31,29 @@ export interface IUserWordAggregated {
   wordTranslate: string;
   textMeaningTranslate: string;
   textExampleTranslate: string;
-  userWord?: IUserWordParams;
+  userWord?: IUserWord;
+}
+
+export interface IUserWord {
+  difficulty?: string;
+  optional?: IWordOptionalParams;
+}
+
+export interface IGameCount {
+  correct: number;
+  wrong: number;
+}
+export interface IWordOptionalParams {
+  isLearnt: boolean;
+  sprint?: IGameCount;
+  audiocall?: IGameCount;
+  lastChanged?: string;
+  correctSeries?: string;
 }
 
 export interface IState {
   pageWords: IWord[] | [];
   pageUserWords: IUserWordAggregated[];
-}
-export interface IUserWordParams {
-  difficulty: string;
-  optional?: { isLearnt: boolean };
 }
 export interface IWord {
   id: string;
@@ -71,12 +84,12 @@ export interface IUserWords {
 export interface IUserWordId {
   userId: string;
   wordId: string;
-  body: { difficulty?: string; optional?: { isLearnt: boolean } };
+  body: IUserWord;
 }
 
 export interface IUserWordsGet {
   difficulty: string;
   id: string;
-  optional?: { isLearnt: boolean };
+  optional?: IWordOptionalParams;
   wordId: string;
 }

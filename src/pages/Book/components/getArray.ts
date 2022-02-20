@@ -8,8 +8,8 @@ export const getArrayToPage = async (current: IPageWords, state: IState) => {
   if (user) {
     const array =
       current.group === 6
-        ? await getFilterWords(filterParams.hard, current, user)
-        : await getFilterWords(filterParams.all, current, user);
+        ? await getFilterWords(filterParams.hard, user, current)
+        : await getFilterWords(filterParams.all, user, current);
     if (array) {
       state.pageUserWords = array.paginatedResults;
       localStorage.setItem('pageUserWords', JSON.stringify(state.pageUserWords));

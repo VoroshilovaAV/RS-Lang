@@ -1,4 +1,4 @@
-import { eventNone, getPaginationNav, hardWords, hardWordsDelete, learnProgress } from './components';
+import { eventNone, getPaginationNav, hardWords, hardWordsDelete } from './components';
 import { currentPage, state, userWordId } from 'state';
 import { isAllWords, listenPagination } from './utils';
 import { getWordList } from './components';
@@ -53,7 +53,7 @@ export const BookComponent = {
           </div>  
         </div>
         <div class="book__word-list">
-          ${getWordList(state, learnProgress, hardWords, hardWordsDelete, currentPage)}
+          ${getWordList(state, hardWords, hardWordsDelete, currentPage)}
         </div>
         <div class="book__pages">
           ${getPaginationNav(currentPage, state)}
