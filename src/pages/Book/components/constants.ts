@@ -36,18 +36,25 @@ export const buttonClassGray = 'full-page';
 export const getTemplate = (template: string) => {
   return (localStorage.getItem('authorizedUser') ? true : false) ? template : '';
 };
+const writeCorrect = (wordUser: IUserWordAggregated, template: string) => {
+  const audiocallCorrect = wordUser.userWord?.optional?.audiocall?.correct;
+  const sprintCorrect = wordUser.userWord?.optional?.sprint?.correct;
+  const audiocallUnCorrect = wordUser.userWord?.optional?.audiocall?.wrong;
+  const sprintUnCorrect = wordUser.userWord?.optional?.sprint?.wrong;
+  const rightAnswers = +(audiocallCorrect ? audiocallCorrect : 0) + +(sprintCorrect ? sprintCorrect : 0);
+  const wrongAnswers = +(audiocallUnCorrect ? audiocallUnCorrect : 0) + +(sprintUnCorrect ? sprintUnCorrect : 0);
+  if (rightAnswers > 0 || wrongAnswers > 0) {
+    return `<div class="word-list__learn-progress">
+    <div class="learned-word">
+    <div class="correct-answers-number" style="color: red;"><span class="blue-number" style="color: blue;">${rightAnswers}/</span>${wrongAnswers}</div>
+    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+    </div>
+  </div>`;
+  } else return template;
+};
 
 export const getTemplateProgress = (template: string, word: IUserWordAggregated) => {
   if (localStorage.getItem('authorizedUser') ? true : false) {
-    if (word.userWord?.optional?.correctSeries && Number(word.userWord?.optional?.correctSeries) > 0) {
-      return `<div class="word-list__learn-progress">
-                <div class="learned-word">
-                <div><span class="blue-number" style="color: blue;">${word.userWord.optional?.correctSeries}/</span>${
-        word.userWord.difficulty === 'hard' ? 5 : 3
-      }</div>
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                </div>
-              </div>`;
-    } else return template;
+    return `${writeCorrect(word, template)}`;
   } else return '';
 };
