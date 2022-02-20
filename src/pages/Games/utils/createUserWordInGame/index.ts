@@ -17,7 +17,7 @@ export const createUserWordInGame = (
   let optional: IWordOptionalParams = {
     isLearnt: false,
     lastChanged: curFullDate,
-    correctSeries: isRight ? '1' : '0',
+    correctSeries: isRight ? 1 : 0,
   };
 
   switch (game) {

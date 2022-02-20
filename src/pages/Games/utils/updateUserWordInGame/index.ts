@@ -26,11 +26,11 @@ export const updateUserWordInGame = (
   const userWord = wordBody.userWord;
   const wordOptional = userWord?.optional;
 
-  if (wordOptional && wordOptional.correctSeries) {
+  if (wordOptional) {
     let optional: IWordOptionalParams;
 
     let isLearnt: boolean;
-    const isPrevLearnt = wordBody.userWord?.optional?.isLearnt;
+    const isPrevLearnt = wordOptional?.isLearnt;
 
     if (!isRight) {
       isLearnt = false;
@@ -58,7 +58,7 @@ export const updateUserWordInGame = (
       optional = {
         isLearnt,
         lastChanged: curFullDate,
-        correctSeries: isRight ? String(correctSeries) : '0',
+        correctSeries: isRight ? correctSeries : 0,
       };
 
       switch (game) {
@@ -86,9 +86,9 @@ export const updateUserWordInGame = (
       };
 
       optional = {
-        isLearnt: wordOptional.isLearnt,
+        isLearnt,
         lastChanged: curFullDate,
-        correctSeries: isRight ? '1' : '0',
+        correctSeries: isRight ? 1 : 0,
       };
 
       switch (game) {

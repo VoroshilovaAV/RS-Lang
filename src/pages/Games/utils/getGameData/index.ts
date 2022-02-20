@@ -20,7 +20,12 @@ export const getGameData = async (selector: string, state: ISprintState | IAudio
       if (notLearnedWords) dataUser = notLearnedWords.paginatedResults;
       if (notLearnedWords && !Array.isArray(notLearnedWords) && notLearnedWords.totalCount[0].count < 20) {
         const restWordsAmount = 20 - notLearnedWords.totalCount[0].count;
-        const restWords: IUsersWords | void = await getFilterWords('rest', user, { page, group }, restWordsAmount);
+        const restWords: IUsersWords | void = await getFilterWords(
+          'rest',
+          user,
+          { page: randomNum(0, 30), group: randomNum(0, 6) },
+          restWordsAmount
+        );
         if (restWords) dataUser = [...notLearnedWords.paginatedResults, ...restWords.paginatedResults];
       }
       state.pageWordsUser = dataUser;

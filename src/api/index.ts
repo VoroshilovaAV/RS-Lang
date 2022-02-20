@@ -248,7 +248,7 @@ export const getFilterWords = async (
       url = `${usersUrl}/${user.userId}/aggregatedWords?wordsPerPage=3600&filter=${filter}`;
       return getAggregatedWords(user.token, url);
     case 'allUser':
-      filter = '{"$or":[{"userWord.difficulty":"easy"},{"userWord.difficulty":"hard"}]}';
+      filter = '{"userWord": {"$ne": null}}';
       url = `${usersUrl}/${user.userId}/aggregatedWords?wordsPerPage=3600&filter=${filter}`;
       return getAggregatedWords(user.token, url);
     case 'notLearned':
@@ -259,9 +259,9 @@ export const getFilterWords = async (
       }
       break;
     case 'rest':
-      if (restWordsAmount) {
-        filter = `{ "userWord.optional.isDelete": null }`;
-        url = `${usersUrl}/${user.userId}/aggregatedWords?wordsPerPage=${restWordsAmount}&filter=${filter}`;
+      if (restWordsAmount && currentPage) {
+        filter = `{ "$and": [{ "page":${currentPage.page} }, { "userWord.optional.isDelete": null }] }`;
+        url = `${usersUrl}/${user.userId}/aggregatedWords?group=${currentPage.group}&wordsPerPage=${restWordsAmount}&filter=${filter}`;
         return getAggregatedWords(user.token, url);
       }
       break;

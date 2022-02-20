@@ -1,5 +1,3 @@
-import { IUserWord, IUserWordAggregated } from 'api/interfaces';
-
 export interface IUserCreated {
   email: string;
   id: string;
@@ -50,7 +48,7 @@ export interface IWordOptionalParams {
   sprint?: IGameCount;
   audiocall?: IGameCount;
   lastChanged?: string;
-  correctSeries?: string;
+  correctSeries?: number;
 }
 
 export interface IState {
@@ -75,7 +73,7 @@ export interface ISprintState {
   score: number;
   series: number;
   longestSeries: number;
-  userWords?: IUserWordAggregated[] | IUserWord[];
+  userWords?: IUserWordAggregated[];
   wordAnswer?: IWordAnswer;
 }
 

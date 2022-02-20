@@ -43,7 +43,6 @@ export const markPageHard = (state: IState, string: string) => {
   } else {
     if (wordsMark) {
       if (countUsersWordLearnt === 20) {
-        console.log(paginationButton);
         paginationButton?.classList.add('full-page');
         wordsMark.innerHTML = string;
         gameButton.forEach((el) => {

@@ -4,9 +4,12 @@ import { startTimer } from '../sprintTimer';
 import { changeAndCompareText } from '../changeAndCompareText';
 import { handleArrowsForSprint, handleBtnsForSprint } from '../handleBtns';
 import { getGameData } from 'pages/Games/utils/getGameData';
+import { getStorage } from 'pages/LoginAndRegistration';
 
 export const sprintListener = async () => {
-  await getGameData('.sprint__answer-text', sprintState);
+  if (getStorage('curPath') !== '/sprint-result') {
+    await getGameData('.sprint__answer-text', sprintState);
+  }
   if (!sprintState.pageWords?.length && !sprintState.pageWordsUser?.length) {
     location.hash = '/games';
   }
