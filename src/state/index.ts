@@ -61,8 +61,9 @@ export const sprintState: ISprintState = {
 };
 
 export const audiocallState: IAudiocallState = {
-  pageWords: [],
+  wordsUser: [],
   words: [],
+  engWords: [],
   translates: [],
   rightAnswers: [],
   wrongAnswers: [],
@@ -71,4 +72,7 @@ export const audiocallState: IAudiocallState = {
   longestSeries: 0,
   counter: 0,
   responseNumber: [],
+  wordAnswer: {
+    isRightTranslate: false,
+  },
 };

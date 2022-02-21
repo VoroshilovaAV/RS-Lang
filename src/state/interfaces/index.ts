@@ -78,18 +78,21 @@ export interface ISprintState {
 }
 
 export interface IAudiocallState {
-  pageWords: IWord[] | [];
+  pageWords?: IWord[] | [];
   pageWordsUser?: IUserWordAggregated[] | [];
-  words: string[] | [];
+  wordsUser: IUserWordAggregated[] | [];
+  words: IWord[] | [];
+  engWords: string[] | [];
   translates: string[] | [];
-  rightAnswers: IWord[] | [];
-  wrongAnswers: IWord[] | [];
+  rightAnswers: (IWord | IUserWordAggregated)[] | undefined;
+  wrongAnswers: (IWord | IUserWordAggregated)[] | undefined;
   score: number;
   series: number;
   longestSeries: number;
   counter: number;
   responseNumber: number[] | [];
   userWords?: IUserWordAggregated[] | IUserWord[];
+  wordAnswer?: IWordAnswer;
 }
 
 export interface IWord {
