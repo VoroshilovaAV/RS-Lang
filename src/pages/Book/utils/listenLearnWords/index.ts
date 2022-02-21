@@ -51,9 +51,15 @@ export const addLearntWord = (currentPage: IPageWords, user: false | IAuth, user
             }
             const statistics = await getUserStatistics(user.userId, user.token);
             if (statistics) {
-              statistics.learnedWords += 1;
+              statistics.learnedWords = +1;
               const userId = user.userId;
-              const statistic = { userId, statistics };
+              const statistic = {
+                userId,
+                statistics: {
+                  learnedWords: statistics.learnedWords,
+                  optional: JSON.parse(JSON.stringify(statistics.optional)),
+                },
+              };
               await updateUserStatistics(statistic, user.token);
             }
           }
