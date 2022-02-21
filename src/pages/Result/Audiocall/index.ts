@@ -1,7 +1,9 @@
+import { updateUserStatistics } from 'api';
 import { IWord } from 'api/interfaces';
 import { GameResultPage } from 'components/GameResultTemplate';
 import { createResultWord } from 'components/GameResultTemplate/utils';
-import { audiocallState } from 'state';
+import { getStorage } from 'pages/LoginAndRegistration';
+import { audiocallState, statsState } from 'state';
 import { setDefaultOptionsToAudiocallState } from 'state/utils/setDefaultOptionsToAudiocallState';
 import { soundResultWordListener } from '../Sprint/utils';
 
@@ -12,6 +14,8 @@ export const ResultAudiocallComponent = {
     }
     const answers = document.querySelector('.answers');
     answers?.addEventListener('click', soundResultWordListener);
+    const user = getStorage('authorizedUser');
+    if (user) updateUserStatistics({ userId: user.userId, statistics: statsState }, user.token);
     setDefaultOptionsToAudiocallState();
   },
   render: () => {

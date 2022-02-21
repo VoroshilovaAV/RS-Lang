@@ -1,3 +1,4 @@
+import { getCurrentDate } from 'utils/getCurrentDate';
 import {
   IUserCreated,
   IAuth,
@@ -76,4 +77,11 @@ export const audiocallState: IAudiocallState = {
 
 export const statsState: IStatistic = {
   learnedWords: 0,
+  optional: {
+    lastChanged: getCurrentDate(),
+    gameStats: {
+      sprint: { newWords: 0, longestSeries: 0, correct: 0, wrong: 0 },
+      audiocall: { newWords: 0, longestSeries: 0, correct: 0, wrong: 0 },
+    },
+  },
 };

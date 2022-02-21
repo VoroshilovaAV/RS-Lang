@@ -1,9 +1,9 @@
-import { IAuth, IStatistic } from 'api/interfaces';
+import { IStatistic } from 'api/interfaces';
 import { getUserStatistics, updateUserStatistics } from 'api';
 import { getStorage } from 'pages/LoginAndRegistration';
 import { getCurrentDate } from 'utils/getCurrentDate';
 
-export const createStats = (user: IAuth) => {
+export const createStats = (userId: string, token: string) => {
   const curDate = getCurrentDate();
   const statistics: IStatistic = {
     learnedWords: 0,
@@ -25,7 +25,7 @@ export const createStats = (user: IAuth) => {
       },
     },
   };
-  return updateUserStatistics({ userId: user.userId, statistics }, user.token);
+  return updateUserStatistics({ userId, statistics }, token);
 };
 
 export const getStats = async () => {
@@ -34,10 +34,8 @@ export const getStats = async () => {
     const { userId, token } = user;
     const response: IStatistic | void = await getUserStatistics(userId, token);
     const curDate = getCurrentDate();
-    if (!response) {
-      createStats(user);
-    } else {
-      if (response.optional && response.optional.lastChanged && response.optional.gameStats) {
+    if (response) {
+      if (response.optional) {
         if (curDate !== response.optional.lastChanged) {
           const statistics: IStatistic = {
             learnedWords: 0,

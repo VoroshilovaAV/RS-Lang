@@ -142,8 +142,8 @@ export interface IStatsOptionalWordsCount {
 }
 
 export interface IStatsOptional {
-  lastChanged?: string;
-  gameStats?: {
+  lastChanged: string;
+  gameStats: {
     sprint: IStatsOptionalGame;
     audiocall: IStatsOptionalGame;
   };

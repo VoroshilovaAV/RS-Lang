@@ -5,7 +5,6 @@ import { preloadLoad, removePreload } from 'components';
 import { ISprintState, IAudiocallState, IStatistic } from 'state/interfaces';
 import { currentPage, statsState } from 'state';
 import { IUsersWords, IWord, IUserWordAggregated } from 'api/interfaces';
-import { createStats } from 'pages/Stats/utils/getStatsRequest';
 
 export const getGameData = async (selector: string, state: ISprintState | IAudiocallState) => {
   const elPreloader: HTMLElement | null = document.querySelector(selector);
@@ -50,14 +49,8 @@ export const getGameData = async (selector: string, state: ISprintState | IAudio
     const response: IStatistic | void = await getUserStatistics(user.userId, user.token);
     if (response) {
       statsState.learnedWords = response.learnedWords;
-      console.log(response.optional);
       statsState.optional = JSON.parse(JSON.stringify(response.optional));
-    } else {
-      const responseCreateStats = await createStats(user);
-      if (responseCreateStats)
-        statsState.optional = JSON.parse(JSON.stringify(responseCreateStats.statistics.optional));
     }
-    console.log(statsState);
     const userData = await getFilterWords('allUser', user);
     state.userWords = userData && Array.isArray(userData.paginatedResults) ? userData.paginatedResults : [];
   }

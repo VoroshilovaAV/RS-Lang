@@ -1,9 +1,11 @@
+import { getStorage } from 'pages/LoginAndRegistration';
 import { IUserWordAggregated, IWord } from 'api/interfaces';
-import { sprintState } from 'state';
+import { sprintState, statsState } from 'state';
 import { GameResultPage } from 'components/GameResultTemplate';
 import { createResultWord } from 'components/GameResultTemplate/utils';
 import { setDefaultOptionsToSprintState } from 'state/utils';
 import { soundResultWordListener } from './utils';
+import { updateUserStatistics } from 'api';
 
 export const ResultSprintComponent = {
   listen: () => {
@@ -12,6 +14,8 @@ export const ResultSprintComponent = {
     }
     const answers = document.querySelector('.answers');
     answers?.addEventListener('click', soundResultWordListener);
+    const user = getStorage('authorizedUser');
+    if (user) updateUserStatistics({ userId: user.userId, statistics: statsState }, user.token);
     setDefaultOptionsToSprintState();
   },
   render: () => {
