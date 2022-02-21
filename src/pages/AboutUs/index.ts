@@ -14,14 +14,14 @@ export const AboutUsComponent = {
         'https://github.com/alyanoyigor',
         'Igor Alyanoy',
         'github github_yellow',
-        '<li>Макет в Figma</li><li>Главная страница</li><li>Меню</li><li>Игра «Спринт»</li><li>Статистика</li>'
+        '<li>Макет в Figma</li><li>Главная страница</li><li>Меню</li><li>Игра «Спринт»</li><li>Прогресс изучения</li><li>Изученные слова</li><li>Статистика</li>'
       )}
       ${CardTemplate(
         'nick',
         'https://github.com/nick1091',
         'Nikolaу Kuckharchuk',
         'github github_blue',
-        '<li>Бэкенд</li><li>Авторизация</li><li>Запросы к API</li><li>Электронный учебник</li><li>Список слов</li><li>Прогресс изучения</li><li>Изученные слова</li>'
+        '<li>Бэкенд</li><li>Авторизация</li><li>Запросы к API</li><li>Электронный учебник</li><li>Список слов</li><li>Изученные слова</li>'
       )}
       ${CardTemplate(
         'ann',
