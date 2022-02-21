@@ -9,9 +9,12 @@ import {
 import { getStorage } from 'pages/LoginAndRegistration';
 import { getUserStatistics } from 'api';
 import './index.scss';
+import { preloadLoad, removePreload } from 'components';
 
 export const StatsComponent = {
   listen: async () => {
+    const stats: HTMLElement | null = document.querySelector('.stats');
+    if (stats) preloadLoad(stats);
     const user = getStorage('authorizedUser');
     if (user) {
       const content = await getUserStatistics(user.userId, user.token);
@@ -20,6 +23,7 @@ export const StatsComponent = {
         statsState.optional = JSON.parse(JSON.stringify(content.optional));
       }
     }
+    if (stats) removePreload(stats);
     Chart.register(...registerables);
     createLearnedWordsChart();
     createCorrectAnswersChart();
