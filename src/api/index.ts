@@ -154,6 +154,10 @@ export const getUserIdWords = async (userId: string, token: string): Promise<IUs
       const content = await rawResponse.json();
       return content;
     }
+    if (rawResponse.status === 401) {
+      const user: IAuth = getStorage('Authenticated');
+      await getNewUserToken(user.userId, user.refreshToken);
+    }
   } catch (error) {
     console.log(error);
   }
@@ -173,6 +177,10 @@ export const updateUserWord = async (
       },
       body: JSON.stringify(body),
     });
+    if (rawResponse.status === 401) {
+      const user: IAuth = getStorage('Authenticated');
+      await getNewUserToken(user.userId, user.refreshToken);
+    }
     const content = await rawResponse.json();
     return content;
   } catch (error) {
