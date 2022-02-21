@@ -1,3 +1,4 @@
+import { getCurrentDate } from 'utils/getCurrentDate';
 import {
   IUserCreated,
   IAuth,
@@ -8,6 +9,7 @@ import {
   IFilterParam,
   ISprintState,
   IAudiocallState,
+  IStatistic,
 } from './interfaces';
 
 export const userCreated: IUserCreated = {
@@ -74,5 +76,16 @@ export const audiocallState: IAudiocallState = {
   responseNumber: [],
   wordAnswer: {
     isRightTranslate: false,
+  },
+};
+
+export const statsState: IStatistic = {
+  learnedWords: 0,
+  optional: {
+    lastChanged: getCurrentDate(),
+    gameStats: {
+      sprint: { newWords: 0, longestSeries: 0, correct: 0, wrong: 0 },
+      audiocall: { newWords: 0, longestSeries: 0, correct: 0, wrong: 0 },
+    },
   },
 };

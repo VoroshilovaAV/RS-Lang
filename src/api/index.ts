@@ -1,3 +1,4 @@
+import { createStats } from 'pages/Stats/utils/getStatsRequest';
 import { getStorage } from 'pages/Book/components';
 import { router } from 'router/router';
 import { usersUrl, wordsUrl, baseUrl } from './constants';
@@ -338,6 +339,10 @@ export const getUserStatistics = async (userId: string, token: string): Promise<
         'Content-Type': 'application/json',
       },
     });
+    if (rawResponse.status === 404) {
+      const content = await createStats(userId, token);
+      if (content) return content.statistics;
+    }
     if (rawResponse.status === 401) {
       const user: IAuth = getStorage('Authenticated');
       await getNewUserToken(user.userId, user.refreshToken);

@@ -1,5 +1,6 @@
 import { updateUserWord } from 'api';
 import { IUserWordAggregated, IWordOptionalParams } from 'api/interfaces';
+import { statsState } from 'state';
 
 const updateGameState = (
   isRight: boolean,
@@ -27,14 +28,36 @@ export const updateUserWordInGame = (
   const wordOptional = userWord?.optional;
 
   if (wordOptional) {
+    if ((userWord[game]?.correct || userWord[game]?.wrong) && !isRight && wordOptional.isLearnt) {
+      if (statsState.learnedWords > 0) statsState.learnedWords--;
+    } else {
+      let isLearnt: boolean;
+      switch (userWord.difficulty) {
+        case 'easy':
+          isLearnt = Number(isRight) + Number(wordOptional.correctSeries) >= 3;
+          break;
+        case 'hard':
+          isLearnt = Number(isRight) + Number(wordOptional.correctSeries) >= 5;
+          break;
+        default:
+          isLearnt = false;
+          break;
+      }
+      if (isLearnt) statsState.learnedWords++;
+    }
     let optional: IWordOptionalParams;
 
     let isLearnt: boolean;
     const isPrevLearnt = wordOptional?.isLearnt;
 
+    if (statsState.optional && userWord[game]?.correct + userWord[game]?.wrong === 0)
+      statsState.optional.gameStats[game].newWords++;
+
     if (!isRight) {
       isLearnt = false;
+      if (statsState.optional) statsState.optional.gameStats[game].wrong++;
     } else {
+      if (statsState.optional) statsState.optional.gameStats[game].correct++;
       if (isPrevLearnt) {
         isLearnt = true;
       } else {
