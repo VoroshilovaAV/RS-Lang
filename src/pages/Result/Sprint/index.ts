@@ -1,9 +1,11 @@
+import { getStorage } from 'pages/LoginAndRegistration';
 import { IUserWordAggregated, IWord } from 'api/interfaces';
-import { sprintState } from 'state';
+import { sprintState, statsState } from 'state';
 import { GameResultPage } from 'components/GameResultTemplate';
 import { createResultWord } from 'components/GameResultTemplate/utils';
 import { setDefaultOptionsToSprintState } from 'state/utils';
 import { soundResultWordListener } from './utils';
+import { updateUserStatistics } from 'api';
 import { getDataBookPage } from 'pages/Book/getDataBookPageBeforeLoad';
 
 export const ResultSprintComponent = {
@@ -14,6 +16,9 @@ export const ResultSprintComponent = {
     getDataBookPage();
     const answers = document.querySelector('.answers');
     answers?.addEventListener('click', soundResultWordListener);
+    const user = getStorage('authorizedUser');
+    if (statsState.optional) statsState.optional.gameStats.sprint.longestSeries = sprintState.longestSeries;
+    if (user) updateUserStatistics({ userId: user.userId, statistics: statsState }, user.token);
     setDefaultOptionsToSprintState();
   },
   render: () => {
