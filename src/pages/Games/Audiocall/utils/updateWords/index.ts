@@ -7,7 +7,7 @@ export const getWordsOnPage = () => {
   const variantsBlock = document.querySelector('.variants');
   let variantsArray: Array<string> = [];
 
-  if (mainWord) mainWord.innerHTML = audiocallState.words[audiocallState.counter];
+  if (mainWord) mainWord.innerHTML = audiocallState.engWords[audiocallState.counter];
   if (mainWord) mainWord.classList.add('hide');
 
   const cloneTlansatesArray = audiocallState.translates.slice();

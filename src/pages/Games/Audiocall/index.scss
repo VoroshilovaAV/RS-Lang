@@ -45,7 +45,7 @@
 
 .btn-answer {
   width: 260px !important;
-  height: 60px !important;
+  height: 70px !important;
   font-size: 22px !important;
   color: white !important;
   background-color: #f178b6 !important;
@@ -59,8 +59,18 @@
   border: 2px solid #fde269 !important;
 }
 
+.btn:disabled, .btn.disabled, fieldset:disabled .btn {
+  pointer-events: none;
+  opacity: 1 !important;
+}
+
 .wrong {
-  text-decoration: line-through !important;  
+  text-decoration: line-through !important;
+  background-color: #f593c5 !important;  
+}
+
+.highlight-answer {
+  box-shadow:0 0 30px #fde269;
 }
 
 .variants {
