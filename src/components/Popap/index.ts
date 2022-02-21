@@ -16,7 +16,7 @@ export const popapTemplate = () => {
           <div class="popap-card d-sm-flex flex-column align-items-center flex-wrap m-2">
             <div class="popap-card-title">Мини-игры</div>
             <img class="popap-img" src="assets/img/games.png" alt="games">
-            <div class="popap-text">Две увекательные игры  «Аудиовызов» и «Спринт». Развивай навыки письма и восприятия речи на слух. Запоминай слова, играя.</div>
+            <div class="popap-text">Две увекательные игры  «Аудиовызов» и «Спринт». Развивай навыки письма и восприятия речи на слух. Запоминай слова играя.</div>
           </div>
           <div class="popap-card d-sm-flex flex-column align-items-center flex-wrap m-2">
             <div class="popap-card-title">Словарь</div>
