@@ -59,8 +59,18 @@
   border: 2px solid #fde269 !important;
 }
 
+.btn:disabled, .btn.disabled, fieldset:disabled .btn {
+  pointer-events: none;
+  opacity: 1 !important;
+}
+
 .wrong {
-  text-decoration: line-through !important;  
+  text-decoration: line-through !important;
+  background-color: #f593c5 !important;  
+}
+
+.highlight-answer {
+  box-shadow:0 0 30px #fde269;
 }
 
 .variants {

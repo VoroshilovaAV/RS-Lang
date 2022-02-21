@@ -35,8 +35,10 @@ export function answerAction(currentButton: HTMLElement) {
       audiocallState.responseNumber[audiocallState.counter]
     ) {
       (<HTMLElement>answerButtons[index]).classList.add('wrong');
-      (<HTMLButtonElement>answerButtons[index]).disabled = true;
+    } else {
+      (<HTMLElement>answerButtons[index]).classList.add('highlight-answer');
     }
+    (<HTMLButtonElement>answerButtons[index]).disabled = true;
   });
 
   if (Number(currentButton.dataset.answer) === audiocallState.responseNumber[audiocallState.counter]) {
