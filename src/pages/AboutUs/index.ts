@@ -14,7 +14,7 @@ export const AboutUsComponent = {
         'https://github.com/alyanoyigor',
         'Igor Alyanoy',
         'github github_yellow',
-        '<li>Макет в Figma</li><li>Главная страница</li><li>Меню</li><li>Игра «Спринт»</li><li>Страница статистики</li><li>Долгострочная статистика</li>'
+        '<li>Макет в Figma</li><li>Главная страница</li><li>Меню</li><li>Игра «Спринт»</li><li>Статистика</li>'
       )}
       ${CardTemplate(
         'nick',
