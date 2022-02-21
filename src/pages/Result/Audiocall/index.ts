@@ -1,6 +1,7 @@
 import { IUserWordAggregated, IWord } from 'api/interfaces';
 import { GameResultPage } from 'components/GameResultTemplate';
 import { createResultWord } from 'components/GameResultTemplate/utils';
+import { getDataBookPage } from 'pages/Book/getDataBookPageBeforeLoad';
 import { audiocallState } from 'state';
 import { setDefaultOptionsToAudiocallState } from 'state/utils/setDefaultOptionsToAudiocallState';
 import { soundResultWordListener } from '../Sprint/utils';
@@ -10,6 +11,7 @@ export const ResultAudiocallComponent = {
     if (!audiocallState?.rightAnswers?.length && !audiocallState?.wrongAnswers?.length) {
       location.hash = '/games';
     }
+    getDataBookPage();
     const answers = document.querySelector('.answers');
     answers?.addEventListener('click', soundResultWordListener);
     setDefaultOptionsToAudiocallState();
