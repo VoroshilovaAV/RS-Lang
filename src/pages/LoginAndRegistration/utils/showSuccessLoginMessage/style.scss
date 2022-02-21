@@ -43,7 +43,7 @@ $width-message: 60vw;
     .active{
       width: $width-message;
       height: 200px;
-      animation-duration: 4s;
+      animation-duration: 3s;
       animation-name: change-size;
     }
   }

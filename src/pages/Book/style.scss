@@ -1,0 +1,101 @@
+@import 'bootstrap/scss/_pagination.scss';
+
+.book {
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 1200px){
+  .book{
+    max-width: 1140px;
+  }
+}
+@media (max-width: 992px) {
+  .book{
+    max-width: 960px;
+  }
+}
+@media (max-width: 768px){
+  .book{
+    max-width: 720px;
+  }
+}
+@media (max-width: 576px){
+  .book{
+    max-width: 540px;
+  }
+}
+.book__wrapper {
+  max-width: 1240px;
+  width: calc(100% - 60px);
+  margin: 0px auto;
+  padding: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.book__header {
+  display: grid;
+  grid-template-columns: 2fr 9fr;
+  align-items: center;
+  @media (max-width: 768px){
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr;
+  }
+}
+.book__panel-controls{
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  gap: 20px;
+  @media (max-width: 768px){
+    padding-left: 0px;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+}
+.form-select {
+  cursor: pointer;
+  option {
+    cursor: pointer;
+  }
+}
+.game__img {
+  position: relative;
+  cursor: pointer;
+}
+.user-words{
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  gap: 20px;
+  justify-self: end;
+  justify-content: end;
+  @media (max-width: 768px){
+    flex-grow: 0;
+  }
+}
+.difficult-words {
+  background: transparent;
+  border: none;
+}
+.learned__img{
+  width: 40px;
+  transition: 0.1s;
+}
+.difficult__img{
+  width: 20px;
+}
+.learned-words {
+  background: transparent;
+  border: none;
+}
+.book__word-list {
+  padding: 20px 0px;
+}
+.page-item.active.full-page .page-link {
+  background-color: #4d4d4d;
+}
+.book__games{
+  display: flex;
+  flex-wrap: nowrap;
+}

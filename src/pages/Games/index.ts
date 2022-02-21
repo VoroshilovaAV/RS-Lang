@@ -1,13 +1,15 @@
-import './index.scss';
 import { LevelButtonsTemplate } from 'components/MiniGamesButtons';
+import { gamePageListener } from './utils/gamePageListener';
+import './index.scss';
 
 export const GamesComponent = {
-  listen: () => {},
+  listen: gamePageListener,
   render: () => {
-    return `<div class="container title-container">
+    return `
+  <div class="container title-container">
     <h2 class="mini-game__title">Мини-игры</h2>
   </div>
-  <div class="container d-flex justify-content-center flex-wrap">
+  <div class="container d-flex justify-content-center flex-wrap mb-5">
     <div class="container d-flex audiocall-block justify-content-center" style="margin-bottom: 85px">
       <div class="d-sm-flex flex-row">
         <div class="d-sm-flex justify-content-center flex-column">
@@ -20,7 +22,7 @@ export const GamesComponent = {
             правильный перевод к произнесенному слову.
           </p>
           <h3 class="level-text align-self-center">Чтобы начать эту игру, выбери уровень сложности:</h3>
-          <div class="d-sm-flex flex-row audiocall-btns flex-wrap">
+          <div class="d-sm-flex flex-row game-btns audiocall-btns flex-wrap">
           ${LevelButtonsTemplate('audiocall', 'pink')}            
           </div>
         </div>
@@ -34,7 +36,7 @@ export const GamesComponent = {
             вашего словаря.
           </p>
           <h3 class="level-text align-self-center" style="margin-left: 5px">Чтобы начать эту игру, выбери уровень сложности:</h3>
-          <div class="d-sm-flex flex-row sprint-btns flex-wrap">
+          <div class="d-sm-flex flex-row game-btns sprint-btns flex-wrap">
           ${LevelButtonsTemplate('sprint', 'blue')}            
           </div>
         </div>
