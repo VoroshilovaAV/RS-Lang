@@ -6,12 +6,14 @@ import { createResultWord } from 'components/GameResultTemplate/utils';
 import { setDefaultOptionsToSprintState } from 'state/utils';
 import { soundResultWordListener } from './utils';
 import { updateUserStatistics } from 'api';
+import { getDataBookPage } from 'pages/Book/getDataBookPageBeforeLoad';
 
 export const ResultSprintComponent = {
   listen: () => {
     if (!sprintState?.rightAnswers?.length && !sprintState?.wrongAnswers?.length) {
       location.hash = '/games';
     }
+    getDataBookPage();
     const answers = document.querySelector('.answers');
     answers?.addEventListener('click', soundResultWordListener);
     const user = getStorage('authorizedUser');

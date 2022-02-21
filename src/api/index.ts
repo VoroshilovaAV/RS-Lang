@@ -1,4 +1,6 @@
 import { createStats } from 'pages/Stats/utils/getStatsRequest';
+import { getStorage } from 'pages/Book/components';
+import { router } from 'router/router';
 import { usersUrl, wordsUrl, baseUrl } from './constants';
 import {
   IWord,
@@ -18,11 +20,25 @@ import {
   IUsersWords,
 } from './interfaces';
 
-export const getWords = async ({ page, group }: IPageWords): Promise<IWord[] | void> => {
+export const getNewUserToken = async (userId: string, refreshToken: string): Promise<IGetNewToken | void> => {
   try {
-    const res = await fetch(`${wordsUrl}?group=${group}&page=${page}`);
-    const data = await res.json();
-    return data;
+    const rawResponse = await fetch(`${usersUrl}/${userId}/tokens`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+    if (rawResponse.status === 401) {
+      localStorage.clear();
+      location.hash = '/login';
+      router();
+      alert('срок сеанса истёк, пожалуйста, войдите снова');
+    } else {
+      const content = await rawResponse.json();
+      return content;
+    }
   } catch (error) {
     console.log(error);
   }
@@ -31,6 +47,21 @@ export const getWords = async ({ page, group }: IPageWords): Promise<IWord[] | v
 export const getWordsId = async (wordId: string): Promise<IWord | void> => {
   try {
     const res = await fetch(`${wordsUrl}/${wordId}`);
+    if (res.status === 401) {
+      const user: IAuth = getStorage('Authenticated');
+      await getNewUserToken(user.userId, user.refreshToken);
+    } else {
+      const data = await res.json();
+      return data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getWords = async ({ page, group }: IPageWords): Promise<IWord[] | void> => {
+  try {
+    const res = await fetch(`${wordsUrl}?group=${group}&page=${page}`);
     const data = await res.json();
     return data;
   } catch (error) {
@@ -105,23 +136,6 @@ export const deleteUser = async (userId: string, token: string) => {
   }
 };
 
-export const getNewUserToken = async (userId: string, refreshToken: string): Promise<IGetNewToken | void> => {
-  try {
-    const rawResponse = await fetch(`${usersUrl}/${userId}/tokens`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${refreshToken}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    });
-    const content = await rawResponse.json();
-    return content;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const getUserIdWords = async (userId: string, token: string): Promise<IUserWordsGet[] | void> => {
   try {
     const rawResponse = await fetch(`${usersUrl}/${userId}/words`, {
@@ -182,6 +196,10 @@ export const createUserWord = async (
       const content = await rawResponse.json();
       return content;
     }
+    if (rawResponse.status === 401) {
+      const user: IAuth = getStorage('Authenticated');
+      await getNewUserToken(user.userId, user.refreshToken);
+    }
   } catch (error) {
     console.log(error);
   }
@@ -196,8 +214,13 @@ export const getUserWord = async (userId: string, wordId: string, token: string)
         Accept: 'application/json',
       },
     });
-    const content = await rawResponse.json();
-    return content;
+    if (rawResponse.status === 401) {
+      const user: IAuth = getStorage('Authenticated');
+      await getNewUserToken(user.userId, user.refreshToken);
+    } else {
+      const content = await rawResponse.json();
+      return content;
+    }
   } catch (error) {
     console.log(error);
   }
@@ -228,8 +251,13 @@ export const getAggregatedWords = async <T>(token: string, url: string): Promise
         'Content-Type': 'application/json',
       },
     });
-    const content = await rawResponse.json();
-    return content[0];
+    if (rawResponse.status === 401) {
+      const user: IAuth = getStorage('Authenticated');
+      await getNewUserToken(user.userId, user.refreshToken);
+    } else {
+      const content = await rawResponse.json();
+      return content[0];
+    }
   } catch (error) {
     console.log(error);
   }
@@ -290,8 +318,13 @@ export const getAggregatedWord = async (
         'Content-Type': 'application/json',
       },
     });
-    const content = await rawResponse.json();
-    return content;
+    if (rawResponse.status === 401) {
+      const user: IAuth = getStorage('Authenticated');
+      await getNewUserToken(user.userId, user.refreshToken);
+    } else {
+      const content = await rawResponse.json();
+      return content;
+    }
   } catch (error) {
     console.log(error);
   }
@@ -310,7 +343,10 @@ export const getUserStatistics = async (userId: string, token: string): Promise<
       const content = await createStats(userId, token);
       if (content) return content.statistics;
     }
-    if (rawResponse.ok) {
+    if (rawResponse.status === 401) {
+      const user: IAuth = getStorage('Authenticated');
+      await getNewUserToken(user.userId, user.refreshToken);
+    } else {
       const content = await rawResponse.json();
       return content;
     }
@@ -333,8 +369,13 @@ export const updateUserStatistics = async (
       },
       body: JSON.stringify(statistics),
     });
-    const content = await rawResponse.json();
-    return content;
+    if (rawResponse.status === 401) {
+      const user: IAuth = getStorage('Authenticated');
+      await getNewUserToken(user.userId, user.refreshToken);
+    } else {
+      const content = await rawResponse.json();
+      return content;
+    }
   } catch (error) {
     console.log(error);
   }
@@ -354,8 +395,13 @@ export const updateUserSettings = async (
       },
       body: JSON.stringify(settings),
     });
-    const content = await rawResponse.json();
-    return content;
+    if (rawResponse.status === 401) {
+      const user: IAuth = getStorage('Authenticated');
+      await getNewUserToken(user.userId, user.refreshToken);
+    } else {
+      const content = await rawResponse.json();
+      return content;
+    }
   } catch (error) {
     console.log(error);
   }
@@ -368,8 +414,13 @@ export const getUserSettings = async (userId: string, token: string): Promise<IS
         Authorization: `Bearer ${token}`,
       },
     });
-    const content = await rawResponse.json();
-    return content;
+    if (rawResponse.status === 401) {
+      const user: IAuth = getStorage('Authenticated');
+      await getNewUserToken(user.userId, user.refreshToken);
+    } else {
+      const content = await rawResponse.json();
+      return content;
+    }
   } catch (error) {
     console.log(error);
   }
