@@ -1,5 +1,5 @@
-import { createUserWord, updateUserWord } from 'api';
-import { learnt } from 'pages/Book/components';
+import { createUserWord, getUserStatistics, updateUserStatistics, updateUserWord } from 'api';
+import { learnt, secondSrc } from 'pages/Book/components';
 import { IAuth, IPageWords, IState, IUserWordId } from 'state/interfaces';
 import { markPageHard } from '../markedPage';
 
@@ -8,10 +8,7 @@ export const addLearntWord = (currentPage: IPageWords, user: false | IAuth, user
     const checkboxLearnt = document.querySelectorAll('.form-check-input');
     checkboxLearnt.forEach(async (el, i) => {
       if (el instanceof HTMLInputElement) {
-        if (
-          state.pageUserWords[i].userWord?.difficulty === 'hard' ||
-          state.pageUserWords[i].userWord?.optional?.isLearnt === true
-        ) {
+        if (state.pageUserWords[i].userWord?.optional?.isLearnt === true) {
           el.disabled = true;
         }
         el.addEventListener('change', async () => {
@@ -19,16 +16,30 @@ export const addLearntWord = (currentPage: IPageWords, user: false | IAuth, user
           userWordId.userId = user.userId;
           const containerWord = document.querySelectorAll('.word-list')[i];
           if (containerWord instanceof HTMLElement && el.checked === true) {
+            const hardWord = document.querySelectorAll('.hard-word img')[i];
+            if (hardWord instanceof HTMLImageElement) {
+              hardWord.src = secondSrc;
+            }
             el.disabled = true;
             containerWord.style.backgroundColor = '#f0b3262a';
             const useWord = state.pageUserWords[i].userWord;
-            const option = { ...state.pageUserWords[i].userWord?.optional, ...{ isLearnt: true } };
+            const date = new Date();
+            const curFullDate = [date.getDate(), String(date.getMonth() + 1).padStart(2, '0'), date.getFullYear()].join(
+              '.'
+            );
+            const option = {
+              ...state.pageUserWords[i].userWord?.optional,
+              ...{ isLearnt: true },
+              ...{ lastChanged: curFullDate },
+            };
             userWordId.body = {
               ...state.pageUserWords[i].userWord,
+              ...{ difficulty: 'easy' },
               ...{ optional: option },
             };
             state.pageUserWords[i].userWord = {
               ...state.pageUserWords[i].userWord,
+              ...{ difficulty: 'easy' },
               ...{ optional: option },
             };
             if (useWord) {
@@ -37,6 +48,19 @@ export const addLearntWord = (currentPage: IPageWords, user: false | IAuth, user
             } else {
               localStorage.setItem('pageUserWords', JSON.stringify(state.pageUserWords));
               createUserWord(userWordId, user.token);
+            }
+            const statistics = await getUserStatistics(user.userId, user.token);
+            if (statistics) {
+              statistics.learnedWords = +1;
+              const userId = user.userId;
+              const statistic = {
+                userId,
+                statistics: {
+                  learnedWords: statistics.learnedWords,
+                  optional: JSON.parse(JSON.stringify(statistics.optional)),
+                },
+              };
+              await updateUserStatistics(statistic, user.token);
             }
           }
           markPageHard(state, learnt);

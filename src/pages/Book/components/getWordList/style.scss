@@ -19,7 +19,6 @@
     align-items: center;
     position: relative;
     @media (max-width: 768px){
-      flex-direction: column;
       margin-bottom: 10px;
     }
     .learn-progress{
@@ -35,9 +34,15 @@
       justify-content: center;
       position: relative;
       height: 100%;
+      @media (max-width: 768px){
+       align-items:center;
+      }
       .correct-answers-number{
         position: absolute;
         top: 0px;
+        @media (max-width: 768px){
+          left: 0;
+        }
       }
       input{
         height: 20px;
@@ -51,6 +56,9 @@
   .word-image {
     height: 100%;
     border-radius: 5px;
+    @media (max-width: 768px){
+      margin-left: 20px;
+    }
     img{
       border-radius: 5px;
       object-fit: cover;

@@ -36,7 +36,11 @@ export const getNewUserToken = async (userId: string, refreshToken: string): Pro
       router();
       alert('срок сеанса истёк, пожалуйста, войдите снова');
     } else {
-      const content = await rawResponse.json();
+      const content: IGetNewToken = await rawResponse.json();
+      const user: IAuth = getStorage('Authenticated');
+      user.token = content.token;
+      user.refreshToken = content.refreshToken;
+      localStorage.setItem('authorizedUser', `${user}`);
       return content;
     }
   } catch (error) {
@@ -150,6 +154,10 @@ export const getUserIdWords = async (userId: string, token: string): Promise<IUs
       const content = await rawResponse.json();
       return content;
     }
+    if (rawResponse.status === 401) {
+      const user: IAuth = getStorage('Authenticated');
+      await getNewUserToken(user.userId, user.refreshToken);
+    }
   } catch (error) {
     console.log(error);
   }
@@ -169,6 +177,10 @@ export const updateUserWord = async (
       },
       body: JSON.stringify(body),
     });
+    if (rawResponse.status === 401) {
+      const user: IAuth = getStorage('Authenticated');
+      await getNewUserToken(user.userId, user.refreshToken);
+    }
     const content = await rawResponse.json();
     return content;
   } catch (error) {
@@ -272,6 +284,10 @@ export const getFilterWords = async (
   let filter: string;
   let url: string;
   switch (isFilterParam) {
+    case 'dataWords':
+      filter = `{ "userWord.optional.lastChanged": {"$ne": null}  }`;
+      url = `${usersUrl}/${user.userId}/aggregatedWords?&wordsPerPage=20&filter=${filter}`;
+      return getAggregatedWords(user.token, url);
     case 'hard':
       filter = '{"userWord.difficulty":"hard"}';
       url = `${usersUrl}/${user.userId}/aggregatedWords?wordsPerPage=3600&filter=${filter}`;
@@ -351,7 +367,7 @@ export const getUserStatistics = async (userId: string, token: string): Promise<
       return content;
     }
   } catch (error) {
-    console.log(error);
+    console.log('error');
   }
 };
 

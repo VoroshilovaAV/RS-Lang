@@ -9,8 +9,6 @@ export const getDifficultWord = async (userWordId: IUserWordId, user: false | IA
     hardWord.forEach((item, i: number) => {
       item.addEventListener('click', async () => {
         if (state.pageUserWords[i].userWord?.optional?.isLearnt !== true) {
-          const checkboxLearnt = document.querySelectorAll('.form-check-input')[i];
-          if (checkboxLearnt instanceof HTMLInputElement) checkboxLearnt.disabled = true;
           if (item instanceof HTMLImageElement) {
             if (item.src.indexOf('empty') !== -1 && state.pageUserWords[i].userWord?.difficulty !== 'hard') {
               item.src = firstSrc;

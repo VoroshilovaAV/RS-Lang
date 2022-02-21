@@ -133,6 +133,7 @@ export interface IUserWordsGet {
   optional?: IWordOptionalParams;
   wordId: string;
 }
+
 export interface IStatsOptionalGame {
   newWords: number;
   longestSeries: number;
