@@ -1,10 +1,13 @@
 import './index.scss';
 import { audiocallListener } from './utils/audiocallListener';
-import { updateAudiocallState } from './utils/updateAudiocallState';
 import { ProgressScore } from 'components/ProgressScore';
+import { updateAudiocallState } from './utils/updateAudiocallState';
+import { getGameData } from '../utils/getGameData';
+import { audiocallState } from 'state';
 
 export const AudiocallComponent = {
-  listen: () => {
+  listen: async () => {
+    await getGameData('.variants', audiocallState);
     updateAudiocallState();
     audiocallListener();
   },
