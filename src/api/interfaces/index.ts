@@ -51,9 +51,30 @@ export interface IWordOptionalParams {
   correctSeries?: number;
 }
 
+export interface IStatsOptionalGame {
+  newWords: number;
+  longestSeries: number;
+  correct: number;
+  wrong: number;
+}
+
+export interface IStatsOptionalWordsCount {
+  [key: string]: number;
+}
+
+export interface IStatsOptional {
+  lastChanged: string;
+  gameStats: {
+    sprint: IStatsOptionalGame;
+    audiocall: IStatsOptionalGame;
+  };
+  newWordsPerDay?: IStatsOptionalWordsCount;
+  learnedWordsPerDay?: IStatsOptionalWordsCount;
+}
+
 export interface IStatistic {
   learnedWords: number;
-  optional?: object;
+  optional?: IStatsOptional;
 }
 
 export interface ISetting {

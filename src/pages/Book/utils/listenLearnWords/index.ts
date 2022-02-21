@@ -1,4 +1,4 @@
-import { createUserWord, updateUserWord } from 'api';
+import { createUserWord, getUserStatistics, updateUserStatistics, updateUserWord } from 'api';
 import { learnt, secondSrc } from 'pages/Book/components';
 import { IAuth, IPageWords, IState, IUserWordId } from 'state/interfaces';
 import { markPageHard } from '../markedPage';
@@ -48,6 +48,13 @@ export const addLearntWord = (currentPage: IPageWords, user: false | IAuth, user
             } else {
               localStorage.setItem('pageUserWords', JSON.stringify(state.pageUserWords));
               createUserWord(userWordId, user.token);
+            }
+            const statistics = await getUserStatistics(user.userId, user.token);
+            if (statistics) {
+              statistics.learnedWords += 1;
+              const userId = user.userId;
+              const statistic = { userId, statistics };
+              await updateUserStatistics(statistic, user.token);
             }
           }
           markPageHard(state, learnt);

@@ -133,3 +133,29 @@ export interface IUserWordsGet {
   optional?: IWordOptionalParams;
   wordId: string;
 }
+
+export interface IStatsOptionalGame {
+  newWords: number;
+  longestSeries: number;
+  correct: number;
+  wrong: number;
+}
+
+export interface IStatsOptionalWordsCount {
+  [key: string]: number;
+}
+
+export interface IStatsOptional {
+  lastChanged: string;
+  gameStats: {
+    sprint: IStatsOptionalGame;
+    audiocall: IStatsOptionalGame;
+  };
+  newWordsPerDay?: IStatsOptionalWordsCount;
+  learnedWordsPerDay?: IStatsOptionalWordsCount;
+}
+
+export interface IStatistic {
+  learnedWords: number;
+  optional?: IStatsOptional;
+}

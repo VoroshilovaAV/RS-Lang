@@ -1,5 +1,6 @@
 import { getStorage } from 'pages/Book/components';
 import { router } from 'router/router';
+import { statsState } from 'state';
 import { usersUrl, wordsUrl, baseUrl } from './constants';
 import {
   IWord,
@@ -35,7 +36,11 @@ export const getNewUserToken = async (userId: string, refreshToken: string): Pro
       router();
       alert('срок сеанса истёк, пожалуйста, войдите снова');
     } else {
-      const content = await rawResponse.json();
+      const content: IGetNewToken = await rawResponse.json();
+      const user: IAuth = getStorage('Authenticated');
+      user.token = content.token;
+      user.refreshToken = content.refreshToken;
+      localStorage.setItem('authorizedUser', `${user}`);
       return content;
     }
   } catch (error) {
@@ -271,6 +276,10 @@ export const getFilterWords = async (
   let filter: string;
   let url: string;
   switch (isFilterParam) {
+    case 'dataWords':
+      filter = `{ "userWord.optional.lastChanged": {"$ne": null}  }`;
+      url = `${usersUrl}/${user.userId}/aggregatedWords?&wordsPerPage=20&filter=${filter}`;
+      return getAggregatedWords(user.token, url);
     case 'hard':
       filter = '{"userWord.difficulty":"hard"}';
       url = `${usersUrl}/${user.userId}/aggregatedWords?wordsPerPage=3600&filter=${filter}`;
@@ -341,12 +350,15 @@ export const getUserStatistics = async (userId: string, token: string): Promise<
     if (rawResponse.status === 401) {
       const user: IAuth = getStorage('Authenticated');
       await getNewUserToken(user.userId, user.refreshToken);
+    }
+    if (rawResponse.status === 404) {
+      return statsState;
     } else {
       const content = await rawResponse.json();
       return content;
     }
   } catch (error) {
-    console.log(error);
+    console.log('error');
   }
 };
 
