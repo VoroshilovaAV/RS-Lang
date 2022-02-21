@@ -20,9 +20,30 @@ export interface IUserWord {
   optional?: object;
 }
 
+export interface IStatsOptionalGame {
+  lastChanged: string;
+  newWords: number;
+  longestSeries: number;
+  correct: number;
+  wrong: number;
+}
+
+export interface IStatsOptionalWordsCount {
+  [key: string]: number;
+}
+
+export interface IStatsOptional {
+  gameStats: {
+    sprint: IStatsOptionalGame;
+    audiocall: IStatsOptionalGame;
+  };
+  newWordsPerDay: IStatsOptionalWordsCount;
+  learnedWordsPerDay: IStatsOptionalWordsCount;
+}
+
 export interface IStatistic {
   learnedWords: number;
-  optional?: object;
+  optional?: IStatsOptional;
 }
 
 export interface ISetting {
