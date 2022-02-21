@@ -52,7 +52,6 @@ export interface IWordOptionalParams {
 }
 
 export interface IStatsOptionalGame {
-  lastChanged: string;
   newWords: number;
   longestSeries: number;
   correct: number;
@@ -64,12 +63,13 @@ export interface IStatsOptionalWordsCount {
 }
 
 export interface IStatsOptional {
-  gameStats: {
+  lastChanged?: string;
+  gameStats?: {
     sprint: IStatsOptionalGame;
     audiocall: IStatsOptionalGame;
   };
-  newWordsPerDay: IStatsOptionalWordsCount;
-  learnedWordsPerDay: IStatsOptionalWordsCount;
+  newWordsPerDay?: IStatsOptionalWordsCount;
+  learnedWordsPerDay?: IStatsOptionalWordsCount;
 }
 
 export interface IStatistic {

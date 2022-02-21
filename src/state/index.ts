@@ -8,6 +8,7 @@ import {
   IFilterParam,
   ISprintState,
   IAudiocallState,
+  IStatistic,
 } from './interfaces';
 
 export const userCreated: IUserCreated = {
@@ -71,4 +72,8 @@ export const audiocallState: IAudiocallState = {
   longestSeries: 0,
   counter: 0,
   responseNumber: [],
+};
+
+export const statsState: IStatistic = {
+  learnedWords: 0,
 };

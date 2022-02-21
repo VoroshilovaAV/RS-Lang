@@ -305,8 +305,10 @@ export const getUserStatistics = async (userId: string, token: string): Promise<
         'Content-Type': 'application/json',
       },
     });
-    const content = await rawResponse.json();
-    return content;
+    if (rawResponse.ok) {
+      const content = await rawResponse.json();
+      return content;
+    }
   } catch (error) {
     console.log(error);
   }
