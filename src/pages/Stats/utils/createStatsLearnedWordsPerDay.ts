@@ -7,10 +7,10 @@ export const createStatsLearnedWordsPerDay = () => {
   if (statsState.optional) {
     const colors = ['#007bff', '#28a745'];
     const labelsData = statsState.optional.learnedWordsPerDay
-      ? Object.keys(statsState.optional.learnedWordsPerDay)
+      ? [...Object.keys(statsState.optional.learnedWordsPerDay), getCurrentDate()]
       : [getCurrentDate()];
     const dataDataset = statsState.optional.learnedWordsPerDay
-      ? Object.values(statsState.optional.learnedWordsPerDay)
+      ? [...Object.values(statsState.optional.learnedWordsPerDay), statsState.learnedWords]
       : [statsState.learnedWords];
     const chartData = {
       labels: labelsData,

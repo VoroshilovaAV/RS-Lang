@@ -1,4 +1,4 @@
 export { createLearnedWordsChart } from './createLearnedWordsChart';
 export { createCorrectAnswersChart } from './createCorrectAnswersChart';
-export { createStatsNewWordsPerDay } from './createStatsNewWordsPerDay';
+export { createStatsAllLearnedWordsPerDay as createStatsNewWordsPerDay } from './createStatsAllLearnedWordsPerDay';
 export { createStatsLearnedWordsPerDay } from './createStatsLearnedWordsPerDay';

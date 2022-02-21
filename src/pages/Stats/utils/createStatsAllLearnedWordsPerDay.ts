@@ -3,7 +3,7 @@ import { statsState } from 'state';
 import { getCurrentDate } from 'utils/getCurrentDate';
 import { createChart } from './createChart';
 
-export const createStatsNewWordsPerDay = () => {
+export const createStatsAllLearnedWordsPerDay = () => {
   if (statsState.optional) {
     const colors = ['#007bff', '#28a745'];
 
@@ -17,10 +17,10 @@ export const createStatsNewWordsPerDay = () => {
     }
 
     const labelsData = statsState.optional.learnedWordsPerDay
-      ? Object.keys(statsState.optional.learnedWordsPerDay)
+      ? [...Object.keys(statsState.optional.learnedWordsPerDay), getCurrentDate()]
       : [getCurrentDate()];
 
-    const dataDataset = arrDataNum.length ? arrDataNum : [statsState.learnedWords];
+    const dataDataset = arrDataNum.length ? [...arrDataNum, statsState.learnedWords] : [statsState.learnedWords];
     const chartData = {
       labels: labelsData,
       datasets: [
