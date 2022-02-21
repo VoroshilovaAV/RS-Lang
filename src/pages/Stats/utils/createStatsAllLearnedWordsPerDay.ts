@@ -20,7 +20,9 @@ export const createStatsAllLearnedWordsPerDay = () => {
       ? [...Object.keys(statsState.optional.learnedWordsPerDay), getCurrentDate()]
       : [getCurrentDate()];
 
-    const dataDataset = arrDataNum.length ? [...arrDataNum, statsState.learnedWords] : [statsState.learnedWords];
+    const dataDataset = arrDataNum.length
+      ? [...arrDataNum, arrDataNum[arrDataNum.length - 1] + statsState.learnedWords]
+      : [statsState.learnedWords];
     const chartData = {
       labels: labelsData,
       datasets: [
