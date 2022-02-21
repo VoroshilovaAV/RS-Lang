@@ -2,14 +2,20 @@
   margin: 36px 0;
 }
 
-.first-stats {
+.first-stats, .second-stats {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 2rem;
 }
 
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
 @media screen and (max-width: 768px) {
-  .first-stats {
+  .first-stats, .second-stats {
     grid-template-columns: 1fr;
   }
 }

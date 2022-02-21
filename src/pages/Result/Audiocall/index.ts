@@ -15,6 +15,7 @@ export const ResultAudiocallComponent = {
     const answers = document.querySelector('.answers');
     answers?.addEventListener('click', soundResultWordListener);
     const user = getStorage('authorizedUser');
+    if (statsState.optional) statsState.optional.gameStats.sprint.longestSeries = audiocallState.longestSeries;
     if (user) updateUserStatistics({ userId: user.userId, statistics: statsState }, user.token);
     setDefaultOptionsToAudiocallState();
   },
