@@ -5,16 +5,16 @@ import './style.scss';
 export const getWordList = (state: IState, hardWords: string, hardWordsDelete: string, currentPage: IPageWords) => {
   const root = (word: IUserWordAggregated | IWord) => `<div class="word-list">
                   ${currentPage.group !== 6 ? getTemplateProgress(learnProgress, word as IUserWordAggregated) : ''}
-                  <div class="word-image"><img src="https://learnwords-team22.herokuapp.com/${
+                  <div class="word-image"><img src="https://rslang-be-v709.onrender.com/${
                     word.image
                   }" alt="изображение слова"></div>
                   <div class="word-list__description">
                     <div class="description-header">
                       <h3>${word.word}</h3>
                       <div class="audio-img">
-                        <audio src="https://learnwords-team22.herokuapp.com/${word.audio}">
-                        <audio src="https://learnwords-team22.herokuapp.com/${word.audioExample}">
-                        <audio src="https://learnwords-team22.herokuapp.com/${word.audioMeaning}">
+                        <audio src="https://rslang-be-v709.onrender.com/${word.audio}">
+                        <audio src="https://rslang-be-v709.onrender.com/${word.audioExample}">
+                        <audio src="https://rslang-be-v709.onrender.com/${word.audioMeaning}">
                       </div>
                       <div class="word-transcription">${word.transcription}</div>
                       ${getTemplate(currentPage.group !== 6 ? hardWords : hardWordsDelete)}
